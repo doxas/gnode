@@ -1,7 +1,7 @@
 
-import Base from './Base/index.js';
+import common from './common/index.js';
 
-export default class ComponentRoot {
-    static get Base(){return Base;}
+export default class Components {
+    static get common(){return common;}
 }
 
