@@ -9,13 +9,23 @@ export default class GNODEElement {
         return this.dom;
     }
     /**
-     * @constructor
-     * @param {string} [element='div'] - tag name
+     * @alias element
      */
-    constructor(element = 'div'){
-        this.dom = null;
-        if(element == null){return;}
-        this.dom = document.createElement(element);
+    get elm(){
+        return this.element;
+    }
+    /**
+     * @type {ShadowRoot}
+     */
+    get shadow(){
+        return this.shadowRoot;
+    }
+    /**
+     * @constructor
+     */
+    constructor(){
+        this.dom = document.createElement('div');
         this.dom.classList.add('GNODEElement');
+        this.shadowRoot = this.dom.attachShadow({mode: 'open'});
     }
 }
