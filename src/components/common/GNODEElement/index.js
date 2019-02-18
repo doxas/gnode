@@ -5,22 +5,22 @@ import EventEmitter3 from 'eventemitter3';
 
 export default class GNODEElement extends EventEmitter3 {
     /**
-     * @type {HTMLElement}
+     * @alias dom
      */
     get element(){
         return this.dom;
     }
     /**
-     * @alias element
+     * @alias dom
      */
     get elm(){
-        return this.element;
+        return this.dom;
     }
     /**
-     * @type {ShadowRoot}
+     * @alias shadow
      */
-    get shadow(){
-        return this.shadowRoot;
+    get shadowRoot(){
+        return this.shadow;
     }
     /**
      * @constructor
@@ -29,6 +29,29 @@ export default class GNODEElement extends EventEmitter3 {
         super();
         this.dom = document.createElement('div');
         this.dom.classList.add('GNODEElement');
-        this.shadowRoot = this.dom.attachShadow({mode: 'open'});
+        this.shadow = this.dom.attachShadow({mode: 'open'});
+    }
+    /**
+     * append to this.dom
+     * @param {HTMLElement} element - html element
+     */
+    append(element){
+        this.dom.appendChild(element);
+    }
+    /**
+     * @alias append
+     */
+    appendChild(element){
+        this.append(element);
+    }
+    /**
+     * release
+     */
+    release(){
+        if(this.dom.parentNode != null){
+            this.dom.parentNode.removeChild(this.dom);
+        }
+        this.shadow = null;
+        this.dom = null;
     }
 }
