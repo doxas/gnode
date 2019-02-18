@@ -4,8 +4,8 @@
   "description": "node based gui",
   "main": "src/script.js",
   "scripts": {
-    "build": "set NODE_ENV=release && webpack -p",
-    "debug": "webpack --debug -w"
+    "build": "set NODE_ENV=release && webpack --mode production -p",
+    "debug": "webpack --mode development -w"
   },
   "repository": {
     "type": "git",
@@ -22,8 +22,12 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "webpack": "^3.10.0",
     "css-loader": "^2.1.0",
-    "style-loader": "^0.23.1"
+    "eventemitter3": "^3.1.0",
+    "style-loader": "^0.23.1",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "webpack": "^4.29.5"
   }
 }

@@ -1,7 +1,9 @@
 
 import css from './style.css';
 
-export default class GNODEElement {
+import EventEmitter3 from 'eventemitter3';
+
+export default class GNODEElement extends EventEmitter3 {
     /**
      * @type {HTMLElement}
      */
@@ -24,6 +26,7 @@ export default class GNODEElement {
      * @constructor
      */
     constructor(){
+        super();
         this.dom = document.createElement('div');
         this.dom.classList.add('GNODEElement');
         this.shadowRoot = this.dom.attachShadow({mode: 'open'});
