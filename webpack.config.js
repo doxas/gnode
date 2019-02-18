@@ -3,11 +3,13 @@ const webpack = require('webpack');
 const path = require('path');
 
 let devmode = false;
+let cssmode = false;
 
 if(process.env.NODE_ENV === 'release'){
     console.log('🍶 release build');
 }else{
     devmode = 'inline-source-map';
+    cssmode = true;
     console.log('☕ debug build');
 }
 
@@ -22,19 +24,34 @@ module.exports = {
         filename: 'script.js'
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            include: path.resolve(__dirname, 'src'),
-            exclude: /node_modules/,
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        ['env']
-                    ]
-                }
-            }]
-        }]
+        rules: [
+            {
+                test: /\.js$/,
+                include: path.resolve(__dirname, 'src'),
+                exclude: /node_modules/,
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            ['env']
+                        ]
+                    }
+                }]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            url: false,
+                            sourceMap: cssmode
+                        }
+                    }
+                ]
+            }
+        ]
     },
     cache: true,
     devtool: devmode
