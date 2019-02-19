@@ -21,7 +21,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'public/js'),
         publicPath: './',
-        filename: 'script.js'
+        filename: 'gnode.js'
     },
     module: {
         rules: [
