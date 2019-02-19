@@ -52,10 +52,7 @@ export default class GNODEElement extends EventEmitter3 {
         this.appendStyle(css);
 
         // event setting ------------------------------------------------------
-        /** @example */
-        // this.addEventListenerForSelf(this.dom, 'click', (evt) => {
-        //     this.emit('click', evt);
-        // }, false);
+        // see addEventListenerForSelf method comments
     }
     /**
      * append to this.dom
@@ -90,6 +87,11 @@ export default class GNODEElement extends EventEmitter3 {
      * @param {string} evt - event name
      * @param {function} listener - listener function
      * @param {boolean} [capture=false] - is using capture
+     * @example
+     * // in constructor
+     * this.addEventListenerForSelf(this.dom, 'click', (evt) => {
+     *     this.emit('click', evt);
+     * }, false);
      */
     addEventListenerForSelf(target, evt, listener, capture = false){
         if(this.listenersForSelf.hasOwnProperty(evt) !== true){
@@ -114,7 +116,7 @@ export default class GNODEElement extends EventEmitter3 {
     }
     /**
      * append style tag
-     * @param {string} css - css from raw-loader
+     * @param {string} css - css from webpack raw-loader (plane text)
      */
     appendStyle(css){
         let style = document.createElement('style');

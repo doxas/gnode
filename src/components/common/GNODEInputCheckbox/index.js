@@ -27,6 +27,9 @@ export default class GNODEInputCheckbox extends GNODEElement {
      * @constructor
      * @param {string} [text=''] - text
      * @param {boolean} [value=false] - checked
+     * @example
+     * let checked = true;
+     * let E = new GNODEInputCheckbox('label caption', checked);
      */
     constructor(text = '', value = false){
         super();

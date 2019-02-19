@@ -4,6 +4,7 @@
 ※というか運用ルールの覚書に近い
 
 * 基本的に ESDoc の conversion を 100% にするのを最低限の位置づけにする
+* できるだけ `class` とメソッドには `@example` をつけること
 * `src` 以下に入ったものは webpack がよしなにする
 * `src/static` は静的なローカルのモジュールなど
 * `src/components` はコンポーネント類のルート
