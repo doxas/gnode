@@ -5,7 +5,7 @@ import GNODEElement from '../GNODEElement/index.js';
 /**
  * simple input checkbox
  * @class
- * @extends {EventEmitter3}
+ * @extends {GNODEElement}
  */
 export default class GNODEInputCheckbox extends GNODEElement {
     /**
