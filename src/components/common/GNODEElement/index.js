@@ -2,6 +2,11 @@
 import css from './style.css';
 import EventEmitter3 from 'eventemitter3';
 
+/**
+ * super class of GNODE element
+ * @class
+ * @extends {EventEmitter3}
+ */
 export default class GNODEElement extends EventEmitter3 {
     /**
      * @alias dom
@@ -26,16 +31,31 @@ export default class GNODEElement extends EventEmitter3 {
      */
     constructor(){
         super();
-        // initialize properties
+        // initialize properties ----------------------------------------------
+        /**
+         * @type {object}
+         */
         this.listenersForSelf = {};
 
-        // dom generation
+        // dom generation -----------------------------------------------------
+        /**
+         * @type {HTMLDivElement}
+         */
         this.dom = document.createElement('div');
         this.dom.classList.add('GNODEElement');
+        /**
+         * @type {ShadowRoot}
+         */
         this.shadow = this.dom.attachShadow({mode: 'open'});
 
-        // style setting
+        // style setting ------------------------------------------------------
         this.appendStyle(css);
+
+        // event setting ------------------------------------------------------
+        /** @example */
+        // this.addEventListenerForSelf(this.dom, 'click', (evt) => {
+        //     this.emit('click', evt);
+        // }, false);
     }
     /**
      * append to this.dom

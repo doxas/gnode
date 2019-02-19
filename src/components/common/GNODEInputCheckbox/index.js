@@ -2,6 +2,11 @@
 import css from './style.css';
 import GNODEElement from '../GNODEElement/index.js';
 
+/**
+ * simple input checkbox
+ * @class
+ * @extends {EventEmitter3}
+ */
 export default class GNODEInputCheckbox extends GNODEElement {
     /**
      * @type {Array<string>}
@@ -15,6 +20,10 @@ export default class GNODEInputCheckbox extends GNODEElement {
      */
     get value(){return this.input.value;}
     /**
+     * @alias value
+     */
+    get checked(){return this.input.value;}
+    /**
      * @constructor
      * @param {string} [text=''] - text
      * @param {boolean} [value=false] - checked
@@ -22,15 +31,30 @@ export default class GNODEInputCheckbox extends GNODEElement {
     constructor(text = '', value = false){
         super();
         // initialize properties ----------------------------------------------
+        /**
+         * @type {string}
+         */
         this.text = text;
 
         // dom generation -----------------------------------------------------
+        /**
+         * @type {HTMLLabelElement}
+         */
         this.wrap = document.createElement('label');
         this.wrap.classList.add('GNODEInputCheckbox');
+        /**
+         * @type {HTMLDivElement}
+         */
         this.box = document.createElement('div');
         this.box.classList.add('box');
+        /**
+         * @type {HTMLDivElement}
+         */
         this.label = document.createElement('div');
         this.label.classList.add('label');
+        /**
+         * @type {HTMLInputElement}
+         */
         this.input = document.createElement('input');
         this.input.type = 'checkbox';
         this.input.checked = value;
