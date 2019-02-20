@@ -23,6 +23,13 @@ window.addEventListener('load', () => {
         ['change'],
         [(evt) => {console.log(evt);}]
     );
+    gen(
+        'GNODEInputText',
+        new GNODE.components.common.GNODEInputText('single', 'set maxlength = 20', '', 20),
+        main,
+        ['change'],
+        [(evt) => {console.log(evt);}]
+    );
 
     head('other', side, main); // =============================================
     gen(
