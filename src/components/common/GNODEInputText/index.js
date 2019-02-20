@@ -44,7 +44,7 @@ export default class GNODEInputText extends GNODEElement {
 
         // dom generation -----------------------------------------------------
         /**
-         * @type {HTMLLabelElement}
+         * @type {HTMLDivElement}
          */
         this.wrap = document.createElement('div');
         this.wrap.classList.add('GNODEInputText');
