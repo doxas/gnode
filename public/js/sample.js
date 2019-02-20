@@ -3,8 +3,12 @@ window.addEventListener('load', () => {
     let side = document.body.querySelector('#side');
     let main = document.body.querySelector('#main');
 
-    head('gnode common', side);
-
+    head('gnode common', side, main); // ======================================
+    gen(
+        'GNODEFrame',
+        new GNODE.components.common.GNODEFrame(),
+        main, [], []
+    );
     gen(
         'GNODEInputCheckbox',
         new GNODE.components.common.GNODEInputCheckbox('input-checkbox', true),
@@ -13,14 +17,22 @@ window.addEventListener('load', () => {
         [(evt) => {console.log(evt);}]
     );
 
-    head('other', side);
+    head('other', side, main); // =============================================
+    gen(
+        'GNODEElement',
+        new GNODE.components.common.GNODEElement(),
+        main, [], []
+    );
 
 }, false);
 
-function head(name, appendTarget){
+function head(name, side, main){
+    let h = document.createElement('h1');
+    h.textContent = name;
+    main.appendChild(h);
     let d = document.createElement('h3');
     d.textContent = name;
-    appendTarget.appendChild(d);
+    side.appendChild(d);
 }
 
 // generate and insert
