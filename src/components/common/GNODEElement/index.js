@@ -9,6 +9,11 @@ import EventEmitter3 from 'eventemitter3';
  */
 export default class GNODEElement extends EventEmitter3 {
     /**
+     * description
+     * @type {string|HTMLElement}
+     */
+    get description(){return 'description text.';}
+    /**
      * @alias dom
      */
     get element(){
