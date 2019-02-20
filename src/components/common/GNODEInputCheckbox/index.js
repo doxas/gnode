@@ -31,18 +31,23 @@ export default class GNODEInputCheckbox extends GNODEElement {
     /**
      * @constructor
      * @param {string} [text=''] - text
+     * @param {string} [name=''] - name
      * @param {boolean} [value=false] - checked
      * @example
      * let checked = true;
      * let E = new GNODEInputCheckbox('label caption', checked);
      */
-    constructor(text = '', value = false){
+    constructor(text = '', name = '', value = false){
         super();
         // initialize properties ----------------------------------------------
         /**
          * @type {string}
          */
         this.text = text;
+        /**
+         * @type {string}
+         */
+        this.name = name;
 
         // dom generation -----------------------------------------------------
         /**
@@ -66,6 +71,7 @@ export default class GNODEInputCheckbox extends GNODEElement {
         this.input = document.createElement('input');
         this.input.type = 'checkbox';
         this.input.checked = value;
+        this.input.name = name;
         this.wrap.appendChild(this.input);
         this.wrap.appendChild(this.box);
         this.wrap.appendChild(this.label);

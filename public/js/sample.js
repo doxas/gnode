@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
     );
     gen(
         'GNODEInputCheckbox',
-        new GNODE.components.common.GNODEInputCheckbox('input-checkbox', true),
+        new GNODE.components.common.GNODEInputCheckbox('input-checkbox', 'single', true),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
