@@ -26,6 +26,7 @@ window.addEventListener('load', () => {
 
 }, false);
 
+// generate and insert to frame
 function head(name, side, main){
     let h = document.createElement('h1');
     h.textContent = name;
@@ -35,7 +36,7 @@ function head(name, side, main){
     side.appendChild(d);
 }
 
-// generate and insert
+// generate and insert to mainframe
 function gen(name, component, appendTarget, eventNames, listeners){
     let a = document.createElement('a');
     a.textContent = name;
@@ -51,6 +52,7 @@ function gen(name, component, appendTarget, eventNames, listeners){
     let e = document.createElement('div');
     let h = document.createElement('h2');
     d.classList.add('component_sample_wrap');
+    e.classList.add('component_inner_wrap');
     h.textContent = name;
     h.setAttribute('id', name);
     appendTarget.appendChild(d);
