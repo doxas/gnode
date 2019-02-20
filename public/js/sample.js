@@ -30,6 +30,13 @@ window.addEventListener('load', () => {
         ['change'],
         [(evt) => {console.log(evt);}]
     );
+    gen(
+        'GNODEInputNumber',
+        new GNODE.components.common.GNODEInputNumber(0, 'single', 0, 10, 0.1),
+        main,
+        ['change'],
+        [(evt) => {console.log(evt);}]
+    );
 
     head('other', side, main); // =============================================
     gen(
