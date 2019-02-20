@@ -1,0 +1,33 @@
+.GNODEInputRange {
+    line-height: 20px;
+    height: 20px;
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+}
+
+.background {
+    background-color: maroon;
+    width: 0%;
+    height: 100%;
+    position: absolute;
+}
+
+.inner {
+    border: 1px solid silver;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.handle {
+    background-color: gray;
+    min-width: 8px;
+    max-width: 8px;
+    height: 100%;
+    position: relative;
+    left: 0px;
+    cursor: pointer;
+}
+
