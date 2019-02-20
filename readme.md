@@ -8,4 +8,6 @@ node patching gui framework.
 * Range まだ途中
   - 枠内クリック時
   - キーアサイン
+  - hover 時などのスタイル
+* Util に Math 系足す（`clamp`, `saturate`）
 
