@@ -21,7 +21,7 @@ export default class GNODEInputNumber extends GNODEElement {
         'change',
     ];}
     /**
-     * @alias checked
+     * @type {number}
      */
     get value(){return this.input.value;}
     /**
