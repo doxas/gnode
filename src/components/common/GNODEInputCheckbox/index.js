@@ -23,11 +23,11 @@ export default class GNODEInputCheckbox extends GNODEElement {
     /**
      * @type {boolean}
      */
-    get value(){return this.input.value;}
+    get checked(){return this.input.checked;}
     /**
-     * @alias value
+     * @alias checked
      */
-    get checked(){return this.input.value;}
+    get value(){return this.input.checked;}
     /**
      * @constructor
      * @param {string} [text=''] - text
