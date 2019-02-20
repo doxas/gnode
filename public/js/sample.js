@@ -11,21 +11,21 @@ window.addEventListener('load', () => {
     );
     gen(
         'GNODEInputCheckbox',
-        new GNODE.components.common.GNODEInputCheckbox('input-checkbox', 'single', true),
+        new GNODE.components.common.GNODEInputCheckbox(true, 'single', 'input-checkbox'),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputRadio',
-        new GNODE.components.common.GNODEInputRadio('input-radio', 'single', true),
+        new GNODE.components.common.GNODEInputRadio(true, 'single', 'input-radio'),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputText',
-        new GNODE.components.common.GNODEInputText('single', 'set maxlength = 20', '', 20),
+        new GNODE.components.common.GNODEInputText('', 'single', 'set maxlength = 20', 20),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]

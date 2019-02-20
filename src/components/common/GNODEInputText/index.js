@@ -26,15 +26,15 @@ export default class GNODEInputText extends GNODEElement {
     get value(){return this.input.value;}
     /**
      * @constructor
+     * @param {string} [value=''] - value
      * @param {string} [name=''] - name
      * @param {string} [placeholder=''] - placeholder
-     * @param {string} [value=''] - value
      * @param {number} [max=null] - maxlength
      * @example
-     * let checked = true;
-     * let E = new GNODEInputText('label caption', checked);
+     * let maxlength = 20;
+     * let E = new GNODEInputText('value', 'name', 'placeholder', maxlength);
      */
-    constructor(name = '', placeholder = '', value = '', max){
+    constructor(value = '', name = '', placeholder = '', max){
         super();
         // initialize properties ----------------------------------------------
         /**
@@ -53,9 +53,8 @@ export default class GNODEInputText extends GNODEElement {
          */
         this.input = document.createElement('input');
         this.input.type = 'text';
-        this.input.name = name;
-        this.input.placeholder = placeholder;
         this.input.value = value;
+        this.input.name = name;
         this.input.setAttribute('placeholder', placeholder);
         this.input.setAttribute('maxlength', max);
         this.wrap.appendChild(this.input);

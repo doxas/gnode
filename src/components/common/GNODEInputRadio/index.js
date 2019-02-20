@@ -30,14 +30,14 @@ export default class GNODEInputRadio extends GNODEElement {
     get value(){return this.input.checked;}
     /**
      * @constructor
-     * @param {string} [text=''] - text
-     * @param {string} [name=''] - name
      * @param {boolean} [value=false] - checked
+     * @param {string} [name=''] - name
+     * @param {string} [text=''] - text
      * @example
      * let checked = true;
-     * let E = new GNODEInputRadio('label caption', 'name', checked);
+     * let E = new GNODEInputRadio(checked, 'name', 'label caption');
      */
-    constructor(text = '', name = '', value = false){
+    constructor(value = false, name = '', text = ''){
         super();
         // initialize properties ----------------------------------------------
         /**
