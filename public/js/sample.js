@@ -16,6 +16,13 @@ window.addEventListener('load', () => {
         ['change'],
         [(evt) => {console.log(evt);}]
     );
+    gen(
+        'GNODEInputRadio',
+        new GNODE.components.common.GNODEInputRadio('input-radio', 'single', true),
+        main,
+        ['change'],
+        [(evt) => {console.log(evt);}]
+    );
 
     head('other', side, main); // =============================================
     gen(
@@ -72,5 +79,6 @@ function gen(name, component, appendTarget, eventNames, listeners){
         }
         d.appendChild(c);
     }
+    return component;
 }
 
