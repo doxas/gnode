@@ -35,7 +35,7 @@ export default class GNODEInputRadio extends GNODEElement {
      * @param {boolean} [value=false] - checked
      * @example
      * let checked = true;
-     * let E = new GNODEInputRadio('label caption', checked);
+     * let E = new GNODEInputRadio('label caption', 'name', checked);
      */
     constructor(text = '', name = '', value = false){
         super();
