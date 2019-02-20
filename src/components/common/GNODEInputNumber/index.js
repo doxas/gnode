@@ -32,7 +32,7 @@ export default class GNODEInputNumber extends GNODEElement {
      * @param {number} [max=100] - max value
      * @param {number} [step=0] - step value
      * @example
-     * let E = new GNODEInputNumber(50, 'name', 0, 10, 0.1);
+     * let E = new GNODEInputNumber(50, 'name', 0, 100, 0.1);
      */
     constructor(value = 0, name = '', min = 0, max = 100, step = 1){
         super();
