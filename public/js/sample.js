@@ -3,52 +3,52 @@ window.addEventListener('load', () => {
     let side = document.body.querySelector('#side');
     let main = document.body.querySelector('#main');
 
-    head('gnode common', side, main); // ======================================
+    head('GNODE Common', side, main); // ======================================
     gen(
         'GNODEFrame',
-        new GNODE.components.common.GNODEFrame(),
+        new GNODE.Components.Common.GNODEFrame(),
         main, [], []
     );
     gen(
         'GNODEInputCheckbox',
-        new GNODE.components.common.GNODEInputCheckbox(true, 'single', 'input-checkbox'),
+        new GNODE.Components.Common.GNODEInputCheckbox(true, 'single', 'input-checkbox'),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputRadio',
-        new GNODE.components.common.GNODEInputRadio(true, 'single', 'input-radio'),
+        new GNODE.Components.Common.GNODEInputRadio(true, 'single', 'input-radio'),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputText',
-        new GNODE.components.common.GNODEInputText('', 'single', 'set maxlength = 20', 20),
+        new GNODE.Components.Common.GNODEInputText('', 'single', 'set maxlength = 20', 20),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputNumber',
-        new GNODE.components.common.GNODEInputNumber(0, 'single', 0, 10, 0.1),
+        new GNODE.Components.Common.GNODEInputNumber(0, 'single', 0, 10, 0.1),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputRange',
-        new GNODE.components.common.GNODEInputRange(0, 'single', 0, 10, 0.1),
+        new GNODE.Components.Common.GNODEInputRange(0, 'single', 0, 10, 0.1),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
 
-    head('other', side, main); // =============================================
+    head('Other', side, main); // =============================================
     gen(
         'GNODEElement',
-        new GNODE.components.common.GNODEElement(),
+        new GNODE.Components.Common.GNODEElement(),
         main, [], []
     );
 
