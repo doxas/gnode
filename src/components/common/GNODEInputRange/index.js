@@ -104,10 +104,27 @@ export default class GNODEInputRange extends GNODEElement {
         this.mouseup = this.mouseup.bind(this);
         this.addEventListenerForSelf(this.handle, 'mousedown', (evt) => {
             this.isMouseDown = true;
+            this.handle.classList.add('active');
             this.mouseDownPositionX = evt.clientX;
             this.mouseDownHandleBound = this.handle.getBoundingClientRect();
             window.addEventListener('mousemove', this.mousemove, false);
             window.addEventListener('mouseup', this.mouseup, false);
+            evt.stopPropagation();
+        }, false);
+        this.addEventListenerForSelf(this.inner, 'mousedown', (evt) => {
+            let b = this.inner.getBoundingClientRect();
+            let c = this.handle.getBoundingClientRect();
+            let innerWidth = b.width - c.width - 2; // 2 is linewidth x 2
+            let x = evt.clientX;
+            if(x < c.left){
+                this.value = Math.min(Math.max(this.value - this.step, this.min), this.max);
+            }else{
+                this.value = Math.min(Math.max(this.value + this.step, this.min), this.max);
+            }
+            let ratio = ((this.value - this.min) / (this.max - this.min));
+            this.handle.style.left = `${ratio * innerWidth}px`;
+            this.background.style.width = `${ratio * 100}%`;
+            this.emit('change', this.value);
         }, false);
     }
     /**
@@ -116,6 +133,7 @@ export default class GNODEInputRange extends GNODEElement {
      */
     mouseup(evt){
         this.isMouseDown = false;
+        this.handle.classList.remove('active');
         this.emit('change', this.value);
         window.removeEventListener('mousemove', this.mousemove);
         window.removeEventListener('mouseup', this.mouseup);

@@ -31,3 +31,11 @@
     cursor: pointer;
 }
 
+.handle:hover {
+    background-color: silver;
+}
+
+.handle.active {
+    background-color: silver;
+}
+
