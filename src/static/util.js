@@ -11,6 +11,12 @@ export default class Util {
 }
 
 class MathUtil {
+    static clamp(v, min, max){
+        return Math.min(Math.max(v, min), max);
+    }
+    static saturate(v){
+        return MathUtil.clamp(v, 0.0, 1.0);
+    }
     static easing(t){
         return t < 0.5 ? 4.0 * t * t * t : (t - 1.0) * (2.0 * t - 2.0) * (2.0 * t - 2.0) + 1.0;
     }
