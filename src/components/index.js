@@ -1,7 +1,7 @@
 
-import common from './common/index.js';
+import Common from './common/index.js';
 
 export default class Components {
-    static get common(){return common;}
+    static get Common(){return Common;}
 }
 
