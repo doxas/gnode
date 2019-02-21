@@ -1,5 +1,6 @@
 
 import css from './style.css';
+import Util from '../../../static/util.js';
 import GNODEElement from '../GNODEElement/index.js';
 
 /**
@@ -119,9 +120,9 @@ export default class GNODEInputRange extends GNODEElement {
             let innerWidth = b.width - c.width - 2; // 2 is linewidth x 2
             let x = evt.clientX;
             if(x < c.left){
-                this.value = Math.min(Math.max(this.value - this.step, this.min), this.max);
+                this.value = Util.Math.clamp(this.value - this.step, this.min, this.max);
             }else{
-                this.value = Math.min(Math.max(this.value + this.step, this.min), this.max);
+                this.value = Util.Math.clamp(this.value + this.step, this.min, this.max);
             }
             this.updateHandlePosition();
             this.emit('input', this.value);
@@ -151,10 +152,10 @@ export default class GNODEInputRange extends GNODEElement {
         let x = evt.clientX - this.mouseDownPositionX;
         let innerWidth = b.width - this.mouseDownHandleBound.width - 2; // 2 is linewidth x 2
         let handleLeft = this.mouseDownHandleBound.left - b.left + x;
-        let handleX = Math.min(Math.max(handleLeft, 0), innerWidth);
+        let handleX = Util.Math.clamp(handleLeft, 0, innerWidth);
         this.value = (handleX / innerWidth) * (this.max - this.min) + this.min;
         this.value = Math.round(this.value / this.step) * this.step;
-        this.value = Math.min(Math.max(this.value, this.min), this.max);
+        this.value = Util.Math.clamp(this.value, this.min, this.max);
         this.updateHandlePosition();
         this.emit('input', this.value);
     }
@@ -167,7 +168,7 @@ export default class GNODEInputRange extends GNODEElement {
         switch(evt.key){
             case 'ArrowLeft':
             case 'ArrowDown':
-                this.value = Math.min(Math.max(this.value - this.step, this.min), this.max);
+                this.value = Util.Math.clamp(this.value - this.step, this.min, this.max);
                 if(this.value !== previouse){
                     this.updateHandlePosition();
                     this.emit('input', this.value);
@@ -176,7 +177,7 @@ export default class GNODEInputRange extends GNODEElement {
                 break;
             case 'ArrowRight':
             case 'ArrowUp':
-                this.value = Math.min(Math.max(this.value + this.step, this.min), this.max);
+                this.value = Util.Math.clamp(this.value + this.step, this.min, this.max);
                 if(this.value !== previouse){
                     this.updateHandlePosition();
                     this.emit('input', this.value);
