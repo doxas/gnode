@@ -91,6 +91,7 @@ export default class GNODEInputRange extends GNODEElement {
          */
         this.handle = document.createElement('div');
         this.handle.classList.add('handle');
+        this.handle.setAttribute('tabindex', 0);
         this.inner.appendChild(this.background);
         this.inner.appendChild(this.handle);
         this.wrap.appendChild(this.inner);
@@ -102,6 +103,7 @@ export default class GNODEInputRange extends GNODEElement {
         // event setting ------------------------------------------------------
         this.mousemove = this.mousemove.bind(this);
         this.mouseup = this.mouseup.bind(this);
+        this.keydown = this.keydown.bind(this);
         this.addEventListenerForSelf(this.handle, 'mousedown', (evt) => {
             this.isMouseDown = true;
             this.handle.classList.add('active');
@@ -121,11 +123,11 @@ export default class GNODEInputRange extends GNODEElement {
             }else{
                 this.value = Math.min(Math.max(this.value + this.step, this.min), this.max);
             }
-            let ratio = ((this.value - this.min) / (this.max - this.min));
-            this.handle.style.left = `${ratio * innerWidth}px`;
-            this.background.style.width = `${ratio * 100}%`;
+            this.updateHandlePosition();
+            this.emit('input', this.value);
             this.emit('change', this.value);
         }, false);
+        this.addEventListenerForSelf(this.handle, 'keydown', this.keydown, false);
     }
     /**
      * mouse up event of window
@@ -134,6 +136,7 @@ export default class GNODEInputRange extends GNODEElement {
     mouseup(evt){
         this.isMouseDown = false;
         this.handle.classList.remove('active');
+        this.emit('input', this.value);
         this.emit('change', this.value);
         window.removeEventListener('mousemove', this.mousemove);
         window.removeEventListener('mouseup', this.mouseup);
@@ -152,9 +155,46 @@ export default class GNODEInputRange extends GNODEElement {
         this.value = (handleX / innerWidth) * (this.max - this.min) + this.min;
         this.value = Math.round(this.value / this.step) * this.step;
         this.value = Math.min(Math.max(this.value, this.min), this.max);
-        this.handle.style.left = `${handleX}px`;
-        this.background.style.width = `${(handleX / innerWidth) * 100}%`;
+        this.updateHandlePosition();
         this.emit('input', this.value);
+    }
+    /**
+     * keydown event
+     * @param {KeyboardEvent} evt - KeyDown event from element
+     */
+    keydown(evt){
+        let previouse = this.value;
+        switch(evt.key){
+            case 'ArrowLeft':
+            case 'ArrowDown':
+                this.value = Math.min(Math.max(this.value - this.step, this.min), this.max);
+                if(this.value !== previouse){
+                    this.updateHandlePosition();
+                    this.emit('input', this.value);
+                    this.emit('change', this.value);
+                }
+                break;
+            case 'ArrowRight':
+            case 'ArrowUp':
+                this.value = Math.min(Math.max(this.value + this.step, this.min), this.max);
+                if(this.value !== previouse){
+                    this.updateHandlePosition();
+                    this.emit('input', this.value);
+                    this.emit('change', this.value);
+                }
+                break;
+        }
+    }
+    /**
+     * update handle position from value
+     */
+    updateHandlePosition(){
+        let b = this.inner.getBoundingClientRect();
+        let c = this.handle.getBoundingClientRect();
+        let innerWidth = b.width - c.width - 2; // 2 is linewidth x 2
+        let ratio = ((this.value - this.min) / (this.max - this.min));
+        this.handle.style.left = `${ratio * innerWidth}px`;
+        this.background.style.width = `${ratio * 100}%`;
     }
     /**
      * set disabled attribute
