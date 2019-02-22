@@ -1,0 +1,33 @@
+.GNODEInputButton {
+    color: silver;
+    line-height: 20px;
+    vertical-align: middle;
+    height: 20px;
+    display: inline-block;
+}
+
+.button {
+    background-color: whitesmoke;
+    color: gray;
+    font-size: small;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0px 3px;
+    min-width: 20px;
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+}
+
+.button:hover {
+    background-color: white;
+    color: maroon;
+}
+
+.button.disabled,
+.button.disabled:hover {
+    background-color: silver;
+    cursor: default;
+}
+
