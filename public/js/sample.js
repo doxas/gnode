@@ -51,6 +51,13 @@ window.addEventListener('load', () => {
         ['change'],
         [(evt) => {console.log(evt);}]
     );
+    gen(
+        'GNODESelect',
+        new GNODE.Components.Common.GNODESelect([0, 1, 2], 'single', 0),
+        main,
+        ['change'],
+        [(evt) => {console.log(evt);}]
+    );
 
     head('Other', side, main); // =============================================
     gen(
