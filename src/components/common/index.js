@@ -7,6 +7,7 @@ import GNODEInputRadio    from './GNODEInputRadio/index.js';
 import GNODEInputText     from './GNODEInputText/index.js';
 import GNODEInputNumber   from './GNODEInputNumber/index.js';
 import GNODEInputRange    from './GNODEInputRange/index.js';
+import GNODESelect        from './GNODESelect/index.js';
 
 export default class Common {
     static get GNODEElement()       {return GNODEElement;}
@@ -17,5 +18,6 @@ export default class Common {
     static get GNODEInputText()     {return GNODEInputText;}
     static get GNODEInputNumber()   {return GNODEInputNumber;}
     static get GNODEInputRange()    {return GNODEInputRange;}
+    static get GNODESelect()        {return GNODESelect;}
 }
 
