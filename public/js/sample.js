@@ -10,6 +10,13 @@ window.addEventListener('load', () => {
         main, [], []
     );
     gen(
+        'GNODEInputButton',
+        new GNODE.Components.Common.GNODEInputButton('input-button', 'single'),
+        main,
+        ['click'],
+        [(evt) => {console.log(evt);}]
+    );
+    gen(
         'GNODEInputCheckbox',
         new GNODE.Components.Common.GNODEInputCheckbox(true, 'single', 'input-checkbox'),
         main,
