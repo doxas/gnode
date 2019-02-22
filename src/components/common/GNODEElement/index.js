@@ -2,6 +2,8 @@
 import css from './style.css';
 import EventEmitter3 from 'eventemitter3';
 
+const ERR_APPEND = `invalid argument 1 is not of type 'Element' or 'GNODEElement'`;
+
 /**
  * super class of GNODE element
  * @class
@@ -41,6 +43,10 @@ export default class GNODEElement extends EventEmitter3 {
          * @type {object}
          */
         this.listenersForSelf = {};
+        /**
+         * @type {Array}
+         */
+        this.children = [];
 
         // dom generation -----------------------------------------------------
         /**
@@ -61,10 +67,20 @@ export default class GNODEElement extends EventEmitter3 {
     }
     /**
      * append to this.dom
-     * @param {HTMLElement} element - html element
+     * @param {HTMLElement|GNODEElement} element - html element or GNODEElement
      */
     append(element){
-        this.dom.appendChild(element);
+        if(element == null){
+            throw new Error(ERR_APPEND);
+        }
+        if(element instanceof GNODEElement === true){
+            this.children.push(element);
+            this.dom.appendChild(element.element);
+        }else if(element instanceof HTMLElement === true){
+            this.dom.appendChild(element);
+        }else{
+            throw new Error(ERR_APPEND);
+        }
     }
     /**
      * @alias append
@@ -76,6 +92,11 @@ export default class GNODEElement extends EventEmitter3 {
      * release
      */
     release(){
+        // remove all child of GNODEElement
+        this.children.map((v) => {
+            v.release();
+            v = null;
+        });
         // remove event listener
         this.removeEventListenerForSelf();
         // remove all element
