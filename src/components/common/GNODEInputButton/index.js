@@ -14,6 +14,24 @@ export default class GNODEInputButton extends GNODEElement {
      */
     get description(){return 'simple input button.';}
     /**
+     * @type {HTMLDivElement}
+     */
+    get wrapper(){return this.wrap;}
+    /**
+     * @type {HTMLDivElement}
+     */
+    get control(){return this.button;}
+    /**
+     * @type {HTMLDivElement}
+     */
+    get value(){return this.caption;}
+
+    set value(v){
+        this.caption = `${v}`;
+        this.button.textContent = this.caption;
+    }
+
+    /**
      * @type {Array<string>}
      */
     static get EVENTS(){return [
@@ -36,7 +54,7 @@ export default class GNODEInputButton extends GNODEElement {
         /**
          * @type {string}
          */
-        this.value = `${value}`;
+        this.caption = `${value}`;
 
         // dom generation -----------------------------------------------------
         /**
