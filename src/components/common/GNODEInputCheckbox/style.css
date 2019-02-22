@@ -29,6 +29,10 @@ input[type=checkbox] {
     display: inline-block;
 }
 
+.box:hover:before {
+    background-color: white;
+}
+
 input:checked + .box:before {
     content: '✓';
 }
