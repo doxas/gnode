@@ -8,6 +8,9 @@ export default class Util {
     static isString(s){
         return s != null && Object.prototype.toString.call(s) === '[object String]';
     }
+    static isObject(o){
+        return o != null && Object.prototype.toString.call(o) === '[object Object]';
+    }
 }
 
 class MathUtil {
