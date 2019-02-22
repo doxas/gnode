@@ -1,15 +1,7 @@
-.GNODESelect {
-    color: silver;
-    line-height: 20px;
-    vertical-align: middle;
-    width: 200px;
-    height: 20px;
-    display: inline-block;
-}
 
 .list_wrap {
     background-color: whitesmoke;
-    width: 200px;
+    width: 100%;
     max-height: 62px;
     overflow-x: hidden;
     overflow-y: auto;

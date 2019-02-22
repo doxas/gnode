@@ -1,5 +1,6 @@
 
 import css from './style.css';
+import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 import GNODEInputButton from '../GNODEInputButton/index.js';
 
@@ -22,35 +23,26 @@ export default class GNODESelect extends GNODEElement {
     ];}
     /**
      * @constructor
-     * @param {string} [value=''] - value
+     * @param {string} [value=[]] - value
      * @param {string} [name=''] - name
-     * @param {string} [placeholder=''] - placeholder
-     * @param {number} [max=null] - maxlength
+     * @param {number} [selectedIndex=0] - default selected index
      * @example
      * let E = new GNODESelect(['value0', 'value1'], 'name', 0);
      */
     constructor(value = [], name = '', selectedIndex = 0){
-        super();
+        super(name);
         // initialize properties ----------------------------------------------
         /**
          * @type {Array<string>}
          */
         this.value = value;
         /**
-         * @type {string}
-         */
-        this.name = name;
-        /**
          * @type {number}
          */
         this.selectedIndex = selectedIndex;
 
         // dom generation -----------------------------------------------------
-        /**
-         * @type {HTMLDivElement}
-         */
-        this.wrap = document.createElement('div');
-        this.wrap.classList.add('GNODESelect');
+        this.dom.classList.add('GNODESelect');
         /**
          * @type {GNODEInputButton}
          */
@@ -78,20 +70,27 @@ export default class GNODESelect extends GNODEElement {
                     this.selected.value = this.value[index];
                     this.emit('change', this.value[index]);
                 };})(i));
-                list.wrapper.style.width = '100%';
+                list.element.style.width = '100%';
                 list.control.style.width = '100%';
                 this.list.push(list);
                 this.listWrap.appendChild(list.element);
             });
         }
 
-        this.wrap.appendChild(this.selected.element);
-        this.wrap.appendChild(this.listWrap);
-        this.shadow.appendChild(this.wrap);
+        this.shadow.appendChild(this.selected.element);
+        this.shadow.appendChild(this.listWrap);
 
         // style setting ------------------------------------------------------
+        this.addStyle({
+            color:         `${CONST.COMPONENT_DEFAULT_COLOR}`,
+            lineHeight:    `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
+            width:         `${CONST.COMPONENT_SELECT_WIDTH}px`,
+            height:        `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
+            verticalAlign: 'middle',
+            display:       'inline-block',
+        });
         this.appendStyle(css);
-        this.selected.wrapper.style.width = '100%';
+        this.selected.element.style.width = '100%';
         this.selected.control.style.width = '100%';
 
         // event setting ------------------------------------------------------
