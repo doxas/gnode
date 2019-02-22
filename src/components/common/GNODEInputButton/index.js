@@ -16,10 +16,6 @@ export default class GNODEInputButton extends GNODEElement {
     /**
      * @type {HTMLDivElement}
      */
-    get wrapper(){return this.wrap;}
-    /**
-     * @type {HTMLDivElement}
-     */
     get control(){return this.button;}
     /**
      * @type {HTMLDivElement}
@@ -57,19 +53,14 @@ export default class GNODEInputButton extends GNODEElement {
         this.caption = `${value}`;
 
         // dom generation -----------------------------------------------------
-        /**
-         * @type {HTMLDivElement}
-         */
-        this.wrap = document.createElement('div');
-        this.wrap.classList.add('GNODEInputButton');
+        this.dom.classList.add('GNODEInputButton');
         /**
          * @type {HTMLDivElement}
          */
         this.button = document.createElement('div');
         this.button.classList.add('button');
         this.button.textContent = this.value;
-        this.wrap.appendChild(this.button);
-        this.shadow.appendChild(this.wrap);
+        this.shadow.appendChild(this.button);
 
         // style setting ------------------------------------------------------
         this.appendStyle(css);
