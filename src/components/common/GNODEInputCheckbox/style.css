@@ -1,6 +1,7 @@
 .GNODEInputCheckbox {
     color: silver;
     line-height: 20px;
+    vertical-align: middle;
     height: 20px;
     display: inline-block;
 }
@@ -19,7 +20,7 @@ input[type=checkbox] {
 }
 
 .box:before {
-    background-color: white;
+    background-color: whitesmoke;
     color: gray;
     text-align: center;
     font-weight: bold;

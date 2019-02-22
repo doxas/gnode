@@ -1,6 +1,7 @@
 .GNODEInputRadio {
     color: silver;
     line-height: 20px;
+    vertical-align: middle;
     height: 20px;
     display: inline-block;
 }
@@ -20,7 +21,7 @@ input[type=radio] {
 }
 
 .radio:before {
-    background-color: white;
+    background-color: whitesmoke;
     border-radius: 10px;
     color: gray;
     text-align: center;
