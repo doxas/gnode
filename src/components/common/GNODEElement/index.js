@@ -1,5 +1,6 @@
 
 import css from './style.css';
+import Util from '../../../static/util.js';
 import EventEmitter3 from 'eventemitter3';
 
 const ERR_APPEND = `invalid argument 1 is not of type 'Element' or 'GNODEElement'`;
@@ -35,10 +36,15 @@ export default class GNODEElement extends EventEmitter3 {
     }
     /**
      * @constructor
+     * @param {string} name - name of element
      */
-    constructor(){
+    constructor(name){
         super();
         // initialize properties ----------------------------------------------
+        /**
+         * @type {string}
+         */
+        this.name = name;
         /**
          * @type {object}
          */
@@ -148,5 +154,15 @@ export default class GNODEElement extends EventEmitter3 {
         let style = document.createElement('style');
         style.textContent = css;
         this.shadow.insertBefore(style, this.shadow.firstChild);
+    }
+    /**
+     * add style to dom
+     * @param {object} style - object of style
+     */
+    addStyle(style){
+        if(Util.isObject(style) !== true){return;}
+        for(let key in style){
+            this.dom.style[key] = style[key];
+        }
     }
 }
