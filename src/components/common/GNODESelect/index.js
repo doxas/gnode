@@ -91,7 +91,6 @@ export default class GNODESelect extends GNODEElement {
 
         // style setting ------------------------------------------------------
         this.appendStyle(css);
-        this.dom.style.width = '100%';
         this.selected.wrapper.style.width = '100%';
         this.selected.control.style.width = '100%';
 
