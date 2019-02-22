@@ -68,13 +68,15 @@ export default class GNODESelect extends GNODEElement {
         if(this.value != null && Array.isArray(this.value) === true){
             this.value.map((v, i) => {
                 if(i === this.selectedIndex){
-                    this.selected.value = i;
+                    this.selected.value = this.value[i];
                 }
                 let list = new GNODEInputButton(`${v}`, this.name);
                 this.children.push(list);
                 list.on('click', ((index) => {return () => {
-                    this.selected.value = i;
-                    this.listWrap.style.display = 'none';
+                    closeListWrap();
+                    this.selectedIndex = index;
+                    this.selected.value = this.value[index];
+                    this.emit('change', this.value[index]);
                 };})(i));
                 list.wrapper.style.width = '100%';
                 list.control.style.width = '100%';
@@ -94,9 +96,19 @@ export default class GNODESelect extends GNODEElement {
         this.selected.control.style.width = '100%';
 
         // event setting ------------------------------------------------------
-        this.selected.on('click', () => {
+        const closeListWrap = () => {
+            this.listWrap.style.display = 'none';
+            window.removeEventListener('click', closeListWrap);
+        };
+        this.selected.on('click', (evt) => {
+            evt.stopPropagation();
             if(this.value != null && Array.isArray(this.value) === true && this.value.length > 0){
-                this.listWrap.style.display = 'flex';
+                if(this.listWrap.style.display === 'flex'){
+                    closeListWrap();
+                }else{
+                    this.listWrap.style.display = 'flex';
+                    window.addEventListener('click', closeListWrap, false);
+                }
             }
         });
     }
