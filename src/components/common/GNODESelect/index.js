@@ -95,6 +95,8 @@ export default class GNODESelect extends GNODEElement {
 
         // event setting ------------------------------------------------------
         const closeListWrap = () => {
+            this.selected.control.style.backgroundColor = '';
+            this.selected.control.style.boxShadow = '';
             this.listWrap.style.display = 'none';
             window.removeEventListener('click', closeListWrap);
         };
@@ -104,6 +106,8 @@ export default class GNODESelect extends GNODEElement {
                 if(this.listWrap.style.display === 'flex'){
                     closeListWrap();
                 }else{
+                    this.selected.control.style.backgroundColor = 'transparent';
+                    this.selected.control.style.boxShadow = `0px 0px 0px 1px ${CONST.COMPONENT_DEFAULT_COLOR} inset`;
                     this.listWrap.style.display = 'flex';
                     window.addEventListener('click', closeListWrap, false);
                 }
