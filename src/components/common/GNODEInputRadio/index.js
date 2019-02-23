@@ -108,14 +108,14 @@ export default class GNODEInputRadio extends GNODEElement {
 
         // event setting ------------------------------------------------------
         this.addEventListenerForSelf(this.input, 'input', (evt) => {
-            this.emit('input', evt);
+            this.emit('input', this.value, evt);
         }, false);
         this.addEventListenerForSelf(this.input, 'change', (evt) => {
-            this.emit('change', evt);
+            this.emit('change', this.value, evt);
         }, false);
         this.addEventListenerForSelf(this.wrap, 'keydown', (evt) => {
+            evt.preventDefault();
             if(evt.key === ' '){
-                evt.preventDefault();
                 this.input.checked = true;
             }
         }, false);
@@ -132,6 +132,6 @@ export default class GNODEInputRadio extends GNODEElement {
      * @param {boolean} [disable=true] - disabled
      */
     disable(disable = true){
-        this.input.disabled = disable;
+        this.enable(!disable);
     }
 }

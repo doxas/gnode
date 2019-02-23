@@ -101,7 +101,7 @@ export default class GNODESelect extends GNODEElement {
             this.listWrap.style.display = 'none';
             window.removeEventListener('click', closeListWrap);
         };
-        this.selected.on('click', (evt) => {
+        this.selected.on('click', (value, evt) => {
             evt.stopPropagation();
             if(this.value != null && Array.isArray(this.value) === true && this.value.length > 0){
                 if(this.listWrap.style.display === 'flex'){
@@ -127,6 +127,6 @@ export default class GNODESelect extends GNODEElement {
      * @param {boolean} [disable=true] - disabled
      */
     disable(disable = true){
-        this.input.disabled = disable;
+        this.enable(!disable);
     }
 }
