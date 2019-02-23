@@ -57,7 +57,7 @@ window.addEventListener('load', () => {
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
-    ).disable();
+    );
 
     head('Other', side, main); // =============================================
     gen(
