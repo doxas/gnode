@@ -58,6 +58,7 @@ export default class GNODEInputButton extends GNODEElement {
          */
         this.button = document.createElement('div');
         this.button.classList.add('button');
+        this.button.setAttribute('tabindex', 0);
         this.button.textContent = this.value;
         this.shadow.appendChild(this.button);
 
@@ -73,7 +74,11 @@ export default class GNODEInputButton extends GNODEElement {
 
         // event setting ------------------------------------------------------
         this.addEventListenerForSelf(this.button, 'click', (evt) => {
-            this.emit('click', evt);
+            this.emit('click', this.caption, evt);
+        }, false);
+        this.addEventListenerForSelf(this.button, 'keydown', (evt) => {
+            evt.preventDefault();
+            if(evt.key === ' '){this.emit('click', this.caption, evt);}
         }, false);
     }
     /**
@@ -92,10 +97,6 @@ export default class GNODEInputButton extends GNODEElement {
      * @param {boolean} [disable=true] - disabled
      */
     disable(disable = true){
-        if(disable === true){
-            this.button.classList.add('disabled');
-        }else{
-            this.button.classList.remove('disabled');
-        }
+        this.enable(!disable);
     }
 }
