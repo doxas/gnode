@@ -1,5 +1,6 @@
 
 import css from './style.css';
+import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 
 /**
@@ -35,19 +36,11 @@ export default class GNODEInputText extends GNODEElement {
      * let E = new GNODEInputText('value', 'name', 'placeholder', maxlength);
      */
     constructor(value = '', name = '', placeholder = '', max){
-        super();
+        super(name);
         // initialize properties ----------------------------------------------
-        /**
-         * @type {string}
-         */
-        this.name = name;
 
         // dom generation -----------------------------------------------------
-        /**
-         * @type {HTMLDivElement}
-         */
-        this.wrap = document.createElement('div');
-        this.wrap.classList.add('GNODEInputText');
+        this.dom.classList.add('GNODEInputText');
         /**
          * @type {HTMLInputElement}
          */
@@ -57,10 +50,16 @@ export default class GNODEInputText extends GNODEElement {
         this.input.name = name;
         this.input.setAttribute('placeholder', placeholder);
         this.input.setAttribute('maxlength', max);
-        this.wrap.appendChild(this.input);
-        this.shadow.appendChild(this.wrap);
+        this.shadow.appendChild(this.input);
 
         // style setting ------------------------------------------------------
+        this.addStyle({
+            color:         `${CONST.COMPONENT_DEFAULT_COLOR}`,
+            lineHeight:    `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
+            height:        `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
+            verticalAlign: 'middle',
+            display:       'inline-block',
+        });
         this.appendStyle(css);
 
         // event setting ------------------------------------------------------
