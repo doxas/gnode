@@ -29,7 +29,7 @@ window.addEventListener('load', () => {
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
-    );
+    ).value = false;
     gen(
         'GNODEInputText',
         new GNODE.Components.Common.GNODEInputText('', 'single', 'set maxlength = 20', 20),
