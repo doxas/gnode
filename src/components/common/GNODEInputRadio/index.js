@@ -1,5 +1,6 @@
 
 import css from './style.css';
+import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 
 /**
@@ -38,23 +39,20 @@ export default class GNODEInputRadio extends GNODEElement {
      * let E = new GNODEInputRadio(checked, 'name', 'label caption');
      */
     constructor(value = false, name = '', text = ''){
-        super();
+        super(name);
         // initialize properties ----------------------------------------------
         /**
          * @type {string}
          */
         this.text = text;
-        /**
-         * @type {string}
-         */
-        this.name = name;
 
         // dom generation -----------------------------------------------------
+        this.dom.classList.add('GNODEInputRadio');
         /**
          * @type {HTMLLabelElement}
          */
         this.wrap = document.createElement('label');
-        this.wrap.classList.add('GNODEInputRadio');
+        this.wrap.classList.add('wrap');
         /**
          * @type {HTMLDivElement}
          */
@@ -79,6 +77,13 @@ export default class GNODEInputRadio extends GNODEElement {
         this.label.textContent = text;
 
         // style setting ------------------------------------------------------
+        this.addStyle({
+            color:         `${CONST.COMPONENT_DEFAULT_COLOR}`,
+            lineHeight:    `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
+            height:        `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
+            verticalAlign: 'middle',
+            display:       'inline-block',
+        });
         this.appendStyle(css);
 
         // event setting ------------------------------------------------------
