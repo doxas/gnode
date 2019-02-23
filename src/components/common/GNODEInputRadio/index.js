@@ -28,15 +28,19 @@ export default class GNODEInputRadio extends GNODEElement {
     /**
      * @type {boolean}
      */
-    get checked(){return this.input.checked;}
-    /**
-     * @alias checked
-     */
     get value(){return this.input.checked;}
     /**
      * @param {boolean} v - checked
      */
     set value(v){this.input.checked = v;}
+    /**
+     * @alias value
+     */
+    get checked(){return this.value;}
+    /**
+     * @param {boolean} v - checked
+     */
+    set checked(v){this.value = v;}
 
     /**
      * @constructor
@@ -62,11 +66,17 @@ export default class GNODEInputRadio extends GNODEElement {
          */
         this.wrap = document.createElement('label');
         this.wrap.classList.add('wrap');
+        this.wrap.setAttribute('tabindex', 0);
         /**
          * @type {HTMLDivElement}
          */
         this.radio = document.createElement('div');
         this.radio.classList.add('radio');
+        /**
+         * @type {HTMLDivElement}
+         */
+        this.before = document.createElement('div');
+        this.before.classList.add('before');
         /**
          * @type {HTMLDivElement}
          */
@@ -79,6 +89,7 @@ export default class GNODEInputRadio extends GNODEElement {
         this.input.type = 'radio';
         this.input.checked = value;
         this.input.name = name;
+        this.radio.appendChild(this.before);
         this.wrap.appendChild(this.input);
         this.wrap.appendChild(this.radio);
         this.wrap.appendChild(this.label);
@@ -101,6 +112,12 @@ export default class GNODEInputRadio extends GNODEElement {
         }, false);
         this.addEventListenerForSelf(this.input, 'change', (evt) => {
             this.emit('change', evt);
+        }, false);
+        this.addEventListenerForSelf(this.wrap, 'keydown', (evt) => {
+            if(evt.key === ' '){
+                evt.preventDefault();
+                this.input.checked = true;
+            }
         }, false);
     }
     /**
