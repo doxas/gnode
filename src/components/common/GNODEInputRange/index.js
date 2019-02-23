@@ -4,6 +4,9 @@ import Util from '../../../static/util.js';
 import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 
+const LINE_WIDTH = 1; // for css border width
+const HANDLE_WIDTH = 8; // for css handle width
+
 /**
  * simple input range
  * @class
@@ -22,6 +25,63 @@ export default class GNODEInputRange extends GNODEElement {
      * @type {string|HTMLElement}
      */
     get description(){return 'simple input range.';}
+    /**
+     * @type {HTMLDivElement}
+     */
+    get control(){return this.handle;}
+    /**
+     * @type {boolean}
+     */
+    get disabled(){return !this.enableFlag;}
+    /**
+     * @param {boolean} v - flag of disabled
+     */
+    set disabled(v){
+        this.enable(!v);
+    }
+    /**
+     * @type {number}
+     */
+    get value(){return this.range;}
+    /**
+     * @param {number} v - value
+     */
+    set value(v){
+        this.range = Util.Math.clamp(v, this.minValue, this.maxValue);
+        this.updateHandlePosition();
+    }
+    /**
+     * @type {number}
+     */
+    get min(){return this.minValue;}
+    /**
+     * @param {number} v - min value
+     */
+    set min(v){
+        this.minValue = Math.min(v, this.maxValue);
+        this.updateHandlePosition();
+    }
+    /**
+     * @type {number}
+     */
+    get max(){return this.maxValue;}
+    /**
+     * @param {number} v - max value
+     */
+    set max(v){
+        this.maxValue = Math.max(v, this.minValue);
+        this.updateHandlePosition();
+    }
+    /**
+     * @type {number}
+     */
+    get step(){return this.stepValue;}
+    /**
+     * @param {number} v - step value
+     */
+    set step(v){
+        this.stepValue = Util.Math.clamp(v, this.minValue, this.maxValue);
+    }
 
     /**
      * @constructor
@@ -37,21 +97,25 @@ export default class GNODEInputRange extends GNODEElement {
         super(name);
         // initialize properties ----------------------------------------------
         /**
-         * @type {number}
+         * @type {boolean}
          */
-        this.value = value;
+        this.enableFlag = true;
         /**
          * @type {number}
          */
-        this.min = min;
+        this.range = value;
         /**
          * @type {number}
          */
-        this.max = max;
+        this.minValue = min;
         /**
          * @type {number}
          */
-        this.step = step;
+        this.maxValue = max;
+        /**
+         * @type {number}
+         */
+        this.stepValue = step;
         /**
          * @type {boolean}
          */
@@ -86,6 +150,7 @@ export default class GNODEInputRange extends GNODEElement {
         this.wrap.appendChild(this.background);
         this.wrap.appendChild(this.handle);
         this.shadow.appendChild(this.wrap);
+        this.updateHandlePosition();
 
         // style setting ------------------------------------------------------
         this.addStyle({
@@ -103,6 +168,7 @@ export default class GNODEInputRange extends GNODEElement {
         this.mouseup = this.mouseup.bind(this);
         this.keydown = this.keydown.bind(this);
         this.addEventListenerForSelf(this.handle, 'mousedown', (evt) => {
+            if(this.enableFlag !== true){return;}
             this.isMouseDown = true;
             this.handle.classList.add('active');
             this.mouseDownPositionX = evt.clientX;
@@ -112,18 +178,19 @@ export default class GNODEInputRange extends GNODEElement {
             evt.stopPropagation();
         }, false);
         this.addEventListenerForSelf(this.wrap, 'mousedown', (evt) => {
+            if(this.enableFlag !== true){return;}
             let b = this.wrap.getBoundingClientRect();
             let c = this.handle.getBoundingClientRect();
-            let innerWidth = b.width - c.width - 2; // 2 is linewidth x 2
+            let innerWidth = b.width - c.width - LINE_WIDTH * 2;
             let x = evt.clientX;
             if(x < c.left){
-                this.value = Util.Math.clamp(this.value - this.step, this.min, this.max);
+                this.range = Util.Math.clamp(this.range - this.stepValue, this.minValue, this.maxValue);
             }else{
-                this.value = Util.Math.clamp(this.value + this.step, this.min, this.max);
+                this.range = Util.Math.clamp(this.range + this.stepValue, this.minValue, this.maxValue);
             }
             this.updateHandlePosition();
-            this.emit('input', this.value);
-            this.emit('change', this.value);
+            this.emit('input', this.range);
+            this.emit('change', this.range);
         }, false);
         this.addEventListenerForSelf(this.handle, 'keydown', this.keydown, false);
     }
@@ -134,8 +201,8 @@ export default class GNODEInputRange extends GNODEElement {
     mouseup(evt){
         this.isMouseDown = false;
         this.handle.classList.remove('active');
-        this.emit('input', this.value);
-        this.emit('change', this.value);
+        this.emit('input', this.range);
+        this.emit('change', this.range);
         window.removeEventListener('mousemove', this.mousemove);
         window.removeEventListener('mouseup', this.mouseup);
     }
@@ -144,41 +211,43 @@ export default class GNODEInputRange extends GNODEElement {
      * @param {MouseEvent} evt - MouseMove event from target of window
      */
     mousemove(evt){
+        if(this.enableFlag !== true){return;}
         evt.preventDefault();
         let b = this.wrap.getBoundingClientRect();
         let x = evt.clientX - this.mouseDownPositionX;
-        let innerWidth = b.width - this.mouseDownHandleBound.width - 2; // 2 is linewidth x 2
+        let innerWidth = b.width - this.mouseDownHandleBound.width - LINE_WIDTH * 2;
         let handleLeft = this.mouseDownHandleBound.left - b.left + x;
         let handleX = Util.Math.clamp(handleLeft, 0, innerWidth);
-        this.value = (handleX / innerWidth) * (this.max - this.min) + this.min;
-        this.value = Math.round(this.value / this.step) * this.step;
-        this.value = Util.Math.clamp(this.value, this.min, this.max);
+        this.range = (handleX / innerWidth) * (this.maxValue - this.minValue) + this.minValue;
+        this.range = Math.round(this.range / this.stepValue) * this.stepValue;
+        this.range = Util.Math.clamp(this.range, this.minValue, this.maxValue);
         this.updateHandlePosition();
-        this.emit('input', this.value);
+        this.emit('input', this.range);
     }
     /**
      * keydown event
      * @param {KeyboardEvent} evt - KeyDown event from element
      */
     keydown(evt){
-        let previouse = this.value;
+        if(this.enableFlag !== true){return;}
+        let previouse = this.range;
         switch(evt.key){
             case 'ArrowLeft':
             case 'ArrowDown':
-                this.value = Util.Math.clamp(this.value - this.step, this.min, this.max);
-                if(this.value !== previouse){
+                this.range = Util.Math.clamp(this.range - this.stepValue, this.minValue, this.maxValue);
+                if(this.range !== previouse){
                     this.updateHandlePosition();
-                    this.emit('input', this.value);
-                    this.emit('change', this.value);
+                    this.emit('input', this.range);
+                    this.emit('change', this.range);
                 }
                 break;
             case 'ArrowRight':
             case 'ArrowUp':
-                this.value = Util.Math.clamp(this.value + this.step, this.min, this.max);
-                if(this.value !== previouse){
+                this.range = Util.Math.clamp(this.range + this.stepValue, this.minValue, this.maxValue);
+                if(this.range !== previouse){
                     this.updateHandlePosition();
-                    this.emit('input', this.value);
-                    this.emit('change', this.value);
+                    this.emit('input', this.range);
+                    this.emit('change', this.range);
                 }
                 break;
         }
@@ -189,23 +258,31 @@ export default class GNODEInputRange extends GNODEElement {
     updateHandlePosition(){
         let b = this.wrap.getBoundingClientRect();
         let c = this.handle.getBoundingClientRect();
-        let innerWidth = b.width - c.width - 2; // 2 is linewidth x 2
-        let ratio = ((this.value - this.min) / (this.max - this.min));
+        let innerWidth = b.width - c.width - LINE_WIDTH * 2;
+        if(innerWidth <= 0 || b.width === 0 || c.width === 0){
+            innerWidth = CONST.COMPONENT_RANGE_WIDTH - HANDLE_WIDTH - LINE_WIDTH * 2;
+        }
+        let ratio = ((this.range - this.minValue) / (this.maxValue - this.minValue));
         this.handle.style.left = `${ratio * innerWidth}px`;
         this.background.style.width = `${ratio * 100}%`;
     }
     /**
-     * set disabled attribute
+     * like set to disabled attribute
      * @param {boolean} [enable=true] - disabled = !enable
      */
     enable(enable = true){
-        this.input.disabled = !enable;
+        this.enableFlag = enable;
+        if(enable === true){
+            this.wrap.classList.remove('disabled');
+        }else{
+            this.wrap.classList.add('disabled');
+        }
     }
     /**
-     * set disabled attribute
+     * like set to disabled attribute
      * @param {boolean} [disable=true] - disabled
      */
     disable(disable = true){
-        this.input.disabled = disable;
+        this.enable(!disable);
     }
 }
