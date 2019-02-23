@@ -26,10 +26,6 @@ export default class GNODEInputCheckbox extends GNODEElement {
      */
     get control(){return this.input;}
     /**
-     * @alias value
-     */
-    get checked(){return this.input.checked;}
-    /**
      * @type {boolean}
      */
     get value(){return this.input.checked;}
@@ -37,6 +33,14 @@ export default class GNODEInputCheckbox extends GNODEElement {
      * @param {boolean} v - checked
      */
     set value(v){this.input.checked = v;}
+    /**
+     * @alias value
+     */
+    get checked(){return this.value;}
+    /**
+     * @param {boolean} v - checked
+     */
+    set checked(v){this.value = v;}
 
     /**
      * @constructor
@@ -62,11 +66,17 @@ export default class GNODEInputCheckbox extends GNODEElement {
          */
         this.wrap = document.createElement('label');
         this.wrap.classList.add('wrap');
+        this.wrap.setAttribute('tabindex', 0);
         /**
          * @type {HTMLDivElement}
          */
         this.box = document.createElement('div');
         this.box.classList.add('box');
+        /**
+         * @type {HTMLDivElement}
+         */
+        this.before = document.createElement('div');
+        this.before.classList.add('before');
         /**
          * @type {HTMLDivElement}
          */
@@ -79,6 +89,7 @@ export default class GNODEInputCheckbox extends GNODEElement {
         this.input.type = 'checkbox';
         this.input.checked = value;
         this.input.name = name;
+        this.box.appendChild(this.before);
         this.wrap.appendChild(this.input);
         this.wrap.appendChild(this.box);
         this.wrap.appendChild(this.label);
@@ -101,6 +112,12 @@ export default class GNODEInputCheckbox extends GNODEElement {
         }, false);
         this.addEventListenerForSelf(this.input, 'change', (evt) => {
             this.emit('change', evt);
+        }, false);
+        this.addEventListenerForSelf(this.wrap, 'keydown', (evt) => {
+            if(evt.key === ' '){
+                evt.preventDefault();
+                this.input.checked = !this.input.checked;
+            }
         }, false);
     }
     /**

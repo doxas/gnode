@@ -4,40 +4,48 @@ input[type=checkbox] {
 }
 
 .box {
+    background-color: whitesmoke;
     min-width: 20px;
     max-width: 20px;
     min-height: 20px;
     max-height: 20px;
     margin: 0px 5px 0px 0px;
     display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
 }
 
-.box:before {
-    background-color: whitesmoke;
-    color: gray;
-    text-align: center;
-    font-weight: bold;
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-}
-
-.box:hover:before {
+.box:hover {
     background-color: white;
 }
 
-input:checked + .box:before {
-    content: '✓';
+.before {
+    background-color: gray;
+    border-radius: 2px;
+    text-align: center;
+    font-weight: bold;
+    margin: 4px;
+    min-width: 12px;
+    max-width: 12px;
+    min-height: 12px;
+    max-height: 12px;
 }
 
-input + .box:before {
-    content: '　';
+input + .box .before {
+    display: none;
 }
 
-input[disabled] + .box:before {
+input:checked + .box .before {
+    display: inline-block;
+}
+
+input[disabled] + .box {
     background-color: #bbb;
-    color: #999;
     box-shadow: 1px 1px 5px 0px #777 inset;
+}
+
+input[disabled] + .box .before {
+    background-color: #999;
 }
 
 .label {
