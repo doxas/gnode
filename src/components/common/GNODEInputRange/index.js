@@ -1,6 +1,7 @@
 
 import css from './style.css';
 import Util from '../../../static/util.js';
+import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 
 /**
@@ -32,16 +33,12 @@ export default class GNODEInputRange extends GNODEElement {
      * let E = new GNODEInputRange(50, 'name', 0, 100, 0.1);
      */
     constructor(value = 0, name = '', min = 0, max = 100, step = 1){
-        super();
+        super(name);
         // initialize properties ----------------------------------------------
         /**
          * @type {number}
          */
         this.value = value;
-        /**
-         * @type {string}
-         */
-        this.name = name;
         /**
          * @type {number}
          */
@@ -61,10 +58,6 @@ export default class GNODEInputRange extends GNODEElement {
         /**
          * @type {number}
          */
-        this.mousePositionX = 0;
-        /**
-         * @type {number}
-         */
         this.mouseDownPositionX = 0;
         /**
          * @type {DOMRect}
@@ -72,16 +65,12 @@ export default class GNODEInputRange extends GNODEElement {
         this.mouseDownHandleBound = null;
 
         // dom generation -----------------------------------------------------
+        this.dom.classList.add('GNODEInputRange');
         /**
          * @type {HTMLDivElement}
          */
         this.wrap = document.createElement('div');
-        this.wrap.classList.add('GNODEInputRange');
-        /**
-         * @type {HTMLDivElement}
-         */
-        this.inner = document.createElement('div');
-        this.inner.classList.add('inner');
+        this.wrap.classList.add('wrap');
         /**
          * @type {HTMLDivElement}
          */
@@ -93,12 +82,19 @@ export default class GNODEInputRange extends GNODEElement {
         this.handle = document.createElement('div');
         this.handle.classList.add('handle');
         this.handle.setAttribute('tabindex', 0);
-        this.inner.appendChild(this.background);
-        this.inner.appendChild(this.handle);
-        this.wrap.appendChild(this.inner);
+        this.wrap.appendChild(this.background);
+        this.wrap.appendChild(this.handle);
         this.shadow.appendChild(this.wrap);
 
         // style setting ------------------------------------------------------
+        this.addStyle({
+            lineHeight:    `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
+            width:         `${CONST.COMPONENT_RANGE_WIDTH}px`,
+            height:        `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
+            verticalAlign: 'middle',
+            display:       'flex',
+            flexDirection: 'row',
+        });
         this.appendStyle(css);
 
         // event setting ------------------------------------------------------
@@ -114,8 +110,8 @@ export default class GNODEInputRange extends GNODEElement {
             window.addEventListener('mouseup', this.mouseup, false);
             evt.stopPropagation();
         }, false);
-        this.addEventListenerForSelf(this.inner, 'mousedown', (evt) => {
-            let b = this.inner.getBoundingClientRect();
+        this.addEventListenerForSelf(this.wrap, 'mousedown', (evt) => {
+            let b = this.wrap.getBoundingClientRect();
             let c = this.handle.getBoundingClientRect();
             let innerWidth = b.width - c.width - 2; // 2 is linewidth x 2
             let x = evt.clientX;
@@ -148,7 +144,7 @@ export default class GNODEInputRange extends GNODEElement {
      */
     mousemove(evt){
         evt.preventDefault();
-        let b = this.inner.getBoundingClientRect();
+        let b = this.wrap.getBoundingClientRect();
         let x = evt.clientX - this.mouseDownPositionX;
         let innerWidth = b.width - this.mouseDownHandleBound.width - 2; // 2 is linewidth x 2
         let handleLeft = this.mouseDownHandleBound.left - b.left + x;
@@ -190,7 +186,7 @@ export default class GNODEInputRange extends GNODEElement {
      * update handle position from value
      */
     updateHandlePosition(){
-        let b = this.inner.getBoundingClientRect();
+        let b = this.wrap.getBoundingClientRect();
         let c = this.handle.getBoundingClientRect();
         let innerWidth = b.width - c.width - 2; // 2 is linewidth x 2
         let ratio = ((this.value - this.min) / (this.max - this.min));

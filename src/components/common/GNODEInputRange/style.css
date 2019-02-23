@@ -1,11 +1,3 @@
-.GNODEInputRange {
-    line-height: 20px;
-    height: 20px;
-    vertical-align: middle;
-    width: 100px;
-    display: flex;
-    flex-direction: row;
-}
 
 .background {
     background-color: maroon;
@@ -14,7 +6,7 @@
     position: absolute;
 }
 
-.inner {
+.wrap {
     border: 1px solid silver;
     width: 100%;
     height: 100%;
