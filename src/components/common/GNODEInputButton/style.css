@@ -24,6 +24,7 @@
 .button.disabled,
 .button.disabled:hover {
     background-color: silver;
+    color: gray;
     cursor: default;
 }
 

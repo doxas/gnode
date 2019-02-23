@@ -60,6 +60,10 @@ export default class GNODESelect extends GNODEElement {
         super(name);
         // initialize properties ----------------------------------------------
         /**
+         * @type {boolean}
+         */
+        this.enableFlag = true;
+        /**
          * @type {Array<string>}
          */
         this.item = value;
@@ -127,6 +131,7 @@ export default class GNODESelect extends GNODEElement {
             window.removeEventListener('click', closeListWrap);
         };
         this.selected.on('click', (value, evt) => {
+            if(this.enableFlag !== true){return;}
             evt.stopPropagation();
             if(this.item != null && Array.isArray(this.item) === true && this.item.length > 0){
                 if(this.listWrap.style.display === 'flex'){
@@ -141,14 +146,20 @@ export default class GNODESelect extends GNODEElement {
         });
     }
     /**
-     * set disabled attribute
+     * like set disabled attribute
      * @param {boolean} [enable=true] - disabled = !enable
      */
     enable(enable = true){
-        this.input.disabled = !enable;
+        this.enableFlag = enable;
+        this.selected.enable(enable);
+        if(enable !== true){
+            this.selected.control.style.backgroundColor = '';
+            this.selected.control.style.boxShadow = '';
+            this.listWrap.style.display = 'none';
+        }
     }
     /**
-     * set disabled attribute
+     * like set disabled attribute
      * @param {boolean} [disable=true] - disabled
      */
     disable(disable = true){
