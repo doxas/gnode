@@ -21,10 +21,36 @@ export default class GNODESelect extends GNODEElement {
      * @type {string|HTMLElement}
      */
     get description(){return 'simple select.';}
+    /**
+     * @type {GNODEInputButton}
+     */
+    get control(){return this.selected;}
+    /**
+     * @type {string}
+     */
+    get value(){return this.item[this.selectedIndex];}
+    /**
+     * @param {string} v - select item
+     */
+    set value(v){
+        if(this.item.includes(v) === true){
+            let index = this.item.indexOf(v);
+            this.selectedIndex = index;
+            this.selected.value = v;
+        }
+    }
+    /**
+     * @alias value
+     */
+    get checked(){return this.value;}
+    /**
+     * @param {boolean} v - checked
+     */
+    set checked(v){this.value = v;}
 
     /**
      * @constructor
-     * @param {string} [value=[]] - value
+     * @param {Array<string>} [value=[]] - value
      * @param {string} [name=''] - name
      * @param {number} [selectedIndex=0] - default selected index
      * @example
@@ -36,7 +62,7 @@ export default class GNODESelect extends GNODEElement {
         /**
          * @type {Array<string>}
          */
-        this.value = value;
+        this.item = value;
         /**
          * @type {number}
          */
@@ -58,18 +84,18 @@ export default class GNODESelect extends GNODEElement {
          * @type {Array<GNODEInputButton>}
          */
         this.list = [];
-        if(this.value != null && Array.isArray(this.value) === true){
-            this.value.map((v, i) => {
+        if(this.item != null && Array.isArray(this.item) === true){
+            this.item.map((v, i) => {
                 if(i === this.selectedIndex){
-                    this.selected.value = this.value[i];
+                    this.selected.value = this.item[i];
                 }
                 let list = new GNODEInputButton(`${v}`, this.name);
                 this.children.push(list);
-                list.on('click', ((index) => {return () => {
+                list.on('click', ((index) => {return (v, evt) => {
                     closeListWrap();
                     this.selectedIndex = index;
-                    this.selected.value = this.value[index];
-                    this.emit('change', this.value[index]);
+                    this.selected.value = this.item[index];
+                    this.emit('change', this.item[index], evt);
                 };})(i));
                 list.element.style.width = '100%';
                 list.control.style.width = '100%';
@@ -77,7 +103,6 @@ export default class GNODESelect extends GNODEElement {
                 this.listWrap.appendChild(list.element);
             });
         }
-
         this.shadow.appendChild(this.selected.element);
         this.shadow.appendChild(this.listWrap);
 
@@ -103,7 +128,7 @@ export default class GNODESelect extends GNODEElement {
         };
         this.selected.on('click', (value, evt) => {
             evt.stopPropagation();
-            if(this.value != null && Array.isArray(this.value) === true && this.value.length > 0){
+            if(this.item != null && Array.isArray(this.item) === true && this.item.length > 0){
                 if(this.listWrap.style.display === 'flex'){
                     closeListWrap();
                 }else{
