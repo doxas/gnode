@@ -4,7 +4,7 @@ import Util from '../../../static/util.js';
 import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 
-const LINE_WIDTH = 1; // for css border width
+const LINE_WIDTH   = 1; // for css border width
 const HANDLE_WIDTH = 8; // for css handle width
 
 /**
@@ -29,16 +29,6 @@ export default class GNODEInputRange extends GNODEElement {
      * @type {HTMLDivElement}
      */
     get control(){return this.handle;}
-    /**
-     * @type {boolean}
-     */
-    get disabled(){return !this.enableFlag;}
-    /**
-     * @param {boolean} v - flag of disabled
-     */
-    set disabled(v){
-        this.enable(!v);
-    }
     /**
      * @type {number}
      */
@@ -149,7 +139,7 @@ export default class GNODEInputRange extends GNODEElement {
         this.handle.setAttribute('tabindex', 0);
         this.wrap.appendChild(this.background);
         this.wrap.appendChild(this.handle);
-        this.shadow.appendChild(this.wrap);
+        this.append(this.wrap);
         this.updateHandlePosition();
 
         // style setting ------------------------------------------------------
@@ -165,8 +155,8 @@ export default class GNODEInputRange extends GNODEElement {
 
         // event setting ------------------------------------------------------
         this.mousemove = this.mousemove.bind(this);
-        this.mouseup = this.mouseup.bind(this);
-        this.keydown = this.keydown.bind(this);
+        this.mouseup   = this.mouseup.bind(this);
+        this.keydown   = this.keydown.bind(this);
         this.addEventListenerForSelf(this.handle, 'mousedown', (evt) => {
             if(this.enableFlag !== true){return;}
             this.isMouseDown = true;

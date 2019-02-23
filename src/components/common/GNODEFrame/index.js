@@ -35,8 +35,5 @@ export default class GNODEFrame extends GNODEElement {
         this.appendStyle(css);
 
         // event setting ------------------------------------------------------
-        // this.addEventListenerForSelf(this.frame, 'click', (evt) => {
-        //     this.emit('click', evt, this.frame);
-        // }, false);
     }
 }

@@ -28,25 +28,27 @@ export default class GNODESelect extends GNODEElement {
     /**
      * @type {string}
      */
-    get value(){return this.item[this.selectedIndex];}
+    get value(){return this.item[this.selectedItemIndex];}
     /**
-     * @param {string} v - select item
+     * @param {string} v - selected item
      */
     set value(v){
         if(this.item.includes(v) === true){
             let index = this.item.indexOf(v);
-            this.selectedIndex = index;
+            this.selectedItemIndex = index;
             this.selected.value = v;
         }
     }
     /**
-     * @alias value
+     * @type {number}
      */
-    get checked(){return this.value;}
+    get selectedIndex(){return this.selectedItemIndex;}
     /**
-     * @param {boolean} v - checked
+     * @param {number} v - selectedIndex
      */
-    set checked(v){this.value = v;}
+    set selectedIndex(v){
+        this.selectedItemIndex = v;
+    }
 
     /**
      * @constructor
@@ -70,7 +72,7 @@ export default class GNODESelect extends GNODEElement {
         /**
          * @type {number}
          */
-        this.selectedIndex = selectedIndex;
+        this.selectedItemIndex = selectedIndex;
 
         // dom generation -----------------------------------------------------
         this.dom.classList.add('GNODESelect');
@@ -90,14 +92,14 @@ export default class GNODESelect extends GNODEElement {
         this.list = [];
         if(this.item != null && Array.isArray(this.item) === true){
             this.item.map((v, i) => {
-                if(i === this.selectedIndex){
+                if(i === this.selectedItemIndex){
                     this.selected.value = this.item[i];
                 }
                 let list = new GNODEInputButton(`${v}`, this.name);
                 this.children.push(list);
                 list.on('click', ((index) => {return (v, evt) => {
                     closeListWrap();
-                    this.selectedIndex = index;
+                    this.selectedItemIndex = index;
                     this.selected.value = this.item[index];
                     this.emit('change', this.item[index], evt);
                 };})(i));
@@ -107,8 +109,8 @@ export default class GNODESelect extends GNODEElement {
                 this.listWrap.appendChild(list.element);
             });
         }
-        this.shadow.appendChild(this.selected.element);
-        this.shadow.appendChild(this.listWrap);
+        this.append(this.selected.element);
+        this.append(this.listWrap);
 
         // style setting ------------------------------------------------------
         this.addStyle({

@@ -66,6 +66,7 @@ export default class GNODEElement extends EventEmitter3 {
         this.shadow = this.dom.attachShadow({mode: 'open'});
 
         // style setting ------------------------------------------------------
+        this.addStyle({});
         this.appendStyle(css);
 
         // event setting ------------------------------------------------------
@@ -81,9 +82,9 @@ export default class GNODEElement extends EventEmitter3 {
         }
         if(element instanceof GNODEElement === true){
             this.children.push(element);
-            this.dom.appendChild(element.element);
+            this.shadow.appendChild(element.element);
         }else if(element instanceof HTMLElement === true){
-            this.dom.appendChild(element);
+            this.shadow.appendChild(element);
         }else{
             throw new Error(ERR_APPEND);
         }
@@ -93,6 +94,35 @@ export default class GNODEElement extends EventEmitter3 {
      */
     appendChild(element){
         this.append(element);
+    }
+    /**
+     * append style tag
+     * @param {string} css - css from webpack raw-loader (plane text)
+     */
+    appendStyle(css){
+        let style = document.createElement('style');
+        style.textContent = css;
+        this.shadow.insertBefore(style, this.shadow.firstChild);
+    }
+    /**
+     * add style to dom
+     * @param {object} style - object of style
+     */
+    addStyle(style){
+        if(Util.isObject(style) !== true){return;}
+        for(let key in style){
+            this.dom.style[key] = style[key];
+        }
+    }
+    /**
+     * add attribute to dom
+     * @param {object} attribute - object of attribute
+     */
+    addAttribute(attribute){
+        if(Util.isObject(attribute) !== true){return;}
+        for(let key in attribute){
+            this.dom.setAttribute(key, attribute[key]);
+        }
     }
     /**
      * release
@@ -145,24 +175,5 @@ export default class GNODEElement extends EventEmitter3 {
             });
         }
         this.listenersForSelf = {};
-    }
-    /**
-     * append style tag
-     * @param {string} css - css from webpack raw-loader (plane text)
-     */
-    appendStyle(css){
-        let style = document.createElement('style');
-        style.textContent = css;
-        this.shadow.insertBefore(style, this.shadow.firstChild);
-    }
-    /**
-     * add style to dom
-     * @param {object} style - object of style
-     */
-    addStyle(style){
-        if(Util.isObject(style) !== true){return;}
-        for(let key in style){
-            this.dom.style[key] = style[key];
-        }
     }
 }

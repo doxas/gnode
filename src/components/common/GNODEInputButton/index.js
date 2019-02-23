@@ -60,7 +60,7 @@ export default class GNODEInputButton extends GNODEElement {
         this.button.classList.add('button');
         this.button.setAttribute('tabindex', 0);
         this.button.textContent = this.value;
-        this.shadow.appendChild(this.button);
+        this.append(this.button);
 
         // style setting ------------------------------------------------------
         this.addStyle({

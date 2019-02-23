@@ -93,7 +93,7 @@ export default class GNODEInputCheckbox extends GNODEElement {
         this.wrap.appendChild(this.input);
         this.wrap.appendChild(this.box);
         this.wrap.appendChild(this.label);
-        this.shadow.appendChild(this.wrap);
+        this.append(this.wrap);
         this.label.textContent = text;
 
         // style setting ------------------------------------------------------

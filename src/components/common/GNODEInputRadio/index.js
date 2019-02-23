@@ -93,7 +93,7 @@ export default class GNODEInputRadio extends GNODEElement {
         this.wrap.appendChild(this.input);
         this.wrap.appendChild(this.radio);
         this.wrap.appendChild(this.label);
-        this.shadow.appendChild(this.wrap);
+        this.append(this.wrap);
         this.label.textContent = text;
 
         // style setting ------------------------------------------------------

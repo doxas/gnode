@@ -83,7 +83,7 @@ export default class GNODEInputNumber extends GNODEElement {
         this.input.min = min;
         this.input.max = max;
         this.input.step = step;
-        this.shadow.appendChild(this.input);
+        this.append(this.input);
 
         // style setting ------------------------------------------------------
         this.addStyle({

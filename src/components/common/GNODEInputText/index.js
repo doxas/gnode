@@ -30,7 +30,7 @@ export default class GNODEInputText extends GNODEElement {
      */
     get value(){return this.input.value;}
     /**
-     * @param {boolean} v - value
+     * @param {string} v - value
      */
     set value(v){this.input.value = v;}
 
@@ -59,7 +59,7 @@ export default class GNODEInputText extends GNODEElement {
         this.input.name = name;
         this.input.setAttribute('placeholder', placeholder);
         this.input.setAttribute('maxlength', max);
-        this.shadow.appendChild(this.input);
+        this.append(this.input);
 
         // style setting ------------------------------------------------------
         this.addStyle({
