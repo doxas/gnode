@@ -3,7 +3,7 @@ import css from './style.css';
 import Util from '../../../static/util.js';
 import EventEmitter3 from 'eventemitter3';
 
-const ERR_APPEND = `invalid argument 1 is not of type 'Element' or 'GNODEElement'`;
+const ERR_APPEND = `[GNODE ERROR] invalid argument 1 is not of type 'Element' or 'GNODEElement'`;
 
 /**
  * super class of GNODE element
