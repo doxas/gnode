@@ -1,5 +1,6 @@
 
 import css from './style.css';
+import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 
 /**
@@ -41,12 +42,8 @@ export default class GNODEInputButton extends GNODEElement {
      * let E = new GNODEInputButton('value', 'name');
      */
     constructor(value = '', name = ''){
-        super();
+        super(name);
         // initialize properties ----------------------------------------------
-        /**
-         * @type {string}
-         */
-        this.name = name;
         /**
          * @type {string}
          */
@@ -63,6 +60,13 @@ export default class GNODEInputButton extends GNODEElement {
         this.shadow.appendChild(this.button);
 
         // style setting ------------------------------------------------------
+        this.addStyle({
+            color:         `${CONST.COMPONENT_DEFAULT_COLOR}`,
+            lineHeight:    `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
+            height:        `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
+            verticalAlign: 'middle',
+            display:       'inline-block',
+        });
         this.appendStyle(css);
 
         // event setting ------------------------------------------------------
