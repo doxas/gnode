@@ -11,17 +11,18 @@ import GNODEElement from '../GNODEElement/index.js';
  */
 export default class GNODEInputRange extends GNODEElement {
     /**
-     * description
-     * @type {string|HTMLElement}
-     */
-    get description(){return 'simple input range.';}
-    /**
      * @type {Array<string>}
      */
     static get EVENTS(){return [
         'input',
         'change',
     ];}
+    /**
+     * description
+     * @type {string|HTMLElement}
+     */
+    get description(){return 'simple input range.';}
+
     /**
      * @constructor
      * @param {number} [value=0] - value

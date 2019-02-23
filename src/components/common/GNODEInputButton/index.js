@@ -10,6 +10,12 @@ import GNODEElement from '../GNODEElement/index.js';
  */
 export default class GNODEInputButton extends GNODEElement {
     /**
+     * @type {Array<string>}
+     */
+    static get EVENTS(){return [
+        'click',
+    ];}
+    /**
      * description
      * @type {string|HTMLElement}
      */
@@ -22,18 +28,14 @@ export default class GNODEInputButton extends GNODEElement {
      * @type {HTMLDivElement}
      */
     get value(){return this.caption;}
-
+    /**
+     * @param {string} v - button caption
+     */
     set value(v){
         this.caption = `${v}`;
         this.button.textContent = this.caption;
     }
 
-    /**
-     * @type {Array<string>}
-     */
-    static get EVENTS(){return [
-        'click',
-    ];}
     /**
      * @constructor
      * @param {string} [value=''] - value

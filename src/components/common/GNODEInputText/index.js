@@ -10,11 +10,6 @@ import GNODEElement from '../GNODEElement/index.js';
  */
 export default class GNODEInputText extends GNODEElement {
     /**
-     * description
-     * @type {string|HTMLElement}
-     */
-    get description(){return 'simple input text.';}
-    /**
      * @type {Array<string>}
      */
     static get EVENTS(){return [
@@ -22,9 +17,23 @@ export default class GNODEInputText extends GNODEElement {
         'change',
     ];}
     /**
+     * description
+     * @type {string|HTMLElement}
+     */
+    get description(){return 'simple input text.';}
+    /**
+     * @type {HTMLInputElement}
+     */
+    get control(){return this.input;}
+    /**
      * @type {string}
      */
     get value(){return this.input.value;}
+    /**
+     * @param {boolean} v - value
+     */
+    set value(v){this.input.value = v;}
+
     /**
      * @constructor
      * @param {string} [value=''] - value

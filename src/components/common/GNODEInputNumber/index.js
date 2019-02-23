@@ -10,11 +10,6 @@ import GNODEElement from '../GNODEElement/index.js';
  */
 export default class GNODEInputNumber extends GNODEElement {
     /**
-     * description
-     * @type {string|HTMLElement}
-     */
-    get description(){return 'simple input number.';}
-    /**
      * @type {Array<string>}
      */
     static get EVENTS(){return [
@@ -22,9 +17,46 @@ export default class GNODEInputNumber extends GNODEElement {
         'change',
     ];}
     /**
+     * description
+     * @type {string|HTMLElement}
+     */
+    get description(){return 'simple input number.';}
+    /**
+     * @type {HTMLInputElement}
+     */
+    get control(){return this.input;}
+    /**
      * @type {number}
      */
     get value(){return this.input.value;}
+    /**
+     * @param {number} v - value
+     */
+    set value(v){this.input.value = v;}
+    /**
+     * @type {number}
+     */
+    get min(){return this.input.min;}
+    /**
+     * @param {number} v - min
+     */
+    set min(v){this.input.min = v;}
+    /**
+     * @type {number}
+     */
+    get max(){return this.input.max;}
+    /**
+     * @param {number} v - max
+     */
+    set max(v){this.input.max = v;}
+    /**
+     * @type {number}
+     */
+    get step(){return this.input.step;}
+    /**
+     * @param {number} v - step
+     */
+    set step(v){this.input.step = v;}
     /**
      * @constructor
      * @param {number} [value=0] - value

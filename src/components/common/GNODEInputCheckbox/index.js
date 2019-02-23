@@ -10,11 +10,6 @@ import GNODEElement from '../GNODEElement/index.js';
  */
 export default class GNODEInputCheckbox extends GNODEElement {
     /**
-     * description
-     * @type {string|HTMLElement}
-     */
-    get description(){return 'simple input checkbox.';}
-    /**
      * @type {Array<string>}
      */
     static get EVENTS(){return [
@@ -22,13 +17,27 @@ export default class GNODEInputCheckbox extends GNODEElement {
         'change',
     ];}
     /**
-     * @type {boolean}
+     * description
+     * @type {string|HTMLElement}
+     */
+    get description(){return 'simple input checkbox.';}
+    /**
+     * @type {HTMLInputElement}
+     */
+    get control(){return this.input;}
+    /**
+     * @alias value
      */
     get checked(){return this.input.checked;}
     /**
-     * @alias checked
+     * @type {boolean}
      */
     get value(){return this.input.checked;}
+    /**
+     * @param {boolean} v - checked
+     */
+    set value(v){this.input.checked = v;}
+
     /**
      * @constructor
      * @param {boolean} [value=false] - checked

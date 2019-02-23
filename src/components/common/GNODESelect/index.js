@@ -11,16 +11,17 @@ import GNODEInputButton from '../GNODEInputButton/index.js';
  */
 export default class GNODESelect extends GNODEElement {
     /**
-     * description
-     * @type {string|HTMLElement}
-     */
-    get description(){return 'simple select.';}
-    /**
      * @type {Array<string>}
      */
     static get EVENTS(){return [
         'change',
     ];}
+    /**
+     * description
+     * @type {string|HTMLElement}
+     */
+    get description(){return 'simple select.';}
+
     /**
      * @constructor
      * @param {string} [value=[]] - value

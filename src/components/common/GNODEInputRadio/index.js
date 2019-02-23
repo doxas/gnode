@@ -10,17 +10,21 @@ import GNODEElement from '../GNODEElement/index.js';
  */
 export default class GNODEInputRadio extends GNODEElement {
     /**
-     * description
-     * @type {string|HTMLElement}
-     */
-    get description(){return 'simple input radio button.';}
-    /**
      * @type {Array<string>}
      */
     static get EVENTS(){return [
         'input',
         'change',
     ];}
+    /**
+     * description
+     * @type {string|HTMLElement}
+     */
+    get description(){return 'simple input radio button.';}
+    /**
+     * @type {HTMLInputElement}
+     */
+    get control(){return this.input;}
     /**
      * @type {boolean}
      */
@@ -29,6 +33,11 @@ export default class GNODEInputRadio extends GNODEElement {
      * @alias checked
      */
     get value(){return this.input.checked;}
+    /**
+     * @param {boolean} v - checked
+     */
+    set value(v){this.input.checked = v;}
+
     /**
      * @constructor
      * @param {boolean} [value=false] - checked
