@@ -21,25 +21,22 @@ export default class GNODEFrame extends GNODEElement {
     ];}
     /**
      * @constructor
+     * @param {string} [name=''] - name
      */
-    constructor(){
-        super();
+    constructor(name){
+        super(name);
         // initialize properties ----------------------------------------------
 
         // dom generation -----------------------------------------------------
-        /**
-         * @type {HTMLDivElement}
-         */
-        this.frame = document.createElement('div');
-        this.frame.classList.add('GNODEFrame');
-        this.shadow.appendChild(this.frame);
+        this.dom.classList.add('GNODEFrame');
 
         // style setting ------------------------------------------------------
+        this.addStyle({});
         this.appendStyle(css);
 
         // event setting ------------------------------------------------------
-        this.addEventListenerForSelf(this.frame, 'click', (evt) => {
-            this.emit('click', evt, this.frame);
-        }, false);
+        // this.addEventListenerForSelf(this.frame, 'click', (evt) => {
+        //     this.emit('click', evt, this.frame);
+        // }, false);
     }
 }
