@@ -46,7 +46,7 @@ window.addEventListener('load', () => {
     );
     gen(
         'GNODEInputRange',
-        new GNODE.Components.Common.GNODEInputRange(0, 'single', 0, 10, 0.1),
+        new GNODE.Components.Common.GNODEInputRange(5, 'single', 0, 10, 0.1),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
