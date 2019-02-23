@@ -53,11 +53,11 @@ window.addEventListener('load', () => {
     );
     gen(
         'GNODESelect',
-        new GNODE.Components.Common.GNODESelect(['item1', 'item2', 'item3', 'item4'], 'single', 0),
+        new GNODE.Components.Common.GNODESelect(['item1', 'item2', 'item3', 'item4'], 'single', 1),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
-    );
+    ).disable();
 
     head('Other', side, main); // =============================================
     gen(
