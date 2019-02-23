@@ -25,7 +25,7 @@ export default class GNODEInputButton extends GNODEElement {
      */
     get control(){return this.button;}
     /**
-     * @type {HTMLDivElement}
+     * @type {string}
      */
     get value(){return this.caption;}
     /**
