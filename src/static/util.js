@@ -35,26 +35,43 @@ class MathUtil {
 
 class StringUtil {
     static zeroPadding(s, n){
-        if(s == null || Object.prototype.toString.call(s) !== "[object Number]"){return '';}
-        if(n == null || Object.prototype.toString.call(n) !== "[object Number]"){return '';}
-        if(n <= 0){return '';}
+        if(n == null || Util.isNumber(n) !== true || n <= 0){return null;}
         let nega = (s < 0);
-        let f = ((s + '').match(/\./) != null);
+        let f = ((`${s}`).match(/\./) != null);
         let target = f ? Math.floor(s) : s;
         if(nega){target *= -1;}
-        if(target >= Math.pow(10, n)){return s + '';}
+        if(target >= Math.pow(10, n)){return `${s}`;}
         let conv = (new Array(n).join('0') + target).slice(-n);
-        if(nega){conv = '-' + conv;}
-        if(f){conv += ((s + '').match(/\.\d+/));}
+        if(nega){conv = `-${conv}`;}
+        if(f){conv += ((`${s}`).match(/\.\d+/));}
         return conv;
     }
     static convertTimeToSerial(d){
         let e = new Date(d);
         let year   = e.getYear() + 1900;
-        let month  = zeroPadding(e.getMonth() + 1, 2);
-        let day    = zeroPadding(e.getDate(), 2);
-        let hour   = zeroPadding(e.getHours(), 2);
-        let minute = zeroPadding(e.getMinutes(), 2);
-        return year + '/' + month + '/' + day + ' ' + hour + ':' + minute;
+        let month  = StringUtil.zeroPadding(e.getMonth() + 1, 2);
+        let day    = StringUtil.zeroPadding(e.getDate(), 2);
+        let hour   = StringUtil.zeroPadding(e.getHours(), 2);
+        let minute = StringUtil.zeroPadding(e.getMinutes(), 2);
+        let second = StringUtil.zeroPadding(e.getSeconds(), 2);
+        return `${year}/${month}/${day} ${hour}:${minute}:${second}`;
+    }
+    static numberToHexString(color){
+        let r = StringUtil.zeroPadding(color[0].toString(16), 2);
+        let g = StringUtil.zeroPadding(color[1].toString(16), 2);
+        let b = StringUtil.zeroPadding(color[2].toString(16), 2);
+        return `#${r}${g}${b}`;
+    }
+    static hexStringToNumber(color){
+        if(color == null || Util.isString(color) !== true){return null;}
+        if(color.search(/^#+[\d|a-f|A-F]+$/) === -1){return null;}
+        let s = color.replace('#', '');
+        if(s.length !== 3 && s.length !== 6){return null;}
+        let t = s.length / 3;
+        return [
+            parseInt(color.substr(1, t), 16) / 255,
+            parseInt(color.substr(1 + t, t), 16) / 255,
+            parseInt(color.substr(1 + t * 2, t), 16) / 255
+        ];
     }
 }
