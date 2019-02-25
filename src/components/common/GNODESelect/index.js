@@ -65,7 +65,7 @@ export default class GNODESelect extends GNODEElement {
         /**
          * @type {boolean}
          */
-        this.enableFlag = true;
+        this.isEnable = true;
         /**
          * @type {Array.<string>}
          */
@@ -134,7 +134,7 @@ export default class GNODESelect extends GNODEElement {
             window.removeEventListener('click', closeListWrap);
         };
         this.selected.on('click', (value, evt) => {
-            if(this.enableFlag !== true){return;}
+            if(this.isEnable !== true){return;}
             evt.stopPropagation();
             if(this.item != null && Array.isArray(this.item) === true && this.item.length > 0){
                 if(this.listWrap.style.display === 'flex'){
@@ -153,7 +153,7 @@ export default class GNODESelect extends GNODEElement {
      * @param {boolean} [enable=true] - disabled = !enable
      */
     enable(enable = true){
-        this.enableFlag = enable;
+        this.isEnable = enable;
         this.selected.enable(enable);
         if(enable !== true){
             this.selected.control.style.backgroundColor = '';

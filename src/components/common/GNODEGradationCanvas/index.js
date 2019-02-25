@@ -53,7 +53,7 @@ export default class GNODEGradationCanvas extends GNODEElement {
         /**
          * @type {boolean}
          */
-        this.enableFlag = true;
+        this.isEnable = true;
 
         // dom generation -----------------------------------------------------
         this.dom.classList.add('GNODEGradationCanvas');
@@ -71,7 +71,7 @@ export default class GNODEGradationCanvas extends GNODEElement {
 
         // event setting ------------------------------------------------------
         this.addEventListenerForSelf(this.canvas, 'click', (evt) => {
-            if(this.enableFlag !== true){return;}
+            if(this.isEnable !== true){return;}
             let b = this.canvas.getBoundingClientRect();
             let x = evt.clientX - b.left;
             let y = evt.clientY - b.top;
@@ -88,7 +88,7 @@ export default class GNODEGradationCanvas extends GNODEElement {
      * @param {number} y - coordinate y on canvas
      */
     pick(x, y){
-        if(this.enableFlag !== true){return;}
+        if(this.isEnable !== true){return;}
         let i = this.context.getImageData(x, y, 1, 1);
         let num = [i.data[0], i.data[1], i.data[2], i.data[3]];
         let hex = Util.Str.numberToHexString(num);
@@ -103,7 +103,7 @@ export default class GNODEGradationCanvas extends GNODEElement {
      * @param {boolean} [isClearCanvas=true] - is clear at previously draw
      */
     draw(color, direction = 'horizontal', isClearCanvas = true){
-        if(this.enableFlag !== true){return;}
+        if(this.isEnable !== true){return;}
         if(color == null || Array.isArray(color) !== true || color.length === 0){return;}
         let c = this.canvas;
         let cx = this.context;
@@ -128,7 +128,7 @@ export default class GNODEGradationCanvas extends GNODEElement {
      * @param {boolean} [enable=true] - disabled = !enable
      */
     enable(enable = true){
-        this.enableFlag = enable;
+        this.isEnable = enable;
         let c = this.canvas;
         let cx = this.context;
         if(enable === true){

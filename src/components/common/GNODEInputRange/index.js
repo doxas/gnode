@@ -113,7 +113,7 @@ export default class GNODEInputRange extends GNODEElement {
         /**
          * @type {boolean}
          */
-        this.enableFlag = true;
+        this.isEnable = true;
         /**
          * @type {boolean}
          */
@@ -166,7 +166,7 @@ export default class GNODEInputRange extends GNODEElement {
         this.mouseup   = this.mouseup.bind(this);
         this.keydown   = this.keydown.bind(this);
         this.addEventListenerForSelf(this.handle, 'mousedown', (evt) => {
-            if(this.enableFlag !== true){return;}
+            if(this.isEnable !== true){return;}
             this.isMouseDown = true;
             this.handle.classList.add('active');
             this.mouseDownPositionX = evt.clientX;
@@ -176,7 +176,7 @@ export default class GNODEInputRange extends GNODEElement {
             evt.stopPropagation();
         }, false);
         this.addEventListenerForSelf(this.wrap, 'mousedown', (evt) => {
-            if(this.enableFlag !== true){return;}
+            if(this.isEnable !== true){return;}
             let b = this.wrap.getBoundingClientRect();
             let c = this.handle.getBoundingClientRect();
             let innerWidth = b.width - c.width - LINE_WIDTH * 2;
@@ -209,7 +209,7 @@ export default class GNODEInputRange extends GNODEElement {
      * @param {MouseEvent} evt - MouseMove event from target of window
      */
     mousemove(evt){
-        if(this.enableFlag !== true){return;}
+        if(this.isEnable !== true){return;}
         evt.preventDefault();
         let b = this.wrap.getBoundingClientRect();
         let x = evt.clientX - this.mouseDownPositionX;
@@ -227,7 +227,7 @@ export default class GNODEInputRange extends GNODEElement {
      * @param {KeyboardEvent} evt - KeyDown event from element
      */
     keydown(evt){
-        if(this.enableFlag !== true){return;}
+        if(this.isEnable !== true){return;}
         evt.preventDefault();
         let previouse = this.range;
         switch(evt.key){
@@ -270,7 +270,7 @@ export default class GNODEInputRange extends GNODEElement {
      * @param {boolean} [enable=true] - disabled = !enable
      */
     enable(enable = true){
-        this.enableFlag = enable;
+        this.isEnable = enable;
         if(enable === true){
             this.wrap.classList.remove('disabled');
         }else{
