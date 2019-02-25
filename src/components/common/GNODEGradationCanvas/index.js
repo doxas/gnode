@@ -35,11 +35,12 @@ export default class GNODEGradationCanvas extends GNODEElement {
      * @param {string} [direction='horizontal'] - direction for gradation
      * @param {number} [width=300] - canvas width
      * @param {number} [height=150] - canvas height
+     * @param {boolean} [transparent=false] - use transparent background pattern
      * @example
      * let color = [{offset: 0.0, color: 'red'}, {offset: 1.0, color: 'blue'}];
      * let E = new GNODEGradationCanvas(color, 'name', 'horizontal', 256, 128);
      */
-    constructor(color, name = '', direction = 'horizontal', width = 300, height = 150){
+    constructor(color, name = '', direction = 'horizontal', width = 300, height = 150, transparent = false){
         super(name);
         // initialize properties ----------------------------------------------
         /**
@@ -51,9 +52,17 @@ export default class GNODEGradationCanvas extends GNODEElement {
          */
         this.latestImageData = null;
         /**
+         * @type {CanvasPattern}
+         */
+        this.transparentPattern = null;
+        /**
          * @type {boolean}
          */
         this.isEnable = true;
+        /**
+         * @type {boolean}
+         */
+        this.isTransparent = transparent;
 
         // dom generation -----------------------------------------------------
         this.dom.classList.add('GNODEGradationCanvas');
@@ -80,6 +89,7 @@ export default class GNODEGradationCanvas extends GNODEElement {
 
         // initial setting ----------------------------------------------------
         this.context = this.canvas.getContext('2d');
+        this.transparentPattern = this.createPattern();
         this.draw(color, direction);
     }
     /**
@@ -113,15 +123,40 @@ export default class GNODEGradationCanvas extends GNODEElement {
         }else{
             g = cx.createLinearGradient(0, 0, 0, c.height);
         }
-        if(isClearCanvas === true){
-            cx.fillStyle = 'white';
-            cx.fillRect(0, 0, c.width, c.height);
-        }
         color.map((v) => {
             g.addColorStop(v.offset, v.color);
         });
+        if(isClearCanvas === true){
+            if(this.isTransparent === true){
+                cx.fillStyle = this.transparentPattern;
+                cx.fillRect(0, 0, c.width, c.height);
+            }else{
+                cx.fillStyle = 'white';
+                cx.fillRect(0, 0, c.width, c.height);
+            }
+        }
         cx.fillStyle = g;
         cx.fillRect(0, 0, c.width, c.height);
+    }
+    /**
+     * create transparent background pattern
+     * @param {number} [size=8] - block size
+     */
+    createPattern(size = 8){
+        if(size == null || Util.isNumber(size) !== true || size < 1){return null;}
+        let c = document.createElement('canvas');
+        let cx = c.getContext('2d');
+        c.width = size * 2;
+        c.height = size * 2;
+        cx.fillStyle = CONST.COMPONENT_TRANSPARENT_BLOCK_LIGHT_COLOR;
+        cx.fillRect(0, 0, c.width, c.height);
+        cx.fillStyle = CONST.COMPONENT_TRANSPARENT_BLOCK_DARK_COLOR;
+        cx.fillRect(0, 0, size, size);
+        cx.fillRect(size, size, size, size);
+        let p = this.context.createPattern(c, 'repeat');
+        cx = null;
+        c = null;
+        return p;
     }
     /**
      * set enable
