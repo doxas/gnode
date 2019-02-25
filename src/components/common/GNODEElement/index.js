@@ -12,6 +12,10 @@ const ERR_APPEND = `[GNODE ERROR] invalid argument 1 is not of type 'Element' or
  */
 export default class GNODEElement extends EventEmitter3 {
     /**
+     * @type {Array<string>}
+     */
+    static get EVENTS(){return [];}
+    /**
      * description
      * @type {string|HTMLElement}
      */
@@ -34,6 +38,10 @@ export default class GNODEElement extends EventEmitter3 {
     get shadowRoot(){
         return this.shadow;
     }
+    /**
+     * @type {HTMLDivElement}
+     */
+    get control(){return null;}
     /**
      * @constructor
      * @param {string} name - name of element
