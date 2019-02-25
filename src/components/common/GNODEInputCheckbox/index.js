@@ -10,7 +10,7 @@ import GNODEElement from '../GNODEElement/index.js';
  */
 export default class GNODEInputCheckbox extends GNODEElement {
     /**
-     * @type {Array<string>}
+     * @type {Array.<string>}
      */
     static get EVENTS(){return [
         'input',

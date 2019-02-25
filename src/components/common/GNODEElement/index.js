@@ -12,7 +12,7 @@ const ERR_APPEND = `[GNODE ERROR] invalid argument 1 is not of type 'Element' or
  */
 export default class GNODEElement extends EventEmitter3 {
     /**
-     * @type {Array<string>}
+     * @type {Array.<string>}
      */
     static get EVENTS(){return [];}
     /**

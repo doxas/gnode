@@ -14,7 +14,7 @@ const HANDLE_WIDTH = 8; // for css handle width
  */
 export default class GNODEInputRange extends GNODEElement {
     /**
-     * @type {Array<string>}
+     * @type {Array.<string>}
      */
     static get EVENTS(){return [
         'input',

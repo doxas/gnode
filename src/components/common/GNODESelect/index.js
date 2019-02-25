@@ -11,7 +11,7 @@ import GNODEInputButton from '../GNODEInputButton/index.js';
  */
 export default class GNODESelect extends GNODEElement {
     /**
-     * @type {Array<string>}
+     * @type {Array.<string>}
      */
     static get EVENTS(){return [
         'change',
@@ -53,7 +53,7 @@ export default class GNODESelect extends GNODEElement {
 
     /**
      * @constructor
-     * @param {Array<string>} [value=[]] - value
+     * @param {Array.<string>} [value=[]] - value
      * @param {string} [name=''] - name
      * @param {number} [selectedIndex=0] - default selected index
      * @example
@@ -67,7 +67,7 @@ export default class GNODESelect extends GNODEElement {
          */
         this.enableFlag = true;
         /**
-         * @type {Array<string>}
+         * @type {Array.<string>}
          */
         this.item = value;
         /**
@@ -88,7 +88,7 @@ export default class GNODESelect extends GNODEElement {
         this.listWrap = document.createElement('div');
         this.listWrap.classList.add('list_wrap');
         /**
-         * @type {Array<GNODEInputButton>}
+         * @type {Array.<GNODEInputButton>}
          */
         this.list = [];
         if(this.item != null && Array.isArray(this.item) === true){
