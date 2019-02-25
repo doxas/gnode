@@ -138,7 +138,9 @@ export default class GNODEElement extends EventEmitter3 {
     release(){
         // remove all child of GNODEElement
         this.children.map((v) => {
-            v.release();
+            if(v.hasOwnProperty('release')){
+                v.release();
+            }
             v = null;
         });
         // remove event listener
