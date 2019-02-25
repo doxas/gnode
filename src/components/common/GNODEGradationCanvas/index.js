@@ -90,7 +90,7 @@ export default class GNODEGradationCanvas extends GNODEElement {
     pick(x, y){
         if(this.enableFlag !== true){return;}
         let i = this.context.getImageData(x, y, 1, 1);
-        let num = [i.data[0], i.data[1], i.data[2]];
+        let num = [i.data[0], i.data[1], i.data[2], i.data[3]];
         let hex = Util.Str.numberToHexString(num);
         return {hex: hex, number: num}
     }
