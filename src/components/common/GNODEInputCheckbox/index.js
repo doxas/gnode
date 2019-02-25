@@ -117,6 +117,8 @@ export default class GNODEInputCheckbox extends GNODEElement {
             evt.preventDefault();
             if(evt.key === ' '){
                 this.input.checked = !this.input.checked;
+                this.emit('input', this.value, evt);
+                this.emit('change', this.value, evt);
             }
         }, false);
     }

@@ -117,6 +117,8 @@ export default class GNODEInputRadio extends GNODEElement {
             evt.preventDefault();
             if(evt.key === ' '){
                 this.input.checked = true;
+                this.emit('input', this.value, evt);
+                this.emit('change', this.value, evt);
             }
         }, false);
     }

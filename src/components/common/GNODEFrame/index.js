@@ -9,16 +9,14 @@ import GNODEElement from '../GNODEElement/index.js';
  */
 export default class GNODEFrame extends GNODEElement {
     /**
+     * @type {Array<string>}
+     */
+    static get EVENTS(){return [];}
+    /**
      * description
      * @type {string|HTMLElement}
      */
     get description(){return 'simple frame element.';}
-    /**
-     * @type {Array<string>}
-     */
-    static get EVENTS(){return [
-        'click',
-    ];}
     /**
      * @constructor
      * @param {string} [name=''] - name

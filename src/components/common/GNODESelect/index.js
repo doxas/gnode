@@ -48,6 +48,7 @@ export default class GNODESelect extends GNODEElement {
      */
     set selectedIndex(v){
         this.selectedItemIndex = v;
+        this.selected.value = this.item[this.selectedItemIndex];
     }
 
     /**

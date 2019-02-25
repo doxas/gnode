@@ -78,7 +78,7 @@ export default class GNODEInputButton extends GNODEElement {
         }, false);
         this.addEventListenerForSelf(this.button, 'keydown', (evt) => {
             evt.preventDefault();
-            if(evt.key === ' '){this.emit('click', this.caption, evt);}
+            if(evt.key === ' ' || evt.key === 'Enter'){this.emit('click', this.caption, evt);}
         }, false);
     }
     /**
