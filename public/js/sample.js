@@ -58,6 +58,13 @@ window.addEventListener('load', () => {
         ['change'],
         [(evt) => {console.log(evt);}]
     );
+    gen(
+        'GNODEGradationCanvas',
+        new GNODE.Components.Common.GNODEGradationCanvas([{offset: 0.0, color: 'red'}, {offset: 1.0, color: 'blue'}], 'single', 'horizontal', 128, 64),
+        main,
+        ['click'],
+        [(evt) => {console.log(evt);}]
+    );
 
     head('Other', side, main); // =============================================
     gen(
