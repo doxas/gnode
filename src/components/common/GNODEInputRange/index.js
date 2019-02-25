@@ -86,26 +86,34 @@ export default class GNODEInputRange extends GNODEElement {
     constructor(value = 0, name = '', min = 0, max = 100, step = 1){
         super(name);
         // initialize properties ----------------------------------------------
+        let minValue = min;
+        let maxValue = max;
+        if(min > max){
+            minValue = value;
+            maxValue = value;
+        }
+        let range = Util.Math.clamp(value, minValue, maxValue);
+        let stepValue = Util.Math.clamp(step, 0, maxValue - minValue);
+        /**
+         * @type {number}
+         */
+        this.range = range;
+        /**
+         * @type {number}
+         */
+        this.minValue = minValue;
+        /**
+         * @type {number}
+         */
+        this.maxValue = maxValue;
+        /**
+         * @type {number}
+         */
+        this.stepValue = stepValue;
         /**
          * @type {boolean}
          */
         this.enableFlag = true;
-        /**
-         * @type {number}
-         */
-        this.range = value;
-        /**
-         * @type {number}
-         */
-        this.minValue = min;
-        /**
-         * @type {number}
-         */
-        this.maxValue = max;
-        /**
-         * @type {number}
-         */
-        this.stepValue = step;
         /**
          * @type {boolean}
          */
