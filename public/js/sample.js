@@ -9,6 +9,15 @@ window.addEventListener('load', () => {
         new GNODE.Components.Common.GNODEFrame(),
         main, [], []
     );
+    let detail = gen(
+        'GNODEDetail',
+        new GNODE.Components.Common.GNODEDetail('detail title', 'single'),
+        main,
+        ['open'],
+        [(evt) => {console.log(evt);}]
+    );
+    let check = new GNODE.Components.Common.GNODEInputCheckbox(true, 'test', 'test checkbox');
+    detail.control.appendChild(check.element);
     gen(
         'GNODEInputButton',
         new GNODE.Components.Common.GNODEInputButton('input-button', 'single'),
