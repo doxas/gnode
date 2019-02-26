@@ -1,6 +1,7 @@
 
 import GNODEElement         from './GNODEElement/index.js';
 import GNODEFrame           from './GNODEFrame/index.js';
+import GNODEDetail          from './GNODEDetail/index.js';
 import GNODEInputButton     from './GNODEInputButton/index.js';
 import GNODEInputCheckbox   from './GNODEInputCheckbox/index.js';
 import GNODEInputRadio      from './GNODEInputRadio/index.js';
@@ -13,6 +14,7 @@ import GNODEGradationCanvas from './GNODEGradationCanvas/index.js';
 export default class Common {
     static get GNODEElement()         {return GNODEElement;}
     static get GNODEFrame()           {return GNODEFrame;}
+    static get GNODEDetail()          {return GNODEDetail;}
     static get GNODEInputButton()     {return GNODEInputButton;}
     static get GNODEInputCheckbox()   {return GNODEInputCheckbox;}
     static get GNODEInputRadio()      {return GNODEInputRadio;}

@@ -1,0 +1,60 @@
+
+.header {
+    background-color: #ccc;
+    color: gray;
+    line-height: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.header:hover {
+    background-color: whitesmoke;
+    color: silver;
+}
+
+.title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0px 10px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.downwrap {
+    text-align: center;
+    min-width: 30px;
+    max-width: 30px;
+    overflow: hidden;
+}
+
+.triangle {
+    min-width: 30px;
+    max-width: 30px;
+    user-select: none;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-out;
+}
+
+.triangle.down {
+    transform: rotate(-90deg);
+    transition: transform 0.2s ease-out;
+}
+
+.inner {
+    border-left: 1px solid #555;
+    border-right: 1px solid #555;
+    border-bottom: 1px solid #555;
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.inner.down {
+    height: auto;
+}
+
+
