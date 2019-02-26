@@ -60,7 +60,7 @@ window.addEventListener('load', () => {
     );
     gen(
         'GNODEGradationCanvas',
-        new GNODE.Components.Common.GNODEGradationCanvas([{offset: 0.0, color: 'rgba(0, 0, 0, 0.0)'}, {offset: 1.0, color: 'rgba(255, 0, 0, 1.0)'}], 'single', 'horizontal', 128, 64, true),
+        new GNODE.Components.Common.GNODEGradationCanvas([{offset: 0.0, color: 'transparent'}, {offset: 1.0, color: 'rgba(255, 0, 0, 1.0)'}], 'single', 'horizontal', 128, 64),
         main,
         ['click'],
         [(evt) => {console.log(evt);}]
