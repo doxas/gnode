@@ -40,7 +40,7 @@ export default class GNODEGradationCanvas extends GNODEElement {
      * let color = [{offset: 0.0, color: 'red'}, {offset: 1.0, color: 'blue'}];
      * let E = new GNODEGradationCanvas(color, 'name', 'horizontal', 256, 128);
      */
-    constructor(color, name = '', direction = 'horizontal', width = 300, height = 150, transparent = false){
+    constructor(color, name = '', direction = 'horizontal', width = 300, height = 150, transparent = true){
         super(name);
         // initialize properties ----------------------------------------------
         /**
@@ -51,10 +51,6 @@ export default class GNODEGradationCanvas extends GNODEElement {
          * @type {ImageData}
          */
         this.latestImageData = null;
-        /**
-         * @type {CanvasPattern}
-         */
-        this.transparentPattern = null;
         /**
          * @type {boolean}
          */
@@ -72,7 +68,15 @@ export default class GNODEGradationCanvas extends GNODEElement {
         this.canvas = document.createElement('canvas');
         this.canvas.width = width;
         this.canvas.height = height;
+        /**
+         * @type {HTMLDivElement}
+         */
+        this.background = document.createElement('div');
+        this.background.classList.add('background');
+        this.background.style.width = `${width}px`;
+        this.background.style.height = `${height}px`;
         this.append(this.canvas);
+        this.append(this.background);
 
         // style setting ------------------------------------------------------
         this.addStyle({});
@@ -89,7 +93,7 @@ export default class GNODEGradationCanvas extends GNODEElement {
 
         // initial setting ----------------------------------------------------
         this.context = this.canvas.getContext('2d');
-        this.transparentPattern = this.createPattern();
+        this.createTilePattern();
         this.draw(color, direction);
     }
     /**
@@ -128,7 +132,7 @@ export default class GNODEGradationCanvas extends GNODEElement {
         });
         if(isClearCanvas === true){
             if(this.isTransparent === true){
-                cx.fillStyle = this.transparentPattern;
+                cx.fillStyle = 'transparent';
                 cx.fillRect(0, 0, c.width, c.height);
             }else{
                 cx.fillStyle = 'white';
@@ -140,9 +144,9 @@ export default class GNODEGradationCanvas extends GNODEElement {
     }
     /**
      * create transparent background pattern
-     * @param {number} [size=8] - block size
+     * @param {number} [size=CONST.COMPONENT_TRANSPARENT_BLOCK_SIZE] - block size
      */
-    createPattern(size = 8){
+    createTilePattern(size = CONST.COMPONENT_TRANSPARENT_BLOCK_SIZE){
         if(size == null || Util.isNumber(size) !== true || size < 1){return null;}
         let c = document.createElement('canvas');
         let cx = c.getContext('2d');
@@ -153,10 +157,9 @@ export default class GNODEGradationCanvas extends GNODEElement {
         cx.fillStyle = CONST.COMPONENT_TRANSPARENT_BLOCK_DARK_COLOR;
         cx.fillRect(0, 0, size, size);
         cx.fillRect(size, size, size, size);
-        let p = this.context.createPattern(c, 'repeat');
+        this.background.style.backgroundImage = `url(${c.toDataURL()})`;
         cx = null;
         c = null;
-        return p;
     }
     /**
      * set enable
@@ -168,12 +171,14 @@ export default class GNODEGradationCanvas extends GNODEElement {
         let cx = this.context;
         if(enable === true){
             if(this.latestImageData != null){
+                cx.globalAlpha = 1.0;
                 cx.putImageData(this.latestImageData, 0, 0);
                 this.latestImageData = null;
             }
         }else{
             this.latestImageData = cx.getImageData(0, 0, c.width, c.height);
             cx.fillStyle = CONST.COMPONENT_DEFAULT_DISABLED_COLOR;
+            cx.globalAlpha = 0.8;
             cx.fillRect(0, 0, c.width, c.height);
         }
     }
