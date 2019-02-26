@@ -1,7 +1,5 @@
 
 import css from './style.css';
-// import Util from '../../../static/util.js';
-import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 
 /**
@@ -89,30 +87,31 @@ export default class GNODEDetail extends GNODEElement {
         // event setting ------------------------------------------------------
         this.addEventListenerForSelf(this.header, 'click', (evt) => {
             this.isOpen = !this.isOpen;
-            if(this.isOpen === true){
-                this.triangle.classList.add('down');
-                this.inner.classList.add('down');
-            }else{
-                this.triangle.classList.remove('down');
-                this.inner.classList.remove('down');
-            }
+            this.open(this.isOpen);
         }, false);
 
         // initial setting ----------------------------------------------------
-        this.open(this.isOpen);
+        this.open(this.isOpen, false);
     }
     /**
      * open detail
      * @param {boolean} [opened=true] - is open
+     * @param {boolean} [isEmit=true] - do emittion
      */
-    open(opened = true){
+    open(opened = true, isEmit = true){
         this.isOpen = opened;
         if(this.isOpen === true){
             this.triangle.classList.add('down');
             this.inner.classList.add('down');
+            if(isEmit === true){
+                this.emit('open', this.isOpen);
+            }
         }else{
             this.triangle.classList.remove('down');
             this.inner.classList.remove('down');
+            if(isEmit === true){
+                this.emit('close', this.isOpen);
+            }
         }
     }
     /**

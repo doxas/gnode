@@ -35,12 +35,12 @@
     max-width: 30px;
     user-select: none;
     transform: rotate(0deg);
-    transition: transform 0.2s ease-out;
+    transition: transform 0.1s ease-out;
 }
 
 .triangle.down {
     transform: rotate(-90deg);
-    transition: transform 0.2s ease-out;
+    transition: transform 0.1s ease-out;
 }
 
 .inner {
