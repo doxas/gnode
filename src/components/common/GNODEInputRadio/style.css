@@ -47,4 +47,5 @@ input[disabled] + .radio .before {
 .label {
     display: inline-block;
     user-select: none;
+    vertical-align: middle;
 }
