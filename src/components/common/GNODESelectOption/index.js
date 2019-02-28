@@ -44,6 +44,11 @@ export default class GNODESelectOption extends GNODEElement {
      */
     set selected(v){
         this.select = v;
+        if(v === true){
+            this.item.classList.add('selected');
+        }else{
+            this.item.classList.remove('selected');
+        }
     }
 
     /**
@@ -91,7 +96,8 @@ export default class GNODESelectOption extends GNODEElement {
 
         // event setting ------------------------------------------------------
         this.addEventListenerForSelf(this.item, 'click', (evt) => {
-            this.emit('click', this.caption, evt);
+            this.selected = true;
+            this.emit('click', this.selected, evt);
         }, false);
     }
     /**
