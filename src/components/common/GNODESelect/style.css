@@ -1,4 +1,21 @@
 
+.select {
+    background-color: whitesmoke;
+    color: gray;
+    font-size: small;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0px 3px;
+    min-width: 20px;
+    height: 100%;
+    display: inline-block;
+    overflow: hidden;
+    box-sizing: border-box;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+}
+
 .list_wrap {
     background-color: whitesmoke;
     width: 100%;

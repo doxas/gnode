@@ -1,8 +1,9 @@
 
 import css from './style.css';
+import Util from '../../../static/util.js';
 import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
-import GNODEInputButton from '../GNODEInputButton/index.js';
+import GNODESelectOption from '../GNODESelectOption/index.js';
 
 /**
  * simple select
@@ -22,7 +23,7 @@ export default class GNODESelect extends GNODEElement {
      */
     get description(){return 'simple select.';}
     /**
-     * @type {GNODEInputButton}
+     * @type {HTMLDivElement}
      */
     get control(){return this.selected;}
     /**
@@ -36,7 +37,7 @@ export default class GNODESelect extends GNODEElement {
         if(this.item.includes(v) === true){
             let index = this.item.indexOf(v);
             this.selectedItemIndex = index;
-            this.selected.value = v;
+            this.selected.textContent = v;
         }
     }
     /**
@@ -48,7 +49,7 @@ export default class GNODESelect extends GNODEElement {
      */
     set selectedIndex(v){
         this.selectedItemIndex = v;
-        this.selected.value = this.item[this.selectedItemIndex];
+        this.selected.textContent = this.item[this.selectedItemIndex];
     }
 
     /**
@@ -73,35 +74,36 @@ export default class GNODESelect extends GNODEElement {
         /**
          * @type {number}
          */
-        this.selectedItemIndex = selectedIndex;
+        this.selectedItemIndex = Util.Math.clamp(selectedIndex, 0, Math.max(this.item.length - 1, 0));
 
         // dom generation -----------------------------------------------------
         this.dom.classList.add('GNODESelect');
         /**
-         * @type {GNODEInputButton}
+         * @type {HTMLDivElement}
          */
-        this.selected = new GNODEInputButton();
-        this.children.push(this.selected);
+        this.selected = document.createElement('div');
+        this.selected.classList.add('select');
+        this.selected.textContent = this.item[this.selectedItemIndex];
         /**
          * @type {HTMLDivElement}
          */
         this.listWrap = document.createElement('div');
         this.listWrap.classList.add('list_wrap');
         /**
-         * @type {Array.<GNODEInputButton>}
+         * @type {Array.<GNODESelectOption>}
          */
         this.list = [];
         if(this.item != null && Array.isArray(this.item) === true){
             this.item.map((v, i) => {
                 if(i === this.selectedItemIndex){
-                    this.selected.value = this.item[i];
+                    this.selected.tectContent = this.item[i];
                 }
-                let list = new GNODEInputButton(`${v}`, this.name);
+                let list = new GNODESelectOption(`${v}`, this.name);
                 this.children.push(list);
                 list.on('click', ((index) => {return (v, evt) => {
                     closeListWrap();
                     this.selectedItemIndex = index;
-                    this.selected.value = this.item[index];
+                    this.selected.textContent = this.item[index];
                     this.emit('change', this.item[index], evt);
                 };})(i));
                 list.element.style.width = '100%';
@@ -110,7 +112,7 @@ export default class GNODESelect extends GNODEElement {
                 this.listWrap.appendChild(list.element);
             });
         }
-        this.append(this.selected.element);
+        this.append(this.selected);
         this.append(this.listWrap);
 
         // style setting ------------------------------------------------------
@@ -123,25 +125,24 @@ export default class GNODESelect extends GNODEElement {
             display:       'inline-block',
         });
         this.appendStyle(css);
-        this.selected.element.style.width = '100%';
-        this.selected.control.style.width = '100%';
+        this.selected.style.width = '100%';
 
         // event setting ------------------------------------------------------
         const closeListWrap = () => {
-            this.selected.control.style.backgroundColor = '';
-            this.selected.control.style.boxShadow = '';
+            this.selected.style.backgroundColor = '';
+            this.selected.style.boxShadow = '';
             this.listWrap.style.display = 'none';
             window.removeEventListener('click', closeListWrap);
         };
-        this.selected.on('click', (value, evt) => {
+        this.addEventListenerForSelf(this.selected, 'click', (evt) => {
             if(this.isEnable !== true){return;}
             evt.stopPropagation();
             if(this.item != null && Array.isArray(this.item) === true && this.item.length > 0){
                 if(this.listWrap.style.display === 'flex'){
                     closeListWrap();
                 }else{
-                    this.selected.control.style.backgroundColor = 'transparent';
-                    this.selected.control.style.boxShadow = `0px 0px 0px 1px ${CONST.COMPONENT_DEFAULT_COLOR} inset`;
+                    this.selected.style.backgroundColor = 'transparent';
+                    this.selected.style.boxShadow = `0px 0px 0px 1px ${CONST.COMPONENT_DEFAULT_COLOR} inset`;
                     this.listWrap.style.display = 'flex';
                     window.addEventListener('click', closeListWrap, false);
                 }
@@ -154,10 +155,9 @@ export default class GNODESelect extends GNODEElement {
      */
     enable(enable = true){
         this.isEnable = enable;
-        this.selected.enable(enable);
         if(enable !== true){
-            this.selected.control.style.backgroundColor = '';
-            this.selected.control.style.boxShadow = '';
+            this.selected.style.backgroundColor = '';
+            this.selected.style.boxShadow = '';
             this.listWrap.style.display = 'none';
         }
     }
