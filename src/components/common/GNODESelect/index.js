@@ -191,7 +191,6 @@ export default class GNODESelect extends GNODEElement {
                 case 'Enter':
                     if(this.isOpen === true){
                         if(this.selectedItemIndex !== this.selectorIndex){
-                            this.selectorIndex = this.selectorIndex;
                             this.selectedItemIndex = this.selectorIndex;
                             this.selected.textContent = this.item[this.selectorIndex];
                             this.emit('change', this.item[this.selectorIndex], evt);
@@ -269,6 +268,18 @@ export default class GNODESelect extends GNODEElement {
         }
         this.item.splice(targetIndex, 0, item);
         this.list.splice(targetIndex, 0, list);
+    }
+    /**
+     * remove from list
+     * @param {number} index - target
+     */
+    removeItem(index){
+        if(index < 0 || index > this.list.length - 1){return;}
+        this.list[index].element.parentNode.removeChild(this.list[index].element);
+        this.item.splice(index, 1);
+        this.list.splice(index, 1);
+        this.selectedItemIndex = Math.min(this.selectedItemIndex, this.list.length - 1);
+        this.selectorIndex = this.selectedItemIndex;
     }
     /**
      * like set disabled attribute
