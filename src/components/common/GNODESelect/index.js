@@ -89,7 +89,7 @@ export default class GNODESelect extends GNODEElement {
         /**
          * @type {number}
          */
-        this.selectorIndex = -1;
+        this.activeIndex = -1;
 
         // dom generation -----------------------------------------------------
         this.dom.classList.add('GNODESelect');
@@ -139,22 +139,22 @@ export default class GNODESelect extends GNODEElement {
                     this.close();
                 }else{
                     this.isOpen = true;
-                    this.selectorIndex = this.selectedItemIndex;
+                    this.activeIndex = this.selectedItemIndex;
                     this.list.map((v) => {
                         v.selected = false;
                     });
-                    this.list[this.selectorIndex].selected = true;
+                    this.list[this.activeIndex].selected = true;
                     this.selected.style.backgroundColor = 'transparent';
                     this.selected.style.boxShadow = `0px 0px 0px 1px ${CONST.COMPONENT_DEFAULT_COLOR} inset`;
                     this.listWrap.style.display = 'flex';
                     window.addEventListener('click', this.close, false);
-                    let s = Math.max(0, this.list[this.selectorIndex].element.offsetTop - LIST_HEIGHT);
+                    let s = Math.max(0, this.list[this.activeIndex].element.offsetTop - LIST_HEIGHT);
                     this.listWrap.scrollTo(0, s);
                 }
             }
         };
         const changeListSelectorIndex = (evt) => {
-            let index = this.selectorIndex;
+            let index = this.activeIndex;
             if(evt.key === 'ArrowUp'){
                 index = Util.Math.clamp(index - 1, 0, this.list.length - 1);
             }else if(evt.key === 'ArrowDown'){
@@ -165,12 +165,12 @@ export default class GNODESelect extends GNODEElement {
                     v.selected = false;
                 });
                 this.list[index].selected = true;
-                this.selectorIndex = index;
+                this.activeIndex = index;
                 let s = Math.max(0, this.list[index].element.offsetTop - LIST_HEIGHT);
                 this.listWrap.scrollTo(0, s);
             }else{
                 if(this.selectedItemIndex !== index){
-                    this.selectorIndex = index;
+                    this.activeIndex = index;
                     this.selectedItemIndex = index;
                     this.selected.textContent = this.item[index];
                     this.emit('change', this.item[index], evt);
@@ -190,10 +190,10 @@ export default class GNODESelect extends GNODEElement {
                     evt.preventDefault()
                 case 'Enter':
                     if(this.isOpen === true){
-                        if(this.selectedItemIndex !== this.selectorIndex){
-                            this.selectedItemIndex = this.selectorIndex;
-                            this.selected.textContent = this.item[this.selectorIndex];
-                            this.emit('change', this.item[this.selectorIndex], evt);
+                        if(this.selectedItemIndex !== this.activeIndex){
+                            this.selectedItemIndex = this.activeIndex;
+                            this.selected.textContent = this.item[this.activeIndex];
+                            this.emit('change', this.item[this.activeIndex], evt);
                         }
                         this.close();
                     }else{
@@ -210,7 +210,7 @@ export default class GNODESelect extends GNODEElement {
 
         // initial setting -----------------------------------------------------
         this.selectedItemIndex = Util.Math.clamp(selectedIndex, -1, this.item.length - 1);
-        this.selectorIndex = this.selectedItemIndex;
+        this.activeIndex = this.selectedItemIndex;
         if(this.selectedItemIndex > -1){
             this.selected.textContent = this.item[this.selectedItemIndex];
         }
@@ -259,7 +259,7 @@ export default class GNODESelect extends GNODEElement {
         if(list == null){return;}
         if(this.selectedItemIndex >= targetIndex){
             ++this.selectedItemIndex;
-            ++this.selectorIndex;
+            ++this.activeIndex;
         }
         if(isLastChild === true){
             this.listWrap.appendChild(list.element);
@@ -279,7 +279,7 @@ export default class GNODESelect extends GNODEElement {
         this.item.splice(index, 1);
         this.list.splice(index, 1);
         this.selectedItemIndex = Math.min(this.selectedItemIndex, this.list.length - 1);
-        this.selectorIndex = this.selectedItemIndex;
+        this.activeIndex = this.selectedItemIndex;
     }
     /**
      * like set disabled attribute
