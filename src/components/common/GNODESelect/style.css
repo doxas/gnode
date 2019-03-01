@@ -16,6 +16,12 @@
     user-select: none;
 }
 
+.select.disabled {
+    background-color: silver;
+    color: gray;
+    cursor: default;
+}
+
 .list_wrap {
     background-color: whitesmoke;
     width: 100%;

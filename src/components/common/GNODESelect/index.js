@@ -154,14 +154,14 @@ export default class GNODESelect extends GNODEElement {
                 }else{
                     this.isOpen = true;
                     this.selectorIndex = this.selectedItemIndex;
-                    this.selected.style.backgroundColor = 'transparent';
-                    this.selected.style.boxShadow = `0px 0px 0px 1px ${CONST.COMPONENT_DEFAULT_COLOR} inset`;
-                    this.listWrap.style.display = 'flex';
-                    window.addEventListener('click', closeListWrap, false);
                     this.list.map((v) => {
                         v.selected = false;
                     });
                     this.list[this.selectorIndex].selected = true;
+                    this.selected.style.backgroundColor = 'transparent';
+                    this.selected.style.boxShadow = `0px 0px 0px 1px ${CONST.COMPONENT_DEFAULT_COLOR} inset`;
+                    this.listWrap.style.display = 'flex';
+                    window.addEventListener('click', closeListWrap, false);
                 }
             }
         };
@@ -219,9 +219,10 @@ export default class GNODESelect extends GNODEElement {
      */
     enable(enable = true){
         this.isEnable = enable;
-        if(enable !== true){
-            this.selected.style.backgroundColor = '';
-            this.selected.style.boxShadow = '';
+        if(enable === true){
+            this.selected.classList.remove('disabled');
+        }else{
+            this.selected.classList.add('disabled');
             this.listWrap.style.display = 'none';
         }
     }
