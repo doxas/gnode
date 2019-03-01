@@ -33,6 +33,31 @@ class MathUtil {
     }
 }
 
+class ColorUtil {
+    static RGBtoHSV(){}
+    static RGBtoHSL(){}
+    static HSVtoRGB(){}
+    static HSLtoRGB(){}
+    static RGBtoHEX(color){
+        let r = StringUtil.zeroPadding(color[0].toString(16), 2);
+        let g = StringUtil.zeroPadding(color[1].toString(16), 2);
+        let b = StringUtil.zeroPadding(color[2].toString(16), 2);
+        return `#${r}${g}${b}`;
+    }
+    static HEXtoRGB(color){
+        if(color == null || Util.isString(color) !== true){return null;}
+        if(color.search(/^#+[\d|a-f|A-F]+$/) === -1){return null;}
+        let s = color.replace('#', '');
+        if(s.length !== 3 && s.length !== 6){return null;}
+        let t = s.length / 3;
+        return [
+            parseInt(color.substr(1, t), 16) / 255,
+            parseInt(color.substr(1 + t, t), 16) / 255,
+            parseInt(color.substr(1 + t * 2, t), 16) / 255
+        ];
+    }
+}
+
 class StringUtil {
     static zeroPadding(s, n){
         if(n == null || Util.isNumber(n) !== true || n <= 0){return null;}
@@ -55,23 +80,5 @@ class StringUtil {
         let minute = StringUtil.zeroPadding(e.getMinutes(), 2);
         let second = StringUtil.zeroPadding(e.getSeconds(), 2);
         return `${year}/${month}/${day} ${hour}:${minute}:${second}`;
-    }
-    static numberToHexString(color){
-        let r = StringUtil.zeroPadding(color[0].toString(16), 2);
-        let g = StringUtil.zeroPadding(color[1].toString(16), 2);
-        let b = StringUtil.zeroPadding(color[2].toString(16), 2);
-        return `#${r}${g}${b}`;
-    }
-    static hexStringToNumber(color){
-        if(color == null || Util.isString(color) !== true){return null;}
-        if(color.search(/^#+[\d|a-f|A-F]+$/) === -1){return null;}
-        let s = color.replace('#', '');
-        if(s.length !== 3 && s.length !== 6){return null;}
-        let t = s.length / 3;
-        return [
-            parseInt(color.substr(1, t), 16) / 255,
-            parseInt(color.substr(1 + t, t), 16) / 255,
-            parseInt(color.substr(1 + t * 2, t), 16) / 255
-        ];
     }
 }
