@@ -68,6 +68,10 @@ export default class GNODESelect extends GNODEElement {
          */
         this.isEnable = true;
         /**
+         * @type {boolean}
+         */
+        this.isOpen = false;
+        /**
          * @type {Array.<string>}
          */
         this.item = value;
@@ -75,6 +79,10 @@ export default class GNODESelect extends GNODEElement {
          * @type {number}
          */
         this.selectedItemIndex = Util.Math.clamp(selectedIndex, 0, Math.max(this.item.length - 1, 0));
+        /**
+         * @type {number}
+         */
+        this.selectorIndex = this.selectedItemIndex;
 
         // dom generation -----------------------------------------------------
         this.dom.classList.add('GNODESelect');
@@ -84,6 +92,7 @@ export default class GNODESelect extends GNODEElement {
         this.selected = document.createElement('div');
         this.selected.classList.add('select');
         this.selected.textContent = this.item[this.selectedItemIndex];
+        this.selected.setAttribute('tabindex', 0);
         /**
          * @type {HTMLDivElement}
          */
@@ -129,23 +138,78 @@ export default class GNODESelect extends GNODEElement {
 
         // event setting ------------------------------------------------------
         const closeListWrap = () => {
+            this.isOpen = false;
             this.selected.style.backgroundColor = '';
             this.selected.style.boxShadow = '';
             this.listWrap.style.display = 'none';
             window.removeEventListener('click', closeListWrap);
         };
-        this.addEventListenerForSelf(this.selected, 'click', (evt) => {
+        const openListWrap = (evt) => {
             if(this.isEnable !== true){return;}
             evt.stopPropagation();
             if(this.item != null && Array.isArray(this.item) === true && this.item.length > 0){
                 if(this.listWrap.style.display === 'flex'){
+                    this.isOpen = false;
                     closeListWrap();
                 }else{
+                    this.isOpen = true;
+                    this.selectorIndex = this.selectedItemIndex;
                     this.selected.style.backgroundColor = 'transparent';
                     this.selected.style.boxShadow = `0px 0px 0px 1px ${CONST.COMPONENT_DEFAULT_COLOR} inset`;
                     this.listWrap.style.display = 'flex';
                     window.addEventListener('click', closeListWrap, false);
+                    this.list.map((v) => {
+                        v.selected = false;
+                    });
+                    this.list[this.selectorIndex].selected = true;
                 }
+            }
+        };
+        const changeListSelectorIndex = (evt) => {
+            let index = this.selectorIndex;
+            if(evt.key === 'ArrowUp'){
+                index = Util.Math.clamp(index - 1, 0, this.list.length - 1);
+            }else if(evt.key === 'ArrowDown'){
+                index = Util.Math.clamp(index + 1, 0, this.list.length - 1);
+            }
+            if(this.isOpen === true){
+                this.list.map((v) => {
+                    v.selected = false;
+                });
+                this.list[index].selected = true;
+                this.selectorIndex = index;
+            }else{
+                if(this.selectedItemIndex !== index){
+                    this.selectorIndex = index;
+                    this.selectedItemIndex = index;
+                    this.selected.textContent = this.item[index];
+                    this.emit('change', this.item[index], evt);
+                }
+            }
+        };
+        this.addEventListenerForSelf(this.selected, 'click', (evt) => {
+            openListWrap(evt);
+        });
+        this.addEventListenerForSelf(this.selected, 'keydown', (evt) => {
+            if(this.isEnable !== true){return;}
+            evt.preventDefault()
+            switch(evt.key){
+                case 'Escape':
+                    closeListWrap();
+                    break;
+                case ' ':
+                case 'Enter':
+                    if(this.isOpen === true){
+                        changeListSelectorIndex(evt);
+                        closeListWrap();
+                    }else{
+                        openListWrap(evt);
+                    }
+                    break;
+                case 'ArrowUp':
+                case 'ArrowDown':
+                    changeListSelectorIndex(evt);
+                    break;
             }
         });
     }
