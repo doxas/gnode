@@ -74,7 +74,11 @@ export default class GNODESelect extends GNODEElement {
         /**
          * @type {Array.<string>}
          */
-        this.item = value;
+        this.item = [];
+        /**
+         * @type {Array.<GNODESelectOption>}
+         */
+        this.list = [];
         /**
          * @type {number}
          */
@@ -98,26 +102,16 @@ export default class GNODESelect extends GNODEElement {
          */
         this.listWrap = document.createElement('div');
         this.listWrap.classList.add('list_wrap');
-        /**
-         * @type {Array.<GNODESelectOption>}
-         */
-        this.list = [];
-        if(this.item != null && Array.isArray(this.item) === true){
-            this.item.map((v, i) => {
+        if(value != null && Array.isArray(value) === true){
+            value.map((v, i) => {
                 if(i === this.selectedItemIndex){
-                    this.selected.tectContent = this.item[i];
+                    this.selected.textContent = v;
                 }
-                let list = new GNODESelectOption(`${v}`, this.name);
-                this.children.push(list);
-                list.on('click', ((index) => {return (v, evt) => {
-                    closeListWrap();
-                    this.selectedItemIndex = index;
-                    this.selected.textContent = this.item[index];
-                    this.emit('change', this.item[index], evt);
-                };})(i));
-                list.element.style.width = '100%';
-                list.control.style.width = '100%';
+                let list = this.generateItem(`${v}`);
+                if(list == null){return;}
+                this.item.push(v);
                 this.list.push(list);
+                this.children.push(list);
                 this.listWrap.appendChild(list.element);
             });
         }
@@ -134,23 +128,16 @@ export default class GNODESelect extends GNODEElement {
             display:       'inline-block',
         });
         this.appendStyle(css);
-        this.selected.style.width = '100%';
 
         // event setting ------------------------------------------------------
-        const closeListWrap = () => {
-            this.isOpen = false;
-            this.selected.style.backgroundColor = '';
-            this.selected.style.boxShadow = '';
-            this.listWrap.style.display = 'none';
-            window.removeEventListener('click', closeListWrap);
-        };
+        this.close = this.close.bind(this);
         const openListWrap = (evt) => {
             if(this.isEnable !== true){return;}
             evt.stopPropagation();
             if(this.item != null && Array.isArray(this.item) === true && this.item.length > 0){
                 if(this.listWrap.style.display === 'flex'){
                     this.isOpen = false;
-                    closeListWrap();
+                    this.close();
                 }else{
                     this.isOpen = true;
                     this.selectorIndex = this.selectedItemIndex;
@@ -161,7 +148,7 @@ export default class GNODESelect extends GNODEElement {
                     this.selected.style.backgroundColor = 'transparent';
                     this.selected.style.boxShadow = `0px 0px 0px 1px ${CONST.COMPONENT_DEFAULT_COLOR} inset`;
                     this.listWrap.style.display = 'flex';
-                    window.addEventListener('click', closeListWrap, false);
+                    window.addEventListener('click', this.close, false);
                 }
             }
         };
@@ -195,13 +182,13 @@ export default class GNODESelect extends GNODEElement {
             evt.preventDefault()
             switch(evt.key){
                 case 'Escape':
-                    closeListWrap();
+                    this.close();
                     break;
                 case ' ':
                 case 'Enter':
                     if(this.isOpen === true){
                         changeListSelectorIndex(evt);
-                        closeListWrap();
+                        this.close();
                     }else{
                         openListWrap(evt);
                     }
@@ -212,6 +199,60 @@ export default class GNODESelect extends GNODEElement {
                     break;
             }
         });
+    }
+    /**
+     * close item list
+     */
+    close(){
+        this.isOpen = false;
+        this.selected.style.backgroundColor = '';
+        this.selected.style.boxShadow = '';
+        this.listWrap.style.display = 'none';
+        window.removeEventListener('click', this.close);
+    }
+    /**
+     * item generate
+     * @
+     */
+    generateItem(text){
+        if(
+            text == null ||
+            Util.isString(text) !== true ||
+            text === '' ||
+            this.list.includes(text) === true
+        ){
+            return null;
+        }
+        let list = new GNODESelectOption(text, this.name);
+        list.on('click', (v, evt) => {
+            this.close();
+            this.selectedItemIndex = this.item.indexOf(text);
+            this.selected.textContent = text;
+            this.emit('change', text, evt);
+        });
+        return list;
+    }
+    /**
+     * add to list
+     * @param {string} item - item
+     * @param {number} [index] - index
+     */
+    addItem(item, index){
+        let targetIndex = Util.Math.clamp(index, 0, this.list.length);
+        let isLastChild = targetIndex === this.list.length;
+        let list = this.generateItem(item);
+        if(list == null){return;}
+        if(this.list.length > 0 && this.selectedItemIndex >= targetIndex){
+            ++this.selectedItemIndex;
+            ++this.selectorIndex;
+        }
+        if(isLastChild === true){
+            this.listWrap.appendChild(list.element);
+        }else{
+            this.listWrap.insertBefore(list.element, this.list[targetIndex].element);
+        }
+        this.item.splice(targetIndex, 0, item);
+        this.list.splice(targetIndex, 0, list);
     }
     /**
      * like set disabled attribute
