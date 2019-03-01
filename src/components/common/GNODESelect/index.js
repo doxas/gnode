@@ -5,6 +5,9 @@ import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 import GNODESelectOption from '../GNODESelectOption/index.js';
 
+const LIST_WRAP_HEIGHT = 60;
+const LIST_HEIGHT = 20;
+
 /**
  * simple select
  * @class
@@ -145,6 +148,8 @@ export default class GNODESelect extends GNODEElement {
                     this.selected.style.boxShadow = `0px 0px 0px 1px ${CONST.COMPONENT_DEFAULT_COLOR} inset`;
                     this.listWrap.style.display = 'flex';
                     window.addEventListener('click', this.close, false);
+                    let s = Math.max(0, this.list[this.selectorIndex].element.offsetTop - LIST_HEIGHT);
+                    this.listWrap.scrollTo(0, s);
                 }
             }
         };
@@ -161,6 +166,8 @@ export default class GNODESelect extends GNODEElement {
                 });
                 this.list[index].selected = true;
                 this.selectorIndex = index;
+                let s = Math.max(0, this.list[index].element.offsetTop - LIST_HEIGHT);
+                this.listWrap.scrollTo(0, s);
             }else{
                 if(this.selectedItemIndex !== index){
                     this.selectorIndex = index;
@@ -175,12 +182,12 @@ export default class GNODESelect extends GNODEElement {
         });
         this.addEventListenerForSelf(this.selected, 'keydown', (evt) => {
             if(this.isEnable !== true){return;}
-            evt.preventDefault()
             switch(evt.key){
                 case 'Escape':
                     this.close();
                     break;
                 case ' ':
+                    evt.preventDefault()
                 case 'Enter':
                     if(this.isOpen === true){
                         if(this.selectedItemIndex !== this.selectorIndex){
@@ -196,6 +203,7 @@ export default class GNODESelect extends GNODEElement {
                     break;
                 case 'ArrowUp':
                 case 'ArrowDown':
+                    evt.preventDefault()
                     changeListSelectorIndex(evt);
                     break;
             }
@@ -220,7 +228,7 @@ export default class GNODESelect extends GNODEElement {
     }
     /**
      * item generate
-     * @
+     * @param {string} text - text
      */
     generateItem(text){
         if(
