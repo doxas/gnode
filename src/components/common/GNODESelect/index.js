@@ -82,11 +82,11 @@ export default class GNODESelect extends GNODEElement {
         /**
          * @type {number}
          */
-        this.selectedItemIndex = Util.Math.clamp(selectedIndex, 0, Math.max(this.item.length - 1, 0));
+        this.selectedItemIndex = -1;
         /**
          * @type {number}
          */
-        this.selectorIndex = this.selectedItemIndex;
+        this.selectorIndex = -1;
 
         // dom generation -----------------------------------------------------
         this.dom.classList.add('GNODESelect');
@@ -95,7 +95,6 @@ export default class GNODESelect extends GNODEElement {
          */
         this.selected = document.createElement('div');
         this.selected.classList.add('select');
-        this.selected.textContent = this.item[this.selectedItemIndex];
         this.selected.setAttribute('tabindex', 0);
         /**
          * @type {HTMLDivElement}
@@ -104,9 +103,6 @@ export default class GNODESelect extends GNODEElement {
         this.listWrap.classList.add('list_wrap');
         if(value != null && Array.isArray(value) === true){
             value.map((v, i) => {
-                if(i === this.selectedItemIndex){
-                    this.selected.textContent = v;
-                }
                 let list = this.generateItem(`${v}`);
                 if(list == null){return;}
                 this.item.push(v);
@@ -187,7 +183,12 @@ export default class GNODESelect extends GNODEElement {
                 case ' ':
                 case 'Enter':
                     if(this.isOpen === true){
-                        changeListSelectorIndex(evt);
+                        if(this.selectedItemIndex !== this.selectorIndex){
+                            this.selectorIndex = this.selectorIndex;
+                            this.selectedItemIndex = this.selectorIndex;
+                            this.selected.textContent = this.item[this.selectorIndex];
+                            this.emit('change', this.item[this.selectorIndex], evt);
+                        }
                         this.close();
                     }else{
                         openListWrap(evt);
@@ -199,6 +200,13 @@ export default class GNODESelect extends GNODEElement {
                     break;
             }
         });
+
+        // initial setting -----------------------------------------------------
+        this.selectedItemIndex = Util.Math.clamp(selectedIndex, -1, this.item.length - 1);
+        this.selectorIndex = this.selectedItemIndex;
+        if(this.selectedItemIndex > -1){
+            this.selected.textContent = this.item[this.selectedItemIndex];
+        }
     }
     /**
      * close item list
@@ -242,7 +250,7 @@ export default class GNODESelect extends GNODEElement {
         let isLastChild = targetIndex === this.list.length;
         let list = this.generateItem(item);
         if(list == null){return;}
-        if(this.list.length > 0 && this.selectedItemIndex >= targetIndex){
+        if(this.selectedItemIndex >= targetIndex){
             ++this.selectedItemIndex;
             ++this.selectorIndex;
         }
