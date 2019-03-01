@@ -89,6 +89,7 @@ export default class GNODESelectOption extends GNODEElement {
             color:         `${CONST.COMPONENT_DEFAULT_COLOR}`,
             lineHeight:    `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
             height:        `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
+            width:         '100%',
             verticalAlign: 'middle',
             display:       'inline-block',
         });
