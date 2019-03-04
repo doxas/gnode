@@ -57,7 +57,7 @@ class StringUtil {
     }
     static convertTimeToSerial(d){
         let e = new Date(d);
-        let year   = e.getYear();
+        let year   = e.getFullYear();
         let month  = StringUtil.zeroPadding(e.getMonth() + 1, 2);
         let day    = StringUtil.zeroPadding(e.getDate(), 2);
         let hour   = StringUtil.zeroPadding(e.getHours(), 2);
