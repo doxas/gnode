@@ -230,13 +230,12 @@ export default class GNODESelect extends GNODEElement {
      * @param {string} text - text
      */
     generateItem(text){
-        if(
-            text == null ||
-            Util.isString(text) !== true ||
-            text === '' ||
-            this.list.includes(text) === true
-        ){
+        if(text == null || Util.isString(text) !== true || text === ''){
             Util.Error.throw('should be a type of {string}', 'GNODESelect.generateItem', 'type');
+        }
+        if(this.list.includes(text) === true){
+            Util.Error.warn('duplicate item', 'GNODESelect.generateItem');
+            return;
         }
         let list = new GNODESelectOption(text, this.name);
         list.on('click', (v, evt) => {
