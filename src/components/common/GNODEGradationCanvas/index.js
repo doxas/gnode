@@ -118,7 +118,9 @@ export default class GNODEGradationCanvas extends GNODEElement {
      */
     draw(color, direction = 'horizontal', isClearCanvas = true){
         if(this.isEnable !== true){return;}
-        if(color == null || Array.isArray(color) !== true || color.length === 0){return;}
+        if(color == null || Array.isArray(color) !== true || color.length === 0){
+            Util.Error.throw('the first argument should be a type of {Array.<object>}', 'GNODEGradationCanvas.draw', 'type');
+        }
         let c = this.canvas;
         let cx = this.context;
         let g = null;
@@ -147,7 +149,9 @@ export default class GNODEGradationCanvas extends GNODEElement {
      * @param {number} [size=CONST.COMPONENT_TRANSPARENT_BLOCK_SIZE] - block size
      */
     createTilePattern(size = CONST.COMPONENT_TRANSPARENT_BLOCK_SIZE){
-        if(size == null || Util.isNumber(size) !== true || size < 1){return null;}
+        if(size == null || Util.isNumber(size) !== true || size < 1){
+            Util.Error.throw('should be a type of {number} and greater than 0', 'GNODEGradationCanvas.createTilePattern', 'type');
+        }
         let c = document.createElement('canvas');
         let cx = c.getContext('2d');
         c.width = size * 2;

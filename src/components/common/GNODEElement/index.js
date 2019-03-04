@@ -3,8 +3,6 @@ import css from './style.css';
 import Util from '../../../static/util.js';
 import EventEmitter3 from 'eventemitter3';
 
-const ERR_APPEND = `[GNODE ERROR] invalid argument 1 is not of type 'Element' or 'GNODEElement'`;
-
 /**
  * super class of GNODE element
  * @class
@@ -85,16 +83,13 @@ export default class GNODEElement extends EventEmitter3 {
      * @param {HTMLElement|GNODEElement} element - html element or GNODEElement
      */
     append(element){
-        if(element == null){
-            throw new Error(ERR_APPEND);
-        }
         if(element instanceof GNODEElement === true){
             this.children.push(element);
             this.shadow.appendChild(element.element);
         }else if(element instanceof HTMLElement === true){
             this.shadow.appendChild(element);
         }else{
-            throw new Error(ERR_APPEND);
+            Util.Error.throw('should be a type of {HTMLElement|GNODEElement}', 'GNODEElement.append', 'type');
         }
     }
     /**
@@ -117,7 +112,9 @@ export default class GNODEElement extends EventEmitter3 {
      * @param {object} style - object of style
      */
     addStyle(style){
-        if(Util.isObject(style) !== true){return;}
+        if(Util.isObject(style) !== true){
+            Util.Error.throw('should be a type of {object}', 'GNODEElement.addStyle', 'type');
+        }
         for(let key in style){
             this.dom.style[key] = style[key];
         }
@@ -127,7 +124,9 @@ export default class GNODEElement extends EventEmitter3 {
      * @param {object} attribute - object of attribute
      */
     addAttribute(attribute){
-        if(Util.isObject(attribute) !== true){return;}
+        if(Util.isObject(attribute) !== true){
+            Util.Error.throw('should be a type of {object}', 'GNODEElement.addAttribute', 'type');
+        }
         for(let key in attribute){
             this.dom.setAttribute(key, attribute[key]);
         }

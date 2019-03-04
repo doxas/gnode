@@ -236,7 +236,7 @@ export default class GNODESelect extends GNODEElement {
             text === '' ||
             this.list.includes(text) === true
         ){
-            return null;
+            Util.Error.throw('should be a type of {string}', 'GNODESelect.generateItem', 'type');
         }
         let list = new GNODESelectOption(text, this.name);
         list.on('click', (v, evt) => {
@@ -274,7 +274,9 @@ export default class GNODESelect extends GNODEElement {
      * @param {number} index - target
      */
     removeItem(index){
-        if(index < 0 || index > this.list.length - 1){return;}
+        if(index < 0 || index > this.list.length - 1){
+            Util.Error.throw('should be a type of {number}', 'GNODESelect.removeItem', 'type');
+        }
         this.list[index].element.parentNode.removeChild(this.list[index].element);
         this.item.splice(index, 1);
         this.list.splice(index, 1);
