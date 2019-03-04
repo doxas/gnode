@@ -1,7 +1,12 @@
 
+import CONST from './constant.js';
+
 export default class Util {
     static get Math(){return MathUtil;}
     static get Str(){return StringUtil;}
+    static get Error(msg, name = ''){
+        return ErrorUtil.err(msg, name);
+    }
     static isNumber(n){
         return n != null && Object.prototype.toString.call(n) === '[object Number]';
     }
@@ -82,3 +87,15 @@ class StringUtil {
         return `${year}/${month}/${day} ${hour}:${minute}:${second}`;
     }
 }
+
+class ErrorUtil {
+    static err(msg, name = ''){
+        let method = '';
+        if(Util.isString(name) === true && name !== ''){
+            method = `: ${name}`;
+        }
+        let message = `${CONST.GLOBAL_PREFIX}[${CONST.GLOBAL_NAME}${method}] ${msg}`;
+        return new Error(msg);
+    }
+}
+
