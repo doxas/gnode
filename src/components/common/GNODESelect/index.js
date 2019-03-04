@@ -228,6 +228,7 @@ export default class GNODESelect extends GNODEElement {
     /**
      * item generate
      * @param {string} text - text
+     * @return {GNODESelectOption} - inserted item or null(at dupulicated)
      */
     generateItem(text){
         if(text == null || Util.isString(text) !== true || text === ''){
@@ -235,7 +236,7 @@ export default class GNODESelect extends GNODEElement {
         }
         if(this.list.includes(text) === true){
             Util.Error.warn('duplicate item', 'GNODESelect.generateItem');
-            return;
+            return null;
         }
         let list = new GNODESelectOption(text, this.name);
         list.on('click', (v, evt) => {
