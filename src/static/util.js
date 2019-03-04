@@ -39,8 +39,8 @@ class MathUtil {
 
 class StringUtil {
     static zeroPadding(s, n){
-        if(s == null || Util.isNumber(s) !== true){
-            ErrorUtil.throw('the first argument should be a type of {number}', 'Util.StringUtil.zeroPadding', 'type');
+        if(s == null || (Util.isNumber(s) !== true && Util.isString(s) !== true)){
+            ErrorUtil.throw('the first argument should be a type of {number|string}', 'Util.StringUtil.zeroPadding', 'type');
         }
         if(n == null || Util.isNumber(n) !== true || n <= 0){
             ErrorUtil.throw('the second argument should be a type of {number} and greater than 0', 'Util.StringUtil.zeroPadding', 'type');
@@ -57,7 +57,7 @@ class StringUtil {
     }
     static convertTimeToSerial(d){
         let e = new Date(d);
-        let year   = e.getYear() + 1900;
+        let year   = e.getYear();
         let month  = StringUtil.zeroPadding(e.getMonth() + 1, 2);
         let day    = StringUtil.zeroPadding(e.getDate(), 2);
         let hour   = StringUtil.zeroPadding(e.getHours(), 2);
