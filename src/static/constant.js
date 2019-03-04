@@ -1,5 +1,7 @@
 
 export default {
+    GLOBAL_NAME: 'gnode',
+    GLOBAL_PREFIX: '🔗 ',
     COMPONENT_DEFAULT_BACKGROUND_COLOR: 'whitesmoke',
     COMPONENT_DEFAULT_BACKGROUND_HOVER_COLOR: 'white',
     COMPONENT_DEFAULT_COLOR: 'silver',
