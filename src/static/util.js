@@ -3,7 +3,8 @@ import CONST from './constant.js';
 
 export default class Util {
     static get Math(){return MathUtil;}
-    static get Str(){return StringUtil;}
+    static get String(){return StringUtil;}
+    static get Color(){return ColorUtil;}
     static get Error(){return ErrorUtil;}
     static isNumber(n){
         return n != null && Object.prototype.toString.call(n) === '[object Number]';
@@ -36,34 +37,14 @@ class MathUtil {
     }
 }
 
-class ColorUtil {
-    static RGBtoHSV(){}
-    static RGBtoHSL(){}
-    static HSVtoRGB(){}
-    static HSLtoRGB(){}
-    static RGBtoHEX(color){
-        let r = StringUtil.zeroPadding(color[0].toString(16), 2);
-        let g = StringUtil.zeroPadding(color[1].toString(16), 2);
-        let b = StringUtil.zeroPadding(color[2].toString(16), 2);
-        return `#${r}${g}${b}`;
-    }
-    static HEXtoRGB(color){
-        if(color == null || Util.isString(color) !== true){return null;}
-        if(color.search(/^#+[\d|a-f|A-F]+$/) === -1){return null;}
-        let s = color.replace('#', '');
-        if(s.length !== 3 && s.length !== 6){return null;}
-        let t = s.length / 3;
-        return [
-            parseInt(color.substr(1, t), 16) / 255,
-            parseInt(color.substr(1 + t, t), 16) / 255,
-            parseInt(color.substr(1 + t * 2, t), 16) / 255
-        ];
-    }
-}
-
 class StringUtil {
     static zeroPadding(s, n){
-        if(n == null || Util.isNumber(n) !== true || n <= 0){return null;}
+        if(s == null || Util.isNumber(s) !== true){
+            ErrorUtil.throw('the first argument should be a type of {number}', 'Util.StringUtil.zeroPadding', 'type');
+        }
+        if(n == null || Util.isNumber(n) !== true || n <= 0){
+            ErrorUtil.throw('the second argument should be a type of {number} and greater than 0', 'Util.StringUtil.zeroPadding', 'type');
+        }
         let nega = (s < 0);
         let f = ((`${s}`).match(/\./) != null);
         let target = f ? Math.floor(s) : s;
@@ -83,6 +64,40 @@ class StringUtil {
         let minute = StringUtil.zeroPadding(e.getMinutes(), 2);
         let second = StringUtil.zeroPadding(e.getSeconds(), 2);
         return `${year}/${month}/${day} ${hour}:${minute}:${second}`;
+    }
+}
+
+class ColorUtil {
+    static RGBtoHSV(){}
+    static RGBtoHSL(){}
+    static HSVtoRGB(){}
+    static HSLtoRGB(){}
+    static RGBtoHEX(color){
+        if(color == null || Array.isArray(color) !== true || color.length < 3){
+            ErrorUtil.throw('should be a type of {Array} and greater equal than length is 3', 'Util.ColorUtil.RGBtoHEX', 'type');
+        }
+        let r = StringUtil.zeroPadding(color[0].toString(16), 2);
+        let g = StringUtil.zeroPadding(color[1].toString(16), 2);
+        let b = StringUtil.zeroPadding(color[2].toString(16), 2);
+        return `#${r}${g}${b}`;
+    }
+    static HEXtoRGB(color){
+        if(color == null || Util.isString(color) !== true){
+            ErrorUtil.throw('should be a type of {string}', 'Util.ColorUtil.HEXtoRGB', 'type');
+        }
+        if(color.search(/^#+[\d|a-f|A-F]+$/) === -1){
+            ErrorUtil.throw('should be a format of "#ffffff"', 'Util.ColorUtil.HEXtoRGB', 'type');
+        }
+        let s = color.replace('#', '');
+        if(s.length !== 3 && s.length !== 6){
+            ErrorUtil.throw('should be a format of "#ffffff" or "#fff"', 'Util.ColorUtil.HEXtoRGB', 'type');
+        }
+        let t = s.length / 3;
+        return [
+            parseInt(color.substr(1, t), 16) / 255,
+            parseInt(color.substr(1 + t, t), 16) / 255,
+            parseInt(color.substr(1 + t * 2, t), 16) / 255
+        ];
     }
 }
 
