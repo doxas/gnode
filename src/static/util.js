@@ -107,7 +107,7 @@ class ErrorUtil {
         if(Util.isString(name) === true && name !== ''){
             method = `: ${name}`;
         }
-        let message = `${CONST.GLOBAL_PREFIX}[${CONST.GLOBAL_NAME}${method}] ${msg}`;
+        let message = `${CONST.CONSOLE_ERROR_PREFIX}[${CONST.GLOBAL_NAME}${method}] ${msg}`;
         switch(type){
             case 'reference':
                 return new ReferenceError(message);
@@ -121,6 +121,14 @@ class ErrorUtil {
     }
     static throw(msg, name = '', type = ''){
         throw ErrorUtil.new(msg, name, type);
+    }
+    static warn(msg, name = ''){
+        let method = '';
+        if(Util.isString(name) === true && name !== ''){
+            method = `: ${name}`;
+        }
+        let message = `${CONST.CONSOLE_WARN_PREFIX}[${CONST.GLOBAL_NAME}${method}] ${msg}`;
+        console.warn(message);
     }
 }
 

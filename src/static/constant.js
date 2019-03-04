@@ -1,7 +1,9 @@
 
 export default {
     GLOBAL_NAME: 'gnode',
-    GLOBAL_PREFIX: '😲',
+    CONSOLE_OUT_PREFIX: '😋',
+    CONSOLE_WARN_PREFIX: '😲',
+    CONSOLE_ERROR_PREFIX: '😩',
     COMPONENT_DEFAULT_BACKGROUND_COLOR: 'whitesmoke',
     COMPONENT_DEFAULT_BACKGROUND_HOVER_COLOR: 'white',
     COMPONENT_DEFAULT_COLOR: 'silver',
