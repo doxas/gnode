@@ -95,13 +95,13 @@ class ErrorUtil {
         let message = `${CONST.GLOBAL_PREFIX}[${CONST.GLOBAL_NAME}${method}] ${msg}`;
         switch(type){
             case 'reference':
-                return new ReferenceError(msg);
+                return new ReferenceError(message);
             case 'syntax':
-                return new SyntaxError(msg);
+                return new SyntaxError(message);
             case 'type':
-                return new TypeError(msg);
+                return new TypeError(message);
             default:
-                return new Error(msg);
+                return new Error(message);
         }
     }
     static throw(msg, name = '', type = ''){
