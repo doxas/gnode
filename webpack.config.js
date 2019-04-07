@@ -33,7 +33,7 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: [
-                            ['env']
+                            ['@babel/env']
                         ]
                     }
                 }]
@@ -43,6 +43,14 @@ module.exports = {
                 use: ['raw-loader']
             }
         ]
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'public'),
+        openPage: 'sample.html',
+        open: true,
+        port: 9090,
+        publicPath: '/js/',
+        watchContentBase: true
     },
     cache: true,
     devtool: devmode
