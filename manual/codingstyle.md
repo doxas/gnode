@@ -1,5 +1,5 @@
 
-# conding guide
+# coding guide
 
 ## overview
 
