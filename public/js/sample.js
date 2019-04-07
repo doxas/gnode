@@ -68,6 +68,13 @@ window.addEventListener('load', () => {
         [(evt) => {console.log(evt);}]
     );
     gen(
+        'GNODEToggleButton',
+        new GNODE.Components.Common.ToggleButton(false, 'single'),
+        main,
+        ['change'],
+        [(evt) => {console.log(evt);}]
+    );
+    gen(
         'GNODEGradationCanvas',
         new GNODE.Components.Common.GradationCanvas([{offset: 0.0, color: 'transparent'}, {offset: 1.0, color: 'rgba(255, 0, 0, 1.0)'}], 'single', 'horizontal', 128, 64),
         main,
