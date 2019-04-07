@@ -43,8 +43,8 @@ export default class GNODECombobox extends GNODEElement {
      * @param {string} [placeholder=''] - placeholder
      * @param {number} [max=null] - maxlength
      * @example
-     * let maxlength = 20;
-     * let E = new GNODECombobox('value', 'name', ['item1', 'item2'], 'placeholder', maxlength);
+     * let presetItems = ['item1', 'item2'];
+     * let E = new GNODECombobox('value', 'name', presetItems, 'placeholder', maxlength);
      */
     constructor(value = '', name = '', item = [], placeholder = '', max){
         super(name);
