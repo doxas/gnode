@@ -13,6 +13,7 @@ CSS ファイルのインポートは JavaScrip のモジュールの仕組み�
 
 ```javascript
 import css from './style.css';
+import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 
 /**
@@ -60,8 +61,8 @@ static get EVENTS(){return [
 
 | プロパティ名 | 型 | 意味 |
 |---|---|---|
-| `dom` | Array | コンポーネント全体を包んでいる `HTMLDivElement` |
-| `shadow` | Array | shadow-dom のルート |
+| `dom` | HTMLDivElement | コンポーネント全体を包んでいる `HTMLDivElement` |
+| `shadow` | ShadowRoot | shadow-dom のルート |
 | `children` | Array | shadow-dom に含まれる子要素 |
 
 gnode は各コンポーネントが shadow-dom になっているので、通常の利用の仕方としては `GNODEElement` クラスが持っている `append` か `appendChild` を使って DOM を append する。
@@ -74,6 +75,7 @@ gnode は各コンポーネントが shadow-dom になっているので、通�
 
 ```javascript
 import css from './style.css';
+import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 
 /**
