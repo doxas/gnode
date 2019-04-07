@@ -24,7 +24,7 @@ export default class GNODESelect extends GNODEElement {
      * description
      * @type {string|HTMLElement}
      */
-    get description(){return 'simple select.';}
+    get description(){return 'simple select. (can be selected of a single item)';}
     /**
      * @type {HTMLDivElement}
      */
