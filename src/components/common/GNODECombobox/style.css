@@ -1,0 +1,26 @@
+
+.listwrap {
+    display: none;
+    flex-direction: column;
+    position: relative;
+}
+
+.listwrap.visible {
+    display: flex;
+}
+
+.list {
+    background-color: whitesmoke;
+    color: gray;
+    font-size: small;
+    padding: 0px 2px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.list:hover {
+    background-color: maroon;
+    color: white;
+}
+
+

@@ -10,6 +10,7 @@ import GNODEInputNumber     from './GNODEInputNumber/index.js';
 import GNODEInputRange      from './GNODEInputRange/index.js';
 import GNODESelect          from './GNODESelect/index.js';
 import GNODEToggleButton    from './GNODEToggleButton/index.js';
+import GNODECombobox        from './GNODECombobox/index.js';
 import GNODEGradationCanvas from './GNODEGradationCanvas/index.js';
 
 export default class Common {
@@ -24,6 +25,7 @@ export default class Common {
     static get InputRange()      {return GNODEInputRange;}
     static get Select()          {return GNODESelect;}
     static get ToggleButton()    {return GNODEToggleButton;}
+    static get Combobox()        {return GNODECombobox;}
     static get GradationCanvas() {return GNODEGradationCanvas;}
 }
 
