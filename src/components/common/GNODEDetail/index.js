@@ -51,12 +51,6 @@ export default class GNODEDetail extends GNODEElement {
         /**
          * @type {HTMLDivElement}
          */
-        this.title = document.createElement('div');
-        this.title.classList.add('title');
-        this.title.textContent = title;
-        /**
-         * @type {HTMLDivElement}
-         */
         this.down = document.createElement('div');
         this.down.classList.add('downwrap');
         /**
@@ -64,15 +58,21 @@ export default class GNODEDetail extends GNODEElement {
          */
         this.triangle = document.createElement('div');
         this.triangle.classList.add('triangle');
-        this.triangle.textContent = '◀';
+        this.triangle.textContent = '▶';
+        /**
+         * @type {HTMLDivElement}
+         */
+        this.title = document.createElement('div');
+        this.title.classList.add('title');
+        this.title.textContent = title;
         /**
          * @type {HTMLDivElement}
          */
         this.inner = document.createElement('div');
         this.inner.classList.add('inner');
         this.down.append(this.triangle);
-        this.header.appendChild(this.title);
         this.header.appendChild(this.down);
+        this.header.appendChild(this.title);
         this.append(this.header);
         this.append(this.inner);
 
