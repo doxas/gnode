@@ -115,7 +115,7 @@ export default class GNODESelect extends GNODEElement {
          * @type {HTMLDivElement}
          */
         this.listWrap = document.createElement('div');
-        this.listWrap.classList.add('list_wrap');
+        this.listWrap.classList.add('listwrap');
         if(value != null && Array.isArray(value) === true){
             value.map((v, i) => {
                 let list = this.generateItem(`${v}`);
