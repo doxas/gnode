@@ -19,7 +19,7 @@ export default class GNODESelectOption extends GNODEElement {
      * description
      * @type {string|HTMLElement}
      */
-    get description(){return 'option on select';}
+    get description(){return 'option in select';}
     /**
      * @type {HTMLDivElement}
      */
