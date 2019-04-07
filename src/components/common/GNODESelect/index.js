@@ -54,6 +54,18 @@ export default class GNODESelect extends GNODEElement {
         this.selectedItemIndex = v;
         this.selected.textContent = this.item[this.selectedItemIndex];
     }
+    /**
+     * @type {Arrah.<GNODESelectOption>}
+     */
+    get selectedOptions(){
+        let option = [];
+        this.list.map((v) => {
+            if(v.selected === true){
+                option.push(v);
+            }
+        });
+        return option;
+    }
 
     /**
      * @constructor
@@ -112,6 +124,9 @@ export default class GNODESelect extends GNODEElement {
                 this.list.push(list);
                 this.children.push(list);
                 this.listWrap.appendChild(list.element);
+                if(this.item.length - 1 === selectedIndex){
+                    list.selected = true;
+                }
             });
         }
         this.append(this.selected);
