@@ -3,6 +3,8 @@ import css from './style.css';
 import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 
+const COMPONENT_WIDTH = 40; // self css
+
 /**
  * simple toggle button
  * @class
@@ -46,8 +48,8 @@ export default class GNODEToggleButton extends GNODEElement {
      * @param {boolean} [value=false] - checked
      * @param {string} [name=''] - name
      * @example
-     * let checked = true;
-     * let E = new GNODEToggleButton(checked, 'name');
+     * let switch = true;
+     * let E = new GNODEToggleButton(switch, 'name');
      */
     constructor(value = false, name = ''){
         super(name);
@@ -87,7 +89,7 @@ export default class GNODEToggleButton extends GNODEElement {
         this.addStyle({
             color:         `${CONST.COMPONENT_DEFAULT_COLOR}`,
             height:        `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
-            width:         `40px`,
+            width:         `${COMPONENT_WIDTH}px`,
             verticalAlign: 'middle',
             display:       'inline-block',
         });
