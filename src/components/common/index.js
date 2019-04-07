@@ -12,16 +12,16 @@ import GNODESelect          from './GNODESelect/index.js';
 import GNODEGradationCanvas from './GNODEGradationCanvas/index.js';
 
 export default class Common {
-    static get GNODEElement()         {return GNODEElement;}
-    static get GNODEFrame()           {return GNODEFrame;}
-    static get GNODEDetail()          {return GNODEDetail;}
-    static get GNODEInputButton()     {return GNODEInputButton;}
-    static get GNODEInputCheckbox()   {return GNODEInputCheckbox;}
-    static get GNODEInputRadio()      {return GNODEInputRadio;}
-    static get GNODEInputText()       {return GNODEInputText;}
-    static get GNODEInputNumber()     {return GNODEInputNumber;}
-    static get GNODEInputRange()      {return GNODEInputRange;}
-    static get GNODESelect()          {return GNODESelect;}
-    static get GNODEGradationCanvas() {return GNODEGradationCanvas;}
+    static get Element()         {return GNODEElement;}
+    static get Frame()           {return GNODEFrame;}
+    static get Detail()          {return GNODEDetail;}
+    static get InputButton()     {return GNODEInputButton;}
+    static get InputCheckbox()   {return GNODEInputCheckbox;}
+    static get InputRadio()      {return GNODEInputRadio;}
+    static get InputText()       {return GNODEInputText;}
+    static get InputNumber()     {return GNODEInputNumber;}
+    static get InputRange()      {return GNODEInputRange;}
+    static get Select()          {return GNODESelect;}
+    static get GradationCanvas() {return GNODEGradationCanvas;}
 }
 
