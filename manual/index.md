@@ -1,26 +1,32 @@
 
-# h1
+# get started gnode
 
 ![](./asset/screenshot.jpg)
 
-## h2
-
-### h3
-
-#### h4
-
-example text.
-
-* example-list
-* example-list
-* example-list
-
-example `inline code` text.
+## initial
 
 ```
-example code block;
-example code block;
-example code block;
+$ npm install
+$ npm run start
 ```
+
+## files
+
+### ./src/script.js
+
+this file is entry point of gnode.
+
+### ./src/static/
+
+global static utilities.
+
+### ./src/components/index.js
+
+entry point of components.
+
+### ./src/components/common/index.js
+
+entry point of gnode common components.
+
 
 
