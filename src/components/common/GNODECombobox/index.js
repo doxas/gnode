@@ -1,5 +1,6 @@
 
 import css from './style.css';
+import Util from '../../../static/util.js';
 import CONST from '../../../static/constant.js';
 import GNODEElement from '../GNODEElement/index.js';
 
@@ -43,7 +44,7 @@ export default class GNODECombobox extends GNODEElement {
      * @param {number} [max=null] - maxlength
      * @example
      * let maxlength = 20;
-     * let E = new GNODECombobox('value', 'name', 'placeholder', maxlength);
+     * let E = new GNODECombobox('value', 'name', ['item1', 'item2'], 'placeholder', maxlength);
      */
     constructor(value = '', name = '', item = [], placeholder = '', max){
         super(name);
@@ -60,6 +61,15 @@ export default class GNODECombobox extends GNODEElement {
          * @type {Array.<string>}
          */
         this.list = item;
+        /**
+         * @type {number}
+         */
+        this.activeIndex = -1;
+        /**
+         * did this component get the focus
+         * @type {boolean}
+         */
+        this.isInitialFocused = false;
 
         // dom generation -----------------------------------------------------
         this.dom.classList.add('GNODECombobox');
@@ -106,9 +116,47 @@ export default class GNODECombobox extends GNODEElement {
             this.wrap.classList.remove('visible');
             this.item.map((v, index) => {
                 v.removeEventListener('click', this.itemListener[index]);
+                this.setActiveItem(index, false);
             });
         }, false);
+        this.addEventListenerForSelf(this.input, 'keydown', (evt) => {
+            this.isInitialFocused = true;
+            switch(evt.key){
+                case 'Enter':
+                    if(this.item[this.activeIndex] == null){return;}
+                    this.input.value = this.item[this.activeIndex].textContent;
+                    this.emit('input', this.value, evt);
+                    this.emit('change', this.value, evt);
+                    this.wrap.classList.remove('visible');
+                    this.item.map((v, index) => {
+                        v.removeEventListener('click', this.itemListener[index]);
+                        this.setActiveItem(index, false);
+                    });
+                    this.activeIndex = -1;
+                    break;
+                case 'ArrowDown':
+                    evt.preventDefault();
+                    this.activeIndex = Util.Math.clamp(this.activeIndex + 1, -1, this.item.length);
+                    this.item.map((v, index) => {
+                        this.setActiveItem(index, index === this.activeIndex);
+                    });
+                    break;
+                case 'ArrowUp':
+                    evt.preventDefault();
+                    this.activeIndex = Util.Math.clamp(this.activeIndex - 1, -1, this.item.length);
+                    this.item.map((v, index) => {
+                        this.setActiveItem(index, index === this.activeIndex);
+                    });
+                    break;
+                default:
+                    this.item.map((v, index) => {
+                        this.setActiveItem(index, index === this.activeIndex);
+                    });
+                    this.activeIndex = -1;
+            }
+        }, false);
         this.addEventListenerForSelf(this.input, 'focus', (evt) => {
+            this.isInitialFocused = false;
             this.wrap.classList.add('visible');
             this.item.map((v, index) => {
                 this.itemListener[index] = (evt) => {
@@ -117,16 +165,37 @@ export default class GNODECombobox extends GNODEElement {
                     this.emit('change', this.value, evt);
                 };
                 v.addEventListener('click', this.itemListener[index], false);
+                this.setActiveItem(index, false);
             });
-        }, false);
-        this.addEventListenerForSelf(this.input, 'blur', (evt) => {
-            setTimeout(() => {
+            this.activeIndex = -1;
+            let windowEvent = () => {
+                if(this.isInitialFocused !== true){
+                    this.isInitialFocused = true;
+                    return;
+                }
                 this.wrap.classList.remove('visible');
                 this.item.map((v, index) => {
                     v.removeEventListener('click', this.itemListener[index]);
+                    this.setActiveItem(index, false);
                 });
-            }, 100);
+                window.removeEventListener('click', windowEvent);
+            };
+            window.addEventListener('click', windowEvent, false);
         }, false);
+    }
+    /**
+     * set active to item
+     * @param {number} index - target index
+     * @param {boolean} active - is active
+     */
+    setActiveItem(index, active){
+        if(this.item[index] != null){
+            if(active === true){
+                this.item[index].classList.add('active');
+            }else{
+                this.item[index].classList.remove('active');
+            }
+        }
     }
     /**
      * set disabled attribute
