@@ -6,70 +6,70 @@ window.addEventListener('load', () => {
     head('GNODE Common', side, main); // ======================================
     gen(
         'GNODEFrame',
-        new GNODE.Components.Common.GNODEFrame(),
+        new GNODE.Components.Common.Frame(),
         main, [], []
     );
     let detail = gen(
         'GNODEDetail',
-        new GNODE.Components.Common.GNODEDetail('detail title', 'single'),
+        new GNODE.Components.Common.Detail('detail title', 'single'),
         main,
         ['open'],
         [(evt) => {console.log(evt);}]
     );
-    let check = new GNODE.Components.Common.GNODEInputCheckbox(true, 'test', 'test checkbox');
+    let check = new GNODE.Components.Common.InputCheckbox(true, 'test', 'test checkbox');
     detail.control.appendChild(check.element);
     gen(
         'GNODEInputButton',
-        new GNODE.Components.Common.GNODEInputButton('input-button', 'single'),
+        new GNODE.Components.Common.InputButton('input-button', 'single'),
         main,
         ['click'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputCheckbox',
-        new GNODE.Components.Common.GNODEInputCheckbox(true, 'single', 'input-checkbox'),
+        new GNODE.Components.Common.InputCheckbox(true, 'single', 'input-checkbox'),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputRadio',
-        new GNODE.Components.Common.GNODEInputRadio(true, 'single', 'input-radio'),
+        new GNODE.Components.Common.InputRadio(true, 'single', 'input-radio'),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     ).value = false;
     gen(
         'GNODEInputText',
-        new GNODE.Components.Common.GNODEInputText('', 'single', 'set maxlength = 20', 20),
+        new GNODE.Components.Common.InputText('', 'single', 'set maxlength = 20', 20),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputNumber',
-        new GNODE.Components.Common.GNODEInputNumber(0, 'single', 0, 10, 0.1),
+        new GNODE.Components.Common.InputNumber(0, 'single', 0, 10, 0.1),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputRange',
-        new GNODE.Components.Common.GNODEInputRange(5, 'single', 0, 10, 0.1),
+        new GNODE.Components.Common.InputRange(5, 'single', 0, 10, 0.1),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODESelect',
-        new GNODE.Components.Common.GNODESelect(['item1', 'item2', 'item3', 'item4'], 'single', 2),
+        new GNODE.Components.Common.Select(['item1', 'item2', 'item3', 'item4'], 'single', 2),
         main,
         ['change'],
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEGradationCanvas',
-        new GNODE.Components.Common.GNODEGradationCanvas([{offset: 0.0, color: 'transparent'}, {offset: 1.0, color: 'rgba(255, 0, 0, 1.0)'}], 'single', 'horizontal', 128, 64),
+        new GNODE.Components.Common.GradationCanvas([{offset: 0.0, color: 'transparent'}, {offset: 1.0, color: 'rgba(255, 0, 0, 1.0)'}], 'single', 'horizontal', 128, 64),
         main,
         ['click'],
         [(evt) => {console.log(evt);}]
@@ -78,7 +78,7 @@ window.addEventListener('load', () => {
     head('Other', side, main); // =============================================
     gen(
         'GNODEElement',
-        new GNODE.Components.Common.GNODEElement(),
+        new GNODE.Components.Common.Element(),
         main, [], []
     );
 
