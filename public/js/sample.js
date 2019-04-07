@@ -47,6 +47,13 @@ window.addEventListener('load', () => {
         [(evt) => {console.log(evt);}]
     );
     gen(
+        'GNODECombobox',
+        new GNODE.Components.Common.Combobox('', 'single', ['item1', 'item2'], 'set maxlength = 20', 20),
+        main,
+        ['change'],
+        [(evt) => {console.log(evt);}]
+    );
+    gen(
         'GNODEInputNumber',
         new GNODE.Components.Common.InputNumber(0, 'single', 0, 10, 0.1),
         main,
