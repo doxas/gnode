@@ -9,9 +9,9 @@ window.addEventListener('load', () => {
         new GNODE.Components.Common.Frame(),
         main, [], []
     );
-    let treeitem = gen(
+    gen(
         'GNODETreeItem',
-        new GNODE.Components.Common.TreeItem('tree item', 'single'),
+        new GNODE.Components.Common.TreeItem('tree item', 'single', false, false),
         main,
         GNODE.Components.Common.TreeItem.EVENTS,
         [(evt) => {console.log(evt);}]

@@ -29,17 +29,22 @@ export default class GNODETreeItem extends GNODEElement {
      * @constructor
      * @param {string|HTMLElement} [title=''] - title string or element
      * @param {string} [name=''] - name
-     * @param {boolean} [opened=false] - is detail opened
+     * @param {boolean} [opened=false] - is tree opened
+     * @param {boolean} [openable=true] - openable flag
      * @example
      * let E = new GNODETreeItem('title', 'name', true);
      */
-    constructor(title = '', name = '', opened = false){
+    constructor(title = '', name = '', opened = false, openable = true){
         super(name);
         // initialize properties ----------------------------------------------
         /**
          * @type {boolean}
          */
         this.isOpen = opened;
+        /**
+         * @type {boolean}
+         */
+        this.openable = openable;
 
         // dom generation -----------------------------------------------------
         this.dom.classList.add('GNODETreeItem');
@@ -58,6 +63,9 @@ export default class GNODETreeItem extends GNODEElement {
          */
         this.icon = document.createElement('div');
         this.icon.classList.add('icon');
+        if(openable !== true){
+            this.icon.classList.add('disable');
+        }
         /**
          * @type {HTMLDivElement}
          */
@@ -88,10 +96,12 @@ export default class GNODETreeItem extends GNODEElement {
         this.appendStyle(css);
 
         // event setting ------------------------------------------------------
-        this.addEventListenerForSelf(this.icon, 'click', (evt) => {
-            this.isOpen = !this.isOpen;
-            this.open(this.isOpen);
-        }, false);
+        if(openable === true){
+            this.addEventListenerForSelf(this.icon, 'click', (evt) => {
+                this.isOpen = !this.isOpen;
+                this.open(this.isOpen);
+            }, false);
+        }
 
         // initial setting ----------------------------------------------------
         this.open(this.isOpen, false);
@@ -102,6 +112,7 @@ export default class GNODETreeItem extends GNODEElement {
      * @param {boolean} [isEmit=true] - do emittion
      */
     open(opened = true, isEmit = true){
+        if(this.openable !== true){return;}
         this.isOpen = opened;
         if(this.isOpen === true){
             this.icon.classList.add('down');

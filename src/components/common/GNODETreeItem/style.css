@@ -35,6 +35,11 @@
     cursor: pointer;
 }
 
+.icon.disable {
+    border: 1px solid transparent;
+    cursor: default;
+}
+
 .icon:before {
     content: '+';
     width: 20px;
@@ -44,6 +49,11 @@
 
 .icon.down:before {
     content: '-';
+}
+
+.icon.disable:before,
+.icon.disable.down:before {
+    content: '·';
 }
 
 .inner {
