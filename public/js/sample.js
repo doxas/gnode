@@ -9,6 +9,13 @@ window.addEventListener('load', () => {
         new GNODE.Components.Common.Frame(),
         main, [], []
     );
+    let treeitem = gen(
+        'GNODETreeItem',
+        new GNODE.Components.Common.TreeItem('tree item', 'single'),
+        main,
+        GNODE.Components.Common.TreeItem.EVENTS,
+        [(evt) => {console.log(evt);}]
+    );
     gen(
         'GNODEInputButton',
         new GNODE.Components.Common.InputButton('input-button', 'single'),
@@ -149,7 +156,11 @@ function gen(name, component, appendTarget, eventNames, listeners){
     d.appendChild(e);
     e.appendChild(component.element);
     eventNames.map((eve, index) => {
-        component.on(eve, listeners[index]);
+        if(listeners[index] != null){
+            component.on(eve, listeners[index]);
+        }else{
+            component.on(eve, listeners[0]);
+        }
     });
     if(component.description != null){
         let c = document.createElement('div');
