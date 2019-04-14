@@ -1,0 +1,63 @@
+
+.wrapper {
+    margin: 0px 0px 1px;
+    display: flex;
+    flex-direction: row;
+}
+
+.wrapper.dragging:hover {
+    opacity: 0.25;
+    user-select: none;
+}
+
+.handle {
+    background-color: #aaa;
+    min-width: 25px;
+    max-width: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.handle:hover {
+    background-color: whitesmoke;
+}
+
+.wrapper.dragging.target .handle {
+    border: 2px solid maroon;
+}
+
+.handleicon {
+    margin: auto;
+    width: 12px;
+    height: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.handleicon div {
+    background-color: gray;
+    height: 2px;
+}
+
+.inner {
+    width: 100%;
+}
+
+.title {
+    background-color: #ccc;
+    color: gray;
+    line-height: 30px;
+    padding: 0px 3px;
+    height: 30px;
+}
+
+.content {
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    padding: 5px;
+}
+
