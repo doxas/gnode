@@ -89,7 +89,7 @@ export default class GNODETreeItem extends GNODEElement {
 
         // style setting ------------------------------------------------------
         this.addStyle({
-            padding: '5px',
+            padding: '2px',
             display: 'flex',
             flexDirection: 'column',
         });
