@@ -52,13 +52,6 @@ window.addEventListener('load', () => {
         [(evt) => {console.log(evt);}]
     );
     gen(
-        'GNODESelect',
-        new GNODE.Components.Common.Select(['item1', 'item2', 'item3', 'item4'], 'single', 2),
-        main,
-        GNODE.Components.Common.Select.EVENTS,
-        [(evt) => {console.log(evt);}]
-    );
-    gen(
         'GNODECombobox',
         new GNODE.Components.Common.Combobox('', 'single', ['item1', 'item2'], 'set maxlength = 20', 20),
         main,
@@ -106,6 +99,13 @@ window.addEventListener('load', () => {
         [(evt) => {console.log(evt);}]
     );
     gen(
+        'GNODESelectOption',
+        new GNODE.Components.Common.SelectOption('item', 'single', false),
+        main,
+        GNODE.Components.Common.SelectOption.EVENTS,
+        [(evt) => {console.log(evt);}]
+    );
+    gen(
         'GNODETreeItem',
         new GNODE.Components.Common.TreeItem('tree item', 'single', false, false),
         main,
@@ -114,6 +114,13 @@ window.addEventListener('load', () => {
     );
 
     head('GNODE Component', side, main); // ===================================
+    gen(
+        'GNODESelect',
+        new GNODE.Components.Select(['item1', 'item2', 'item3', 'item4'], 'single', 2),
+        main,
+        GNODE.Components.Select.EVENTS,
+        [(evt) => {console.log(evt);}]
+    );
     let anchor = document.createElement('a');
     anchor.href = '#';
     anchor.textContent = 'link text';

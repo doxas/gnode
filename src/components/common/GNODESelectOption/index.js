@@ -91,6 +91,8 @@ export default class GNODESelectOption extends GNODEElement {
             height:        `${CONST.COMPONENT_DEFAULT_HEIGHT}px`,
             width:         '100%',
             verticalAlign: 'middle',
+            overflow:      'hidden',
+            whiteSpace:    'nowrap',
             display:       'inline-block',
         });
         this.appendStyle(css);
