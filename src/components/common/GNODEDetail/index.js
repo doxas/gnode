@@ -31,7 +31,7 @@ export default class GNODEDetail extends GNODEElement {
      * @param {string} [name=''] - name
      * @param {boolean} [opened=false] - is detail opened
      * @example
-     * let E = new GNODEDetail(true);
+     * let E = new GNODEDetail('title', 'name', true);
      */
     constructor(title = '', name = '', opened = false){
         super(name);
