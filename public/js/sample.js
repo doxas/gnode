@@ -80,7 +80,7 @@ window.addEventListener('load', () => {
         [(evt) => {console.log(evt);}]
     );
     let check = new GNODE.Components.InputCheckbox(true, 'test', 'test checkbox');
-    detail.control.appendChild(check.element);
+    detail.appendToInner(check.element);
     let draggableinner = document.createElement('div');
     let radio = new GNODE.Components.InputRadio(true, 'single', 'input-radio');
     draggableinner.appendChild(radio.element);
