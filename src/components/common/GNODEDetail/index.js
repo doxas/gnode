@@ -121,4 +121,11 @@ export default class GNODEDetail extends GNODEElement {
     close(closed = true){
         this.open(!closed);
     }
+    /**
+     * append to inner
+     * @param {HTMLElement} element - append element
+     */
+    appendToInner(element){
+        this.inner.appendChild(element);
+    }
 }
