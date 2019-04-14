@@ -138,12 +138,13 @@ export default class GNODEDraggableList extends GNODEElement {
                             this.shadow.insertBefore(wrapper, this.list[i]);
                             this.list.splice(i, 0, wrapper);
                         }
-                        console.log(this.shadow.children, this.list);
+                        this.emit('change', this.list, `from ${currentIndex} to ${i}`);
                         return;
                     }
                 }
             };
             window.addEventListener('mouseup', mouseup);
+            this.emit('float', evt);
         };
         this.addEventListenerForSelf(handle, 'mousedown', mousedown, false);
     }
