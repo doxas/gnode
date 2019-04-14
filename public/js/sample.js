@@ -6,83 +6,83 @@ window.addEventListener('load', () => {
     head('GNODE Common', side, main); // ======================================
     gen(
         'GNODEFrame',
-        new GNODE.Components.Common.Frame(),
+        new GNODE.Components.Frame(),
         main, [], []
     );
     gen(
         'GNODEInputButton',
-        new GNODE.Components.Common.InputButton('input-button', 'single'),
+        new GNODE.Components.InputButton('input-button', 'single'),
         main,
-        GNODE.Components.Common.InputButton.EVENTS,
+        GNODE.Components.InputButton.EVENTS,
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputCheckbox',
-        new GNODE.Components.Common.InputCheckbox(true, 'single', 'input-checkbox'),
+        new GNODE.Components.InputCheckbox(true, 'single', 'input-checkbox'),
         main,
-        GNODE.Components.Common.InputCheckbox.EVENTS,
+        GNODE.Components.InputCheckbox.EVENTS,
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputRadio',
-        new GNODE.Components.Common.InputRadio(true, 'single', 'input-radio'),
+        new GNODE.Components.InputRadio(true, 'single', 'input-radio'),
         main,
-        GNODE.Components.Common.InputRadio.EVENTS,
+        GNODE.Components.InputRadio.EVENTS,
         [(evt) => {console.log(evt);}]
     ).value = false;
     gen(
         'GNODEInputText',
-        new GNODE.Components.Common.InputText('', 'single', 'set maxlength = 20', 20),
+        new GNODE.Components.InputText('', 'single', 'set maxlength = 20', 20),
         main,
-        GNODE.Components.Common.InputText.EVENTS,
+        GNODE.Components.InputText.EVENTS,
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputNumber',
-        new GNODE.Components.Common.InputNumber(0, 'single', 0, 10, 0.1),
+        new GNODE.Components.InputNumber(0, 'single', 0, 10, 0.1),
         main,
-        GNODE.Components.Common.InputNumber.EVENTS,
+        GNODE.Components.InputNumber.EVENTS,
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEInputRange',
-        new GNODE.Components.Common.InputRange(5, 'single', 0, 10, 0.1),
+        new GNODE.Components.InputRange(5, 'single', 0, 10, 0.1),
         main,
-        GNODE.Components.Common.InputRange.EVENTS,
+        GNODE.Components.InputRange.EVENTS,
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODECombobox',
-        new GNODE.Components.Common.Combobox('', 'single', ['item1', 'item2'], 'set maxlength = 20', 20),
+        new GNODE.Components.Combobox('', 'single', ['item1', 'item2'], 'set maxlength = 20', 20),
         main,
-        GNODE.Components.Common.Combobox.EVENTS,
+        GNODE.Components.Combobox.EVENTS,
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEToggleButton',
-        new GNODE.Components.Common.ToggleButton(false, 'single'),
+        new GNODE.Components.ToggleButton(false, 'single'),
         main,
-        GNODE.Components.Common.ToggleButton.EVENTS,
+        GNODE.Components.ToggleButton.EVENTS,
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODEGradationCanvas',
-        new GNODE.Components.Common.GradationCanvas([{offset: 0.0, color: 'transparent'}, {offset: 1.0, color: 'rgba(255, 0, 0, 1.0)'}], 'single', 'horizontal', 128, 64),
+        new GNODE.Components.GradationCanvas([{offset: 0.0, color: 'transparent'}, {offset: 1.0, color: 'rgba(255, 0, 0, 1.0)'}], 'single', 'horizontal', 128, 64),
         main,
-        GNODE.Components.Common.GradationCanvas.EVENTS,
+        GNODE.Components.GradationCanvas.EVENTS,
         [(evt) => {console.log(evt);}]
     );
     let detail = gen(
         'GNODEDetail',
-        new GNODE.Components.Common.Detail('detail title', 'single'),
+        new GNODE.Components.Detail('detail title', 'single'),
         main,
-        GNODE.Components.Common.Detail.EVENTS,
+        GNODE.Components.Detail.EVENTS,
         [(evt) => {console.log(evt);}]
     );
-    let check = new GNODE.Components.Common.InputCheckbox(true, 'test', 'test checkbox');
+    let check = new GNODE.Components.InputCheckbox(true, 'test', 'test checkbox');
     detail.control.appendChild(check.element);
     let draggableinner = document.createElement('div');
-    let radio = new GNODE.Components.Common.InputRadio(true, 'single', 'input-radio');
+    let radio = new GNODE.Components.InputRadio(true, 'single', 'input-radio');
     draggableinner.appendChild(radio.element);
     let draggabledata = [
         {title: 'list0', element: draggableinner},
@@ -93,23 +93,23 @@ window.addEventListener('load', () => {
     ];
     let draggable = gen(
         'GNODEDraggableList',
-        new GNODE.Components.Common.DraggableList('single', draggabledata),
+        new GNODE.Components.DraggableList('single', draggabledata),
         main,
-        GNODE.Components.Common.DraggableList.EVENTS,
+        GNODE.Components.DraggableList.EVENTS,
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODESelectOption',
-        new GNODE.Components.Common.SelectOption('item', 'single', false),
+        new GNODE.Components.SelectOption('item', 'single', false),
         main,
-        GNODE.Components.Common.SelectOption.EVENTS,
+        GNODE.Components.SelectOption.EVENTS,
         [(evt) => {console.log(evt);}]
     );
     gen(
         'GNODETreeItem',
-        new GNODE.Components.Common.TreeItem('tree item', 'single', false, false),
+        new GNODE.Components.TreeItem('tree item', 'single', false, false),
         main,
-        GNODE.Components.Common.TreeItem.EVENTS,
+        GNODE.Components.TreeItem.EVENTS,
         [(evt) => {console.log(evt);}]
     );
 
@@ -172,7 +172,7 @@ window.addEventListener('load', () => {
     head('Other', side, main); // =============================================
     gen(
         'GNODEElement',
-        new GNODE.Components.Common.Element(),
+        new GNODE.Components.Element(),
         main, [], []
     );
 
