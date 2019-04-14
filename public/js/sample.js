@@ -18,6 +18,23 @@ window.addEventListener('load', () => {
     );
     let check = new GNODE.Components.Common.InputCheckbox(true, 'test', 'test checkbox');
     detail.control.appendChild(check.element);
+    let draggableinner = document.createElement('div');
+    let radio = new GNODE.Components.Common.InputRadio(true, 'single', 'input-radio');
+    draggableinner.appendChild(radio.element);
+    let draggabledata = [
+        {title: 'list0', element: draggableinner},
+        {title: 'list1', element: 'text'},
+        {title: 'list2', element: 'text text text'},
+        {title: 'list3', element: 'text text text text text'},
+        {title: 'list4', element: 'text text text text text text text'},
+    ];
+    let draggable = gen(
+        'GNODEDraggableList',
+        new GNODE.Components.Common.DraggableList('single', draggabledata),
+        main,
+        ['click'],
+        [(evt) => {console.log(evt);}]
+    );
     gen(
         'GNODEInputButton',
         new GNODE.Components.Common.InputButton('input-button', 'single'),
