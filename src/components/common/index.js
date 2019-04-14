@@ -2,6 +2,7 @@
 import GNODEElement         from './GNODEElement/index.js';
 import GNODEFrame           from './GNODEFrame/index.js';
 import GNODEDetail          from './GNODEDetail/index.js';
+import GNODETreeItem        from './GNODETreeItem/index.js';
 import GNODEDraggableList   from './GNODEDraggableList/index.js';
 import GNODEInputButton     from './GNODEInputButton/index.js';
 import GNODEInputCheckbox   from './GNODEInputCheckbox/index.js';
@@ -18,6 +19,7 @@ export default class Common {
     static get Element()         {return GNODEElement;}
     static get Frame()           {return GNODEFrame;}
     static get Detail()          {return GNODEDetail;}
+    static get TreeItem()        {return GNODETreeItem;}
     static get DraggableList()   {return GNODEDraggableList;}
     static get InputButton()     {return GNODEInputButton;}
     static get InputCheckbox()   {return GNODEInputCheckbox;}
