@@ -9,32 +9,6 @@ window.addEventListener('load', () => {
         new GNODE.Components.Common.Frame(),
         main, [], []
     );
-    let detail = gen(
-        'GNODEDetail',
-        new GNODE.Components.Common.Detail('detail title', 'single'),
-        main,
-        ['open'],
-        [(evt) => {console.log(evt);}]
-    );
-    let check = new GNODE.Components.Common.InputCheckbox(true, 'test', 'test checkbox');
-    detail.control.appendChild(check.element);
-    let draggableinner = document.createElement('div');
-    let radio = new GNODE.Components.Common.InputRadio(true, 'single', 'input-radio');
-    draggableinner.appendChild(radio.element);
-    let draggabledata = [
-        {title: 'list0', element: draggableinner},
-        {title: 'list1', element: 'text'},
-        {title: 'list2', element: 'text text text'},
-        {title: 'list3', element: 'text text text text text'},
-        {title: 'list4', element: 'text text text text text text text'},
-    ];
-    let draggable = gen(
-        'GNODEDraggableList',
-        new GNODE.Components.Common.DraggableList('single', draggabledata),
-        main,
-        ['click'],
-        [(evt) => {console.log(evt);}]
-    );
     gen(
         'GNODEInputButton',
         new GNODE.Components.Common.InputButton('input-button', 'single'),
@@ -103,6 +77,32 @@ window.addEventListener('load', () => {
         new GNODE.Components.Common.GradationCanvas([{offset: 0.0, color: 'transparent'}, {offset: 1.0, color: 'rgba(255, 0, 0, 1.0)'}], 'single', 'horizontal', 128, 64),
         main,
         ['click'],
+        [(evt) => {console.log(evt);}]
+    );
+    let detail = gen(
+        'GNODEDetail',
+        new GNODE.Components.Common.Detail('detail title', 'single'),
+        main,
+        ['open'],
+        [(evt) => {console.log(evt);}]
+    );
+    let check = new GNODE.Components.Common.InputCheckbox(true, 'test', 'test checkbox');
+    detail.control.appendChild(check.element);
+    let draggableinner = document.createElement('div');
+    let radio = new GNODE.Components.Common.InputRadio(true, 'single', 'input-radio');
+    draggableinner.appendChild(radio.element);
+    let draggabledata = [
+        {title: 'list0', element: draggableinner},
+        {title: 'list1', element: 'text'},
+        {title: 'list2', element: 'text text text'},
+        {title: 'list3', element: 'text text text text text'},
+        {title: 'list4', element: 'text text text text text text text'},
+    ];
+    let draggable = gen(
+        'GNODEDraggableList',
+        new GNODE.Components.Common.DraggableList('single', draggabledata),
+        main,
+        ['change'],
         [(evt) => {console.log(evt);}]
     );
 
