@@ -32,7 +32,7 @@ export default class GNODETreeItem extends GNODEElement {
      * @param {boolean} [opened=false] - is tree opened
      * @param {boolean} [openable=true] - openable flag
      * @example
-     * let E = new GNODETreeItem('title', 'name', true);
+     * let E = new GNODETreeItem('title', 'name', true, true);
      */
     constructor(title = '', name = '', opened = false, openable = true){
         super(name);
