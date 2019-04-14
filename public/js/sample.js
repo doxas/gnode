@@ -10,60 +10,6 @@ window.addEventListener('load', () => {
         main, [], []
     );
     gen(
-        'GNODETreeItem',
-        new GNODE.Components.Common.TreeItem('tree item', 'single', false, false),
-        main,
-        GNODE.Components.Common.TreeItem.EVENTS,
-        [(evt) => {console.log(evt);}]
-    );
-    let anchor = document.createElement('a');
-    anchor.href = '#';
-    anchor.textContent = 'link text';
-    let treeitems = [
-        {
-            title: anchor,
-            opened: true,
-            children: [
-                {
-                    title: 'text or element',
-                    opened: true,
-                    children: null
-                }, {
-                    title: 'text or element',
-                    opened: true,
-                    children: null
-                }
-            ]
-        }, {
-            title: 'parent',
-            opened: false,
-            children: [
-                {
-                    title: 'child',
-                    opened: false,
-                    children: null
-                }, {
-                    title: 'child',
-                    opened: false,
-                    children: [
-                        {
-                            title: 'child for child',
-                            opened: false,
-                            children: null
-                        }
-                    ]
-                }
-            ]
-        }
-    ];
-    gen(
-        'GNODETree',
-        new GNODE.Components.Tree('multi', treeitems),
-        main,
-        GNODE.Components.Tree.EVENTS,
-        [(evt) => {console.log(evt);}]
-    );
-    gen(
         'GNODEInputButton',
         new GNODE.Components.Common.InputButton('input-button', 'single'),
         main,
@@ -157,6 +103,62 @@ window.addEventListener('load', () => {
         new GNODE.Components.Common.DraggableList('single', draggabledata),
         main,
         GNODE.Components.Common.DraggableList.EVENTS,
+        [(evt) => {console.log(evt);}]
+    );
+    gen(
+        'GNODETreeItem',
+        new GNODE.Components.Common.TreeItem('tree item', 'single', false, false),
+        main,
+        GNODE.Components.Common.TreeItem.EVENTS,
+        [(evt) => {console.log(evt);}]
+    );
+
+    head('GNODE Component', side, main); // ===================================
+    let anchor = document.createElement('a');
+    anchor.href = '#';
+    anchor.textContent = 'link text';
+    let treeitems = [
+        {
+            title: anchor,
+            opened: true,
+            children: [
+                {
+                    title: 'text or element',
+                    opened: true,
+                    children: null
+                }, {
+                    title: 'text or element',
+                    opened: true,
+                    children: null
+                }
+            ]
+        }, {
+            title: 'parent',
+            opened: false,
+            children: [
+                {
+                    title: 'child',
+                    opened: false,
+                    children: null
+                }, {
+                    title: 'child',
+                    opened: false,
+                    children: [
+                        {
+                            title: 'child for child',
+                            opened: false,
+                            children: null
+                        }
+                    ]
+                }
+            ]
+        }
+    ];
+    gen(
+        'GNODETree',
+        new GNODE.Components.Tree('multi', treeitems),
+        main,
+        GNODE.Components.Tree.EVENTS,
         [(evt) => {console.log(evt);}]
     );
 
