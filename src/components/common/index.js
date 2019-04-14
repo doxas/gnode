@@ -2,6 +2,7 @@
 import GNODEElement         from './GNODEElement/index.js';
 import GNODEFrame           from './GNODEFrame/index.js';
 import GNODEDetail          from './GNODEDetail/index.js';
+import GNODEDraggableList   from './GNODEDraggableList/index.js';
 import GNODEInputButton     from './GNODEInputButton/index.js';
 import GNODEInputCheckbox   from './GNODEInputCheckbox/index.js';
 import GNODEInputRadio      from './GNODEInputRadio/index.js';
@@ -17,6 +18,7 @@ export default class Common {
     static get Element()         {return GNODEElement;}
     static get Frame()           {return GNODEFrame;}
     static get Detail()          {return GNODEDetail;}
+    static get DraggableList()   {return GNODEDraggableList;}
     static get InputButton()     {return GNODEInputButton;}
     static get InputCheckbox()   {return GNODEInputCheckbox;}
     static get InputRadio()      {return GNODEInputRadio;}
