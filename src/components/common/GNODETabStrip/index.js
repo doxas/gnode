@@ -134,6 +134,13 @@ export default class GNODETabStrip extends GNODEElement {
         this.checkTitleVisible();
     }
     /**
+     * return page inner element
+     * @param {number} index - target index
+     */
+    getPageElement(index){
+        return this.inners[index];
+    }
+    /**
      * add pages
      * @param {string} title - title string
      * @param {number} [index] - target index
