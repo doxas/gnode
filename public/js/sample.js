@@ -10,6 +10,13 @@ window.addEventListener('load', () => {
         main, [], []
     );
     gen(
+        'GNODETabStrip',
+        new GNODE.Components.TabStrip(['title0', 'title1', 'title2'], 'single', 1),
+        main,
+        GNODE.Components.TabStrip.EVENTS,
+        [(evt) => {console.log(evt);}]
+    ).checkTitleVisible();
+    gen(
         'GNODEInputButton',
         new GNODE.Components.InputButton('input-button', 'single'),
         main,
