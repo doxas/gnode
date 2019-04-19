@@ -108,7 +108,6 @@ export default class GNODETabStrip extends GNODEElement {
         // style setting ------------------------------------------------------
         this.addStyle({
             backgroundColor: '#666',
-            padding: '5px',
             display: 'flex',
             flexDirection: 'column',
         });
