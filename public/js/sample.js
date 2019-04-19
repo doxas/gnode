@@ -10,13 +10,6 @@ window.addEventListener('load', () => {
         main, [], []
     );
     gen(
-        'GNODETabStrip',
-        new GNODE.Components.TabStrip(['title0', 'title1', 'title2'], 'single', 1),
-        main,
-        GNODE.Components.TabStrip.EVENTS,
-        [(evt) => {console.log(evt);}]
-    ).checkTitleVisible();
-    gen(
         'GNODEInputButton',
         new GNODE.Components.InputButton('input-button', 'single'),
         main,
@@ -119,6 +112,17 @@ window.addEventListener('load', () => {
         GNODE.Components.TreeItem.EVENTS,
         [(evt) => {console.log(evt);}]
     );
+    let tab = gen(
+        'GNODETabStrip',
+        new GNODE.Components.TabStrip(['title0', 'title1', 'title2'], 'single', 1),
+        main,
+        GNODE.Components.TabStrip.EVENTS,
+        [(evt) => {console.log(evt);}]
+    );
+    tab.checkTitleVisible();
+    tab.getPageElement(0).textContent = 'page0';
+    tab.getPageElement(1).textContent = 'page1';
+    tab.getPageElement(2).textContent = 'page2';
 
     head('GNODE Component', side, main); // ===================================
     gen(
