@@ -1,6 +1,7 @@
 
 import GNODEElement         from './GNODEElement/index.js';
 import GNODEFrame           from './GNODEFrame/index.js';
+import GNODETabStrip        from './GNODETabStrip/index.js';
 import GNODEDetail          from './GNODEDetail/index.js';
 import GNODETreeItem        from './GNODETreeItem/index.js';
 import GNODEDraggableList   from './GNODEDraggableList/index.js';
@@ -18,6 +19,7 @@ import GNODEGradationCanvas from './GNODEGradationCanvas/index.js';
 export default class Common {
     static get Element()         {return GNODEElement;}
     static get Frame()           {return GNODEFrame;}
+    static get TabStrip()        {return GNODETabStrip;}
     static get Detail()          {return GNODEDetail;}
     static get TreeItem()        {return GNODETreeItem;}
     static get DraggableList()   {return GNODEDraggableList;}

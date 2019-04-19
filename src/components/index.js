@@ -10,6 +10,7 @@ export default class Components {
     static get Common()          {return Common;}
     static get Element()         {return Common.Element;}
     static get Frame()           {return Common.Frame;}
+    static get TabStrip()        {return Common.TabStrip;}
     static get Detail()          {return Common.Detail;}
     static get TreeItem()        {return Common.TreeItem;}
     static get DraggableList()   {return Common.DraggableList;}
