@@ -21,6 +21,7 @@ export default class Components {
     static get InputNumber()     {return Common.InputNumber;}
     static get InputRange()      {return Common.InputRange;}
     static get SelectOption()    {return Common.SelectOption;}
+    static get MenuItem()        {return Common.MenuItem;}
     static get ToggleButton()    {return Common.ToggleButton;}
     static get Combobox()        {return Common.Combobox;}
     static get GradationCanvas() {return Common.GradationCanvas;}
