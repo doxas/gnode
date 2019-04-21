@@ -66,7 +66,7 @@ export default class GNODEMenuItem extends GNODEElement {
         /**
          * @type {boolean}
          */
-        this.disabled = false;
+        this.isEnable = true;
         /**
          * @type {boolean}
          */
@@ -99,7 +99,7 @@ export default class GNODEMenuItem extends GNODEElement {
 
         // event setting ------------------------------------------------------
         this.addEventListenerForSelf(this.item, 'click', (evt) => {
-            if(this.disabled === true){return;}
+            if(this.isEnable !== true){return;}
             if(this.selectable === true){
                 this.selected = !this.selected;
             }
@@ -111,7 +111,7 @@ export default class GNODEMenuItem extends GNODEElement {
      * @param {boolean} [enable=true] - disabled = !enable
      */
     enable(enable = true){
-        this.disabled = !enable;
+        this.isEnable = enable;
         if(enable === true){
             this.item.classList.remove('disabled');
         }else{
