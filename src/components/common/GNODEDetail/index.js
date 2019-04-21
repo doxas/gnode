@@ -87,7 +87,7 @@ export default class GNODEDetail extends GNODEElement {
         // event setting ------------------------------------------------------
         this.addEventListenerForSelf(this.header, 'click', (evt) => {
             this.isOpen = !this.isOpen;
-            this.open(this.isOpen);
+            this.open(this.isOpen, true, evt);
         }, false);
 
         // initial setting ----------------------------------------------------
@@ -97,20 +97,21 @@ export default class GNODEDetail extends GNODEElement {
      * open detail
      * @param {boolean} [opened=true] - is open
      * @param {boolean} [isEmit=true] - do emittion
+     * @param {MouseEvent} [evt] - mouse event
      */
-    open(opened = true, isEmit = true){
+    open(opened = true, isEmit = true, evt){
         this.isOpen = opened;
         if(this.isOpen === true){
             this.triangle.classList.add('down');
             this.inner.classList.add('down');
             if(isEmit === true){
-                this.emit('open', this.isOpen);
+                this.emit('open', this.isOpen, evt);
             }
         }else{
             this.triangle.classList.remove('down');
             this.inner.classList.remove('down');
             if(isEmit === true){
-                this.emit('close', this.isOpen);
+                this.emit('close', this.isOpen, evt);
             }
         }
     }
