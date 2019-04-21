@@ -3,6 +3,7 @@
 import Common      from './common/index.js';
 
 // import multi component
+import GNODEMenu   from './GNODEMenu/index.js';
 import GNODESelect from './GNODESelect/index.js';
 import GNODETree   from './GNODETree/index.js';
 
@@ -25,6 +26,7 @@ export default class Components {
     static get ToggleButton()    {return Common.ToggleButton;}
     static get Combobox()        {return Common.Combobox;}
     static get GradationCanvas() {return Common.GradationCanvas;}
+    static get Menu()            {return GNODEMenu;}
     static get Select()          {return GNODESelect;}
     static get Tree()            {return GNODETree;}
 }
