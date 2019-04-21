@@ -248,7 +248,7 @@ export default class GNODESelect extends GNODEElement {
         if(text == null || Util.isString(text) !== true || text === ''){
             Util.Error.throw('should be a type of {string}', 'GNODESelect.generateItem', 'type');
         }
-        if(this.list.includes(text) === true){
+        if(this.item.includes(text) === true){
             Util.Error.warn('duplicate item', 'GNODESelect.generateItem');
             return null;
         }
