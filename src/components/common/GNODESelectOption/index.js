@@ -29,7 +29,7 @@ export default class GNODESelectOption extends GNODEElement {
      */
     get value(){return this.caption;}
     /**
-     * @param {string} v - button caption
+     * @param {string} v - item caption
      */
     set value(v){
         this.caption = `${v}`;
