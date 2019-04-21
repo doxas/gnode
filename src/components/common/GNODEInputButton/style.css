@@ -17,14 +17,12 @@
 }
 
 .button:hover {
-    background-color: white;
-    color: maroon;
+    background-color: #ddd;
 }
 
 .button.disabled,
 .button.disabled:hover {
     background-color: silver;
-    color: gray;
     cursor: default;
 }
 
