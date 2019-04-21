@@ -27,7 +27,7 @@ export default class GNODETabStrip extends GNODEElement {
     /**
      * @type {HTMLDivElement}
      */
-    get control(){return this.inner;}
+    get control(){return this.inners;}
 
     /**
      * @constructor
