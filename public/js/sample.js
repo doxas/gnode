@@ -5,6 +5,23 @@ window.addEventListener('load', () => {
 
     head('GNODE Common', side, main); // ======================================
     gen(
+        'GNODEMenu',
+        new GNODE.Components.Menu('dropdown menu sample', 'single', [
+            {
+                caption: 'item0', selected: false, selectable: true, callback: (v, evt) => {console.log(v);}
+            }, {
+                caption: 'item1', selected: false, selectable: true, callback: (v, evt) => {console.log(v);}
+            }, {
+                caption: 'item2', selected:  true, selectable: true, callback: (v, evt) => {console.log(v);}
+            }, {
+                caption: 'item3', selected:  true, selectable: true, callback: (v, evt) => {console.log(v);}
+            }
+        ]),
+        main,
+        GNODE.Components.Menu.EVENTS,
+        [(value, evt) => {console.log(value, evt);}]
+    );
+    gen(
         'GNODEFrame',
         new GNODE.Components.Frame(),
         main, [], []
@@ -14,70 +31,70 @@ window.addEventListener('load', () => {
         new GNODE.Components.InputButton('input-button', 'single'),
         main,
         GNODE.Components.InputButton.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     gen(
         'GNODEInputCheckbox',
         new GNODE.Components.InputCheckbox(true, 'single', 'input-checkbox'),
         main,
         GNODE.Components.InputCheckbox.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     gen(
         'GNODEInputRadio',
         new GNODE.Components.InputRadio(true, 'single', 'input-radio'),
         main,
         GNODE.Components.InputRadio.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     ).value = false;
     gen(
         'GNODEInputText',
         new GNODE.Components.InputText('', 'single', 'set maxlength = 20', 20),
         main,
         GNODE.Components.InputText.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     gen(
         'GNODEInputNumber',
         new GNODE.Components.InputNumber(0, 'single', 0, 10, 0.1),
         main,
         GNODE.Components.InputNumber.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     gen(
         'GNODEInputRange',
         new GNODE.Components.InputRange(5, 'single', 0, 10, 0.1),
         main,
         GNODE.Components.InputRange.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     gen(
         'GNODECombobox',
         new GNODE.Components.Combobox('', 'single', ['item1', 'item2'], 'set maxlength = 20', 20),
         main,
         GNODE.Components.Combobox.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     gen(
         'GNODEToggleButton',
         new GNODE.Components.ToggleButton(false, 'single'),
         main,
         GNODE.Components.ToggleButton.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     gen(
         'GNODEGradationCanvas',
         new GNODE.Components.GradationCanvas([{offset: 0.0, color: 'transparent'}, {offset: 1.0, color: 'rgba(255, 0, 0, 1.0)'}], 'single', 'horizontal', 128, 64),
         main,
         GNODE.Components.GradationCanvas.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     let detail = gen(
         'GNODEDetail',
         new GNODE.Components.Detail('detail title', 'single'),
         main,
         GNODE.Components.Detail.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     let check = new GNODE.Components.InputCheckbox(true, 'test', 'test checkbox');
     detail.appendToInner(check.element);
@@ -96,35 +113,35 @@ window.addEventListener('load', () => {
         new GNODE.Components.DraggableList('single', draggabledata),
         main,
         GNODE.Components.DraggableList.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     gen(
         'GNODESelectOption',
         new GNODE.Components.SelectOption('item', 'single', false),
         main,
         GNODE.Components.SelectOption.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     gen(
         'GNODEMenuItem',
         new GNODE.Components.MenuItem('menu item', 'single', false, true),
         main,
         GNODE.Components.MenuItem.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     gen(
         'GNODETreeItem',
         new GNODE.Components.TreeItem('tree item', 'single', false, false),
         main,
         GNODE.Components.TreeItem.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     let tab = gen(
         'GNODETabStrip',
         new GNODE.Components.TabStrip(['title0', 'title1', 'title2'], 'single', 1),
         main,
         GNODE.Components.TabStrip.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     tab.checkTitleVisible();
     tab.getPageElement(0).textContent = 'page0';
@@ -137,7 +154,7 @@ window.addEventListener('load', () => {
         new GNODE.Components.Select(['item1', 'item2', 'item3', 'item4'], 'single', 2),
         main,
         GNODE.Components.Select.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
     let anchor = document.createElement('a');
     anchor.href = '#';
@@ -184,7 +201,7 @@ window.addEventListener('load', () => {
         new GNODE.Components.Tree('multi', treeitems),
         main,
         GNODE.Components.Tree.EVENTS,
-        [(evt) => {console.log(evt);}]
+        [(value, evt) => {console.log(value, evt);}]
     );
 
     head('Other', side, main); // =============================================
