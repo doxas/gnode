@@ -5,23 +5,6 @@ window.addEventListener('load', () => {
 
     head('GNODE Common', side, main); // ======================================
     gen(
-        'GNODEMenu',
-        new GNODE.Components.Menu('dropdown menu sample', 'single', [
-            {
-                caption: 'item0', selected: false, selectable: true, callback: (v, evt) => {console.log(v);}
-            }, {
-                caption: 'item1', selected: false, selectable: true, callback: (v, evt) => {console.log(v);}
-            }, {
-                caption: 'item2', selected:  true, selectable: true, callback: (v, evt) => {console.log(v);}
-            }, {
-                caption: 'item3', selected:  true, selectable: true, callback: (v, evt) => {console.log(v);}
-            }
-        ]),
-        main,
-        GNODE.Components.Menu.EVENTS,
-        [(value, evt) => {console.log(value, evt);}]
-    );
-    gen(
         'GNODEFrame',
         new GNODE.Components.Frame(),
         main, [], []
@@ -149,6 +132,23 @@ window.addEventListener('load', () => {
     tab.getPageElement(2).textContent = 'page2';
 
     head('GNODE Component', side, main); // ===================================
+    gen(
+        'GNODEMenu',
+        new GNODE.Components.Menu('dropdown menu sample', 'single', [
+            {
+                caption: 'item0', selected: false, selectable: true, callback: (v, evt) => {console.log(v);}
+            }, {
+                caption: 'item1', selected: false, selectable: true, callback: (v, evt) => {console.log(v);}
+            }, {
+                caption: 'item2', selected:  true, selectable: true, callback: (v, evt) => {console.log(v);}
+            }, {
+                caption: 'item3', selected:  true, selectable: true, callback: (v, evt) => {console.log(v);}
+            }
+        ]),
+        main,
+        GNODE.Components.Menu.EVENTS,
+        [(value, evt) => {console.log(value, evt);}]
+    );
     gen(
         'GNODESelect',
         new GNODE.Components.Select(['item1', 'item2', 'item3', 'item4'], 'single', 2),
