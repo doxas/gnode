@@ -106,6 +106,13 @@ window.addEventListener('load', () => {
         [(evt) => {console.log(evt);}]
     );
     gen(
+        'GNODEMenuItem',
+        new GNODE.Components.MenuItem('menu item', 'single', false, true),
+        main,
+        GNODE.Components.MenuItem.EVENTS,
+        [(evt) => {console.log(evt);}]
+    );
+    gen(
         'GNODETreeItem',
         new GNODE.Components.TreeItem('tree item', 'single', false, false),
         main,
