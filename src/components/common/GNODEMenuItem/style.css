@@ -19,8 +19,14 @@
 }
 
 .item:hover {
-    background-color: silver;
+    background-color: #ddd;
     color: gray;
+}
+
+.item.disabled,
+.item.disabled:hover {
+    background-color: silver;
+    color: #888;
 }
 
 .item:before {
