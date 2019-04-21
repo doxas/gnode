@@ -5,7 +5,6 @@ import CONST from '../../static/constant.js';
 import GNODEElement from '../common/GNODEElement/index.js';
 import GNODESelectOption from '../common/GNODESelectOption/index.js';
 
-const LIST_WRAP_HEIGHT = 60;
 const LIST_HEIGHT = 20;
 
 /**
