@@ -99,11 +99,13 @@ export default class GNODEDraggableList extends GNODEElement {
             content.textContent = element;
         }
         let mousedown = (evt) => {
+            let current = 0;
             let isMouseDown = true;
             this.list.map((v, index) => {
                 v.classList.add('dragging');
                 if(wrapper === v){
                     v.classList.add('target');
+                    current = index;
                 }
             });
             let mouseup;
@@ -138,13 +140,13 @@ export default class GNODEDraggableList extends GNODEElement {
                             this.shadow.insertBefore(wrapper, this.list[i]);
                             this.list.splice(i, 0, wrapper);
                         }
-                        this.emit('change', this.list, `from ${currentIndex} to ${i}`);
+                        this.emit('change', this.list, evt, `from ${currentIndex} to ${i}`);
                         return;
                     }
                 }
             };
             window.addEventListener('mouseup', mouseup);
-            this.emit('float', evt);
+            this.emit('float', current, evt);
         };
         this.addEventListenerForSelf(handle, 'mousedown', mousedown, false);
     }
