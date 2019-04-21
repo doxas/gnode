@@ -24,7 +24,7 @@ export default class GNODETree extends GNODEElement {
     /**
      * @type {HTMLDivElement}
      */
-    get control(){return this.inner;}
+    get control(){return this.shadow;}
 
     /**
      * @constructor
@@ -84,6 +84,12 @@ export default class GNODETree extends GNODEElement {
                 openable = true;
             }
             let treeItem = new GNODETreeItem(v.title, this.name, opened, openable);
+            treeItem.on('open', ((targetItem) => {return (v, evt) => {
+                this.emit('open', targetItem, evt)
+            };})(treeItem));
+            treeItem.on('close', ((targetItem) => {return (v, evt) => {
+                this.emit('close', targetItem, evt)
+            };})(treeItem));
             target.appendChild(treeItem.element);
             if(openable === true){
                 this.generateList(v.children, treeItem.control);
