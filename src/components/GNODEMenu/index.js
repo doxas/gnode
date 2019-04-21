@@ -17,6 +17,8 @@ export default class GNODEMenu extends GNODEElement {
      * @type {Array.<string>}
      */
     static get EVENTS(){return [
+        'open',
+        'close',
         'change',
     ];}
     /**
@@ -98,10 +100,10 @@ export default class GNODEMenu extends GNODEElement {
 
         // event setting ------------------------------------------------------
         this.addEventListenerForSelf(this.listTitle, 'click', (evt) => {
-            this.toggle();
+            this.toggle(evt);
         });
         this.addEventListenerForSelf(this.listWrap, 'mouseleave', (evt) => {
-            this.close();
+            this.close(evt, false);
         });
 
         // initial setting -----------------------------------------------------
@@ -129,7 +131,7 @@ export default class GNODEMenu extends GNODEElement {
         }
         let list = new GNODEMenuItem(caption, this.name, selected === true, selectable === true);
         list.on('click', (v, evt) => {
-            this.close();
+            this.close(evt);
             this.emit('change', v, evt);
             if(callback != null){callback(v, evt);}
         });
@@ -137,27 +139,38 @@ export default class GNODEMenu extends GNODEElement {
     }
     /**
      * open item list
+     * @param {MouseEvent} evt - mouse event
+     * @param {boolean} [isEmit=true] - whether emittion
      */
-    open(){
+    open(evt, isEmit = true){
         if(this.isEnable !== true){return;}
         this.isOpen = true;
         this.listWrap.classList.add('visible');
+        if(isEmit === true){
+            this.emit('open', this.isOpen, evt);
+        }
     }
     /**
      * close item list
+     * @param {MouseEvent} evt - mouse event
+     * @param {boolean} [isEmit=true] - whether emittion
      */
-    close(){
+    close(evt, isEmit = true){
         this.isOpen = false;
         this.listWrap.classList.remove('visible');
+        if(isEmit === true){
+            this.emit('close', this.isOpen, evt);
+        }
     }
     /**
      * toggle item list
+     * @param {MouseEvent} evt - mouse event
      */
-    toggle(){
+    toggle(evt){
         if(this.isOpen === true){
-            this.close();
+            this.close(evt);
         }else{
-            this.open();
+            this.open(evt);
         }
     }
     /**
