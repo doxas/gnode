@@ -21,7 +21,9 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'public/js'),
         publicPath: './',
-        filename: 'gnode.js'
+        filename: 'gnode.js',
+        library: 'gnode',
+        libraryTarget: 'umd'
     },
     module: {
         rules: [
